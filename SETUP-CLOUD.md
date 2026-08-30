@@ -5,7 +5,7 @@
 
 **결과물 두 가지**
 - 텔레그램으로 아침에 푸시 알림
-- 어느 기기에서든 볼 수 있는 웹 주소 (`https://내아이디.github.io/stock-brief/`)
+- 어느 기기에서든 볼 수 있는 웹 주소 (`https://junjieun30.github.io/stock-brief/`)
 
 **비용** — 전부 무료입니다. 공개 저장소의 GitHub Actions는 실행 시간 제한이 없습니다.
 유일한 유료 항목은 Claude API 사용료인데, 하루 1회 요약이면 월 1~2달러 수준입니다.
@@ -14,13 +14,12 @@
 
 ---
 
-## 1단계 — GitHub 계정 만들기 (5분)
+## 1단계 — GitHub 계정 ✅ 완료
 
-1. https://github.com/signup 접속
-2. 이메일, 비밀번호, 사용자 이름(영문 아이디) 입력
-   - 이 **사용자 이름이 웹 주소에 들어갑니다.** 예: `junji` → `junji.github.io`
-3. 이메일로 온 인증 코드 입력
-4. 요금제는 **Free** 선택
+계정 `junjieun30` 확인했습니다. 이 문서의 모든 주소는 이 아이디로 맞춰져 있습니다.
+
+- 저장소: https://github.com/junjieun30/stock-brief
+- 웹페이지: https://junjieun30.github.io/stock-brief/
 
 ## 2단계 — 텔레그램 봇 만들기 (3분)
 
@@ -68,10 +67,10 @@
 
 **4-2. 코드 올리기**
 
-이 폴더에서 아래를 실행합니다. `내아이디` 자리에 1단계에서 만든 GitHub 사용자 이름을 넣으세요.
+저장소를 만든 뒤 아래를 그대로 실행합니다. (remote 는 이미 걸어뒀습니다.)
 
 ```bash
-cd /d/claud/stock-brief && git remote add origin https://github.com/내아이디/stock-brief.git && git branch -M main && git push -u origin main
+cd /d/claud/stock-brief && git push -u origin main
 ```
 
 브라우저 창이 뜨면 GitHub 로그인 후 권한을 허용하세요.
@@ -107,7 +106,7 @@ cd /d/claud/stock-brief && git remote add origin https://github.com/내아이디
 4. 1~2분 뒤 페이지 상단에 주소가 뜹니다
 
    ```
-   https://내아이디.github.io/stock-brief/
+   https://junjieun30.github.io/stock-brief/
    ```
 
 이 주소를 휴대폰 홈 화면에 추가하거나, 크롬 시작페이지로 지정하세요.
