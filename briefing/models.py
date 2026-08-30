@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 
 
 @dataclass
@@ -61,6 +61,40 @@ class NewsItem:
 
 
 @dataclass
+class CalendarEvent:
+    """앞으로 예정된 일정. 예측이 아니라 공표된 사실만 담는다."""
+    day: date
+    kind: str                  # "macro" | "earnings"
+    title: str
+    detail: str = ""
+    source: str = ""
+
+    def d_day(self, today: date) -> str:
+        n = (self.day - today).days
+        return "오늘" if n == 0 else ("내일" if n == 1 else f"D-{n}")
+
+
+@dataclass
+class Alert:
+    """관심 종목의 급등락. 임계값을 넘은 것만 만든다."""
+    quote: Quote
+    threshold: float
+
+    @property
+    def direction(self) -> str:
+        return self.quote.direction
+
+
+@dataclass
+class Lesson:
+    """주식 용어 · 투자 심리 학습 카드."""
+    term: str
+    kind: str                  # "term" | "psychology"
+    plain: str                 # 쉬운 설명
+    why: str                   # 왜 알아둬야 하는지
+
+
+@dataclass
 class Brief:
     """하루치 브리핑 전체."""
     generated_at: datetime
@@ -73,6 +107,10 @@ class Brief:
     losers: list[Quote] = field(default_factory=list)
     news: list[NewsItem] = field(default_factory=list)
     ai_summary: str | None = None       # 시장 총평 (한국어)
+    calendar: list[CalendarEvent] = field(default_factory=list)
+    alerts: list[Alert] = field(default_factory=list)
+    ticker_news: dict[str, list[NewsItem]] = field(default_factory=dict)
+    lessons: list[Lesson] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
     @property

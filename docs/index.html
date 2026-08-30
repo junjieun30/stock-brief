@@ -69,6 +69,44 @@
   .tag{display:inline-block;padding:1px 7px;border-radius:4px;
     background:color-mix(in srgb,var(--accent) 12%,transparent);
     color:var(--accent);font-size:11px;font-weight:600;margin-right:6px}
+  /* --- 급등락 알림 --- */
+  .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
+  .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:11px;
+    background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);font-size:14px}
+  .alert.up{border-left:3px solid var(--up)} .alert.down{border-left:3px solid var(--down)}
+  .alert .nm{font-weight:600} .alert .pc{font-weight:700;font-variant-numeric:tabular-nums}
+  /* --- 일정 --- */
+  .cal{list-style:none;margin:0;padding:0}
+  .cal li{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:baseline;
+    padding:12px 18px;border-bottom:1px solid var(--line)}
+  .cal li:last-child{border-bottom:none}
+  .dday{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .dday.soon{color:var(--up)}
+  .cal .t{font-weight:600;font-size:14.5px}
+  .cal .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .kind{display:inline-block;padding:0 6px;border-radius:4px;font-size:11px;font-weight:600;
+    margin-left:7px;background:color-mix(in srgb,var(--muted) 15%,transparent);color:var(--muted)}
+  /* --- 종목별 뉴스 --- */
+  .tnews{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+  .tn{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);padding:13px 16px}
+  .tn h3{margin:0 0 8px;font-size:13px;display:flex;align-items:baseline;gap:7px}
+  .tn h3 .pc{font-size:12px;font-variant-numeric:tabular-nums}
+  .tn a{display:block;color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.5;
+    margin-bottom:6px}
+  .tn a:last-child{margin-bottom:0}
+  .tn a:hover{color:var(--accent)}
+  .tn .src{color:var(--muted);font-size:11.5px}
+  /* --- 오늘의 공부 --- */
+  .learn{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .lc{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);padding:16px 18px}
+  .lc .badge{display:inline-block;padding:2px 9px;border-radius:5px;font-size:11px;font-weight:700;
+    background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);margin-bottom:9px}
+  .lc h3{margin:0 0 7px;font-size:17px;letter-spacing:-.01em}
+  .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
+  .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
+    font-size:13.5px;color:var(--muted);line-height:1.65}
   .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
   .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
@@ -83,8 +121,16 @@
 <header>
   <h1>해외 시장 데일리 브리핑</h1>
   <div class="meta">시장 기준일 <b>2026-08-27</b>
-    · 생성 2026-08-30 22:45 KST</div>
+    · 생성 2026-08-30 23:24 KST</div>
 </header>
+
+<div class="alerts">
+  <div class="alert up">
+    <span class="nm">엔비디아</span>
+    <span class="pc up">▲ +8.74%</span>
+    <span class="sym">NVDA</span>
+  </div>
+</div>
 
 
 <h2>주요 지수</h2>
@@ -130,8 +176,8 @@
   </div>
   <div class="tile">
     <div class="n">원/달러 환율</div>
-    <div class="p">1,371.50원</div>
-    <div class="c down">▼ -0.65%</div>
+    <div class="p">1,375.67원</div>
+    <div class="c down">▼ -0.35%</div>
   </div>
   <div class="tile">
     <div class="n">WTI 유가</div>
@@ -145,8 +191,8 @@
   </div>
   <div class="tile">
     <div class="n">비트코인</div>
-    <div class="p">$78,834</div>
-    <div class="c up">▲ +1.29%</div>
+    <div class="p">$78,818</div>
+    <div class="c up">▲ +1.27%</div>
   </div>
 </div>
 
@@ -302,6 +348,111 @@
 </table>
 </div>
 
+<h2>상승 · 하락 상위</h2>
+<div class="cols">
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>상승 상위</th><th>종가</th><th>등락</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>CRM</td>
+          <td class="num">252.05</td>
+          <td class="num up"><b>▲ +22.58%</b></td>
+        </tr>
+        <tr>
+          <td>CRWD</td>
+          <td class="num">227.96</td>
+          <td class="num up"><b>▲ +20.50%</b></td>
+        </tr>
+        <tr>
+          <td>PANW</td>
+          <td class="num">382.85</td>
+          <td class="num up"><b>▲ +12.83%</b></td>
+        </tr>
+        <tr>
+          <td>NOW</td>
+          <td class="num">138.43</td>
+          <td class="num up"><b>▲ +10.04%</b></td>
+        </tr>
+        <tr>
+          <td>NVDA</td>
+          <td class="num">227.98</td>
+          <td class="num up"><b>▲ +8.74%</b></td>
+        </tr>
+        <tr>
+          <td>DDOG</td>
+          <td class="num">242.93</td>
+          <td class="num up"><b>▲ +6.70%</b></td>
+        </tr>
+        <tr>
+          <td>ADBE</td>
+          <td class="num">289.15</td>
+          <td class="num up"><b>▲ +5.73%</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>하락 상위</th><th>종가</th><th>등락</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>GE</td>
+          <td class="num">342.73</td>
+          <td class="num down"><b>▼ -3.29%</b></td>
+        </tr>
+        <tr>
+          <td>BKNG</td>
+          <td class="num">202.56</td>
+          <td class="num down"><b>▼ -3.03%</b></td>
+        </tr>
+        <tr>
+          <td>CMCSA</td>
+          <td class="num">26.41</td>
+          <td class="num down"><b>▼ -2.90%</b></td>
+        </tr>
+        <tr>
+          <td>MCD</td>
+          <td class="num">260.06</td>
+          <td class="num down"><b>▼ -2.57%</b></td>
+        </tr>
+        <tr>
+          <td>DIS</td>
+          <td class="num">106.82</td>
+          <td class="num down"><b>▼ -2.56%</b></td>
+        </tr>
+        <tr>
+          <td>MRK</td>
+          <td class="num">149.54</td>
+          <td class="num down"><b>▼ -2.33%</b></td>
+        </tr>
+        <tr>
+          <td>COST</td>
+          <td class="num">934.66</td>
+          <td class="num down"><b>▼ -2.24%</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2>앞으로 예정된 일정</h2>
+<div class="card">
+<ul class="cal">
+  <li>
+    <span class="dday ">D-4</span>
+    <span>
+      <span class="t">브로드컴 실적 발표</span><span class="kind">실적</span>
+<div class="d">주당순이익(EPS) 시장 예상 3.24달러</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-5</span>
+    <span>
+      <span class="t">미국 고용보고서 (비농업 고용)</span><span class="kind">지표</span>
+<div class="d">통상 매월 첫째 금요일 · 한국시간 밤 9시 30분</div>    </span>
+  </li>
+</ul>
+</div>
 
 <h2>주요 뉴스</h2>
 <div class="card">
@@ -311,58 +462,158 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 13:00 UTC · What new tariff walls in U.S.-Canada trade war mean for the economy&#39;s critical metals</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/t-mobile-stock-could-win-140002998.html" target="_blank" rel="noopener">How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 14:00 UTC · How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</div>
+    <a href="https://finance.yahoo.com/healthcare/articles/josh-brown-says-break-ai-134507001.html" target="_blank" rel="noopener">Josh Brown Says ‘Take a Break From AI CapEx World,’ Highlights His 2 Top Healthcare Stock Picks</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-30 13:45 UTC · Josh Brown Says ‘Take a Break From AI CapEx World,’ Highlights His 2 Top Healthcare Stock Picks</div>
   </li>
   <li>
-    <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOSW5MQXJjSmlxRnRnb3hOcEJFcDRrbVFYT091VjhrdjNWU2dWNnRrZ3JTNlMzRjM3RUotaGNBZG1rT3JWTF9VT1hVUWVMa0NnbERXLV9XeDVlTFE0dEZYanFzSE1haldYM3VXMy1wbHktelJEaWJTb2R3dG5rT0FiT3dUZ0RlaFdmUFNHSnVGLUx0UUQtLUdiU2N2c25LVE0zN2t0cHBnUWdwOTA5OHhXMVJTMk4?oc=5" target="_blank" rel="noopener">Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now. - Investor&#39;s Business Daily</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 13:28 UTC · Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now. - Investor&#39;s Business Daily</div>
+    <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPZ21YcDFpMjktQkoxeTZra1Jya3FUQnF2LW5qVnJBdDhRV0xmcWdtdEg5T3hHTWVHZndjeDJyZVZnTndXanh4X2x2dmZqQU9ITWVYV2d6c241Sk1CaTJwQVA1TEZicVNPZkRwUkpIVEloWUVMcU1OVExRRlpWNFd0dXdBdHVmUXlkU3RkcGhvVGtHUWRqbjBGUA?oc=5" target="_blank" rel="noopener">Meta Stock Looks Undervalued. Is the Market Missing Something? - The Motley Fool</a>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:18 UTC · Meta Stock Looks Undervalued. Is the Market Missing Something? - The Motley Fool</div>
   </li>
   <li>
     <a href="https://www.cnbc.com/2026/08/30/iceland-eu-accession-referendum-result.html" target="_blank" rel="noopener">Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 12:32 UTC · Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/sandisk-reported-layoffs-israel-locations-134502982.html" target="_blank" rel="noopener">Sandisk Reported Layoffs at Its Israel Locations. This Is an Efficiency Push, Not a Warning Sign for SNDK Stock.</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 13:45 UTC · Sandisk Reported Layoffs at Its Israel Locations. This Is an Efficiency Push, Not a Warning Sign for SNDK Stock.</div>
+    <a href="https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-microsoft-titans-mask-market-weakness/?src=A00220&amp;yptr=yahoo" target="_blank" rel="noopener">Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now.</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-30 13:28 UTC · Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now.</div>
   </li>
   <li>
-    <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOX0VoUFV1ckszdEdnWXgwb3NfTWdBdTRFcUVqMldBWjFHcUMwWThvb3dSWlJJYUpLd25CWFBtQTB3WC13WTFzVkpGYjcyUWJ4YUtGbkZ5T3Y0YjgwRmRtWE5kWXFheE1pLUtUYlFIemFQQUFsMExtbWhpb2RLMTF3LVhsNDdNNlNXVlpyc3g1RllObWx3?oc=5" target="_blank" rel="noopener">This 2 ETF Portfolio Historically Outperforms the S&amp;P 500 With Less Volatility - The Motley Fool</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 13:22 UTC · This 2 ETF Portfolio Historically Outperforms the S&amp;P 500 With Less Volatility - The Motley Fool</div>
+    <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPeG5GY3ItMllKZkh2NHZqa0ZzQ2Nid0cxbkZ1SWs3S0ZBUnNSMWM3a1JqcFB4R3BRXzh0OEY1MmFoOFlHemtpdmQ3QzdJRmhpX1duN2VMSHJZU2ZldVBKU0tFNVFHN01CNkdtYXZlc29SU0ZuSENfbFFJZDRTQU82d2dsd3lkRS1OZXNTNUt0Q2FwTHlsZ0Uya0tqenV5ZDF2c1Y0dkpyNjNWbmw5STVBcEMxaVZGMDJKNktIanVIMEg1ejdMRXVSRWI4YTNBMWJSNzVwQ1JPUmtRbUdncGFz?oc=5" target="_blank" rel="noopener">Where Will Nvidia Stock Be 6 Months After the Latest Explosive Earnings Report? Here’s What History Says. - The Motley Fool</a>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:17 UTC · Where Will Nvidia Stock Be 6 Months After the Latest Explosive Earnings Report? Here’s What History Says. - The Motley Fool</div>
   </li>
   <li>
     <a href="https://www.cnbc.com/2026/08/30/trump-tariff-refunds-walmart-home-depot-target.html" target="_blank" rel="noopener">The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/dear-apple-stock-fans-mark-133002349.html" target="_blank" rel="noopener">Dear Apple Stock Fans, Mark Your Calendars for September 9</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 13:30 UTC · Dear Apple Stock Fans, Mark Your Calendars for September 9</div>
+    <a href="https://finance.yahoo.com/economy/articles/kevin-oleary-worth-400-million-143000770.html" target="_blank" rel="noopener">Kevin O&#39;Leary, worth $400 million, compares paper towel prices at Walmart as grocery costs climb 5.9%</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:30 UTC · Kevin O&#39;Leary, worth $400 million, compares paper towel prices at Walmart as grocery costs climb 5.9%</div>
   </li>
   <li>
-    <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQaXZLaDhidmxYdzlwZ0tzT2F5WW44a1ZSaXBub2tEeW9CYWtSOVFEM3c5andCTWk2dzJsV1pjTVg3TDJSVU1XZGlTTklvVk5DRzhDMGNnNUJRX2ljazBBSFMzZ1F6OFFOQXF4NUdlcTcwUXJmQV9YQXVjUktOeFhSQjdjdVRweVV2?oc=5" target="_blank" rel="noopener">Shein Comes to Market… Finally - The Business of Fashion</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 13:00 UTC · Shein Comes to Market… Finally - The Business of Fashion</div>
+    <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOUEx2Um5oSlRFYWQ1aHhubUZGd3pZQ29yUFhHVlpYTF8tVHh4WmlLOXVvMWtKdlVzc1ZILW9lTVdjNWstZmxIazZtRF91S3JZQXFjdDZzQVRCQjF0aTY0NUpOMktaMV8tdlJLUVRwbTBnSlhULXVzS0ZnNHAtM2hzVVFlNGtELWppejZVc2NwTQ?oc=5" target="_blank" rel="noopener">(NGPE) Equity Trading Insights (NGPE:CA) - Stock Traders Daily</a>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:11 UTC · (NGPE) Equity Trading Insights (NGPE:CA) - Stock Traders Daily</div>
   </li>
   <li>
     <a href="https://www.cnbc.com/2026/08/30/mike-moore-ag-social-media-settlement-big-tobacco.html" target="_blank" rel="noopener">He beat Big Tobacco. Will the same playbook work against Meta and social media?</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · He beat Big Tobacco. Will the same playbook work against Meta and social media?</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/options/articles/suze-orman-says-annuity-guarantee-133000171.html" target="_blank" rel="noopener">Suze Orman says your annuity guarantee is &#39;only as good as&#39; the insurer&#39;s balance sheet — here&#39;s why</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 13:30 UTC · Suze Orman says your annuity guarantee is &#39;only as good as&#39; the insurer&#39;s balance sheet — here&#39;s why</div>
+    <a href="https://finance.yahoo.com/economy/article/fed-chairman-warsh-shows-courage-with-jackson-hole-speech-defying-political-pressure-says-harvards-rogoff-140951926.html" target="_blank" rel="noopener">Fed Chairman Warsh shows courage with Jackson Hole speech, defying political pressure, says Harvard&#39;s Rogoff</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:09 UTC · Fed Chairman Warsh shows courage with Jackson Hole speech, defying political pressure, says Harvard&#39;s Rogoff</div>
   </li>
   <li>
-    <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxNYlB4djNhRUJHcWRLb3BSVHNGWi1TTXBFRnIxaHJEVXE4RDV5eTE2Uk5qNzliNjJ0aEJTTkdmc2hsa1htMTdLZl9vLTVuUFZlbC1GQkktZTlXelp2QVdXWDJYVlZncUFsdEZ0WkpDeXNidXZYMmItZ2FDYWJIVFlQLVhseVlIUHN6NUkxMS04c2haZl9HamFSOWc2Zm1WNjlwZ0ZrYXRGM041aFBTLWF6MUdRcktpZFNuUEt6UXBzX1M?oc=5" target="_blank" rel="noopener">These charts show how leverage-happy investors are transforming the stock market - MarketWatch</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 13:00 UTC · These charts show how leverage-happy investors are transforming the stock market - MarketWatch</div>
+    <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPME16bU1vNnQydVRXLVB0SUlzbzBJbHZWblRmdXZTY2xIcWljaTJXUURmY3BkUVRxd2ROS2VYNjl4NDRkSS1PQVJ3WVRYWThSM3lsS2F2RFdDMTFsMFFHMy1jNGljYi1OYjFVWFJZOXlveGdvNE1tZnNVNkoxekw5b3Y3QWNhYnBXRDFhLUtHYUtRclJ4bUxqUUhvUnhwN0p4dGVzMXB0QQ?oc=5" target="_blank" rel="noopener">Destiny Tech100 Stock (DXYZ) Opinions on Quarterly Earnings Release - Quiver Quantitative</a>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:03 UTC · Destiny Tech100 Stock (DXYZ) Opinions on Quarterly Earnings Release - Quiver Quantitative</div>
   </li>
   <li>
     <a href="https://www.cnbc.com/2026/08/30/top-analysts-suggest-these-dividend-stocks-for-consistent-income.html" target="_blank" rel="noopener">Top Wall Street analysts suggest these 3 dividend stocks for consistent income</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 10:42 UTC · Top Wall Street analysts suggest these 3 dividend stocks for consistent income</div>
   </li>
   <li>
-    <a href="https://www.investors.com/research/investing-action-plan/stock-market-week-ahead-chips-cybersecurity-and-jobs/?src=A00220&amp;yptr=yahoo" target="_blank" rel="noopener">Stock Market Week Ahead: Chips, Cybersecurity And Jobs</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 13:07 UTC · Stock Market Week Ahead: Chips, Cybersecurity And Jobs</div>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/t-mobile-stock-could-win-140002998.html" target="_blank" rel="noopener">How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:00 UTC · How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</div>
   </li>
 </ul>
+</div>
+
+<h2>내 관심 종목 소식</h2>
+<div class="tnews">
+  <div class="tn">
+    <h3>애플<span class="sym">AAPL</span>
+      <span class="pc up">▲ +0.36%</span></h3>
+      <a href="https://finance.yahoo.com/markets/article/apples-big-handoff-and-a-jobs-report-what-to-watch-this-week-100000786.html" target="_blank" rel="noopener">Apple&#39;s big handoff and a jobs report: What to watch this week
+        <span class="src">· Yahoo Finance</span></a>
+      <a href="https://beincrypto.com/tim-cook-bitcoin-apple-ceo/" target="_blank" rel="noopener">Tim Cook Owns Crypto But Apple Never Bought Bitcoin: Will This Change?
+        <span class="src">· BeInCrypto</span></a>
+  </div>
+  <div class="tn">
+    <h3>마이크로소프트<span class="sym">MSFT</span>
+      <span class="pc up">▲ +1.75%</span></h3>
+      <a href="https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-microsoft-titans-mask-market-weakness/?src=A00220&amp;yptr=yahoo" target="_blank" rel="noopener">Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now.
+        <span class="src">· Investor&#39;s Business Daily</span></a>
+      <a href="https://www.fool.com/investing/2026/08/30/nvidias-earnings-reveal-a-new-buyer-class-outgrowi/" target="_blank" rel="noopener">Nvidia&#39;s Earnings Reveal a New Buyer Class Outgrowing Microsoft, Google and Amazon
+        <span class="src">· Motley Fool</span></a>
+  </div>
+  <div class="tn">
+    <h3>엔비디아<span class="sym">NVDA</span>
+      <span class="pc up">▲ +8.74%</span></h3>
+      <a href="https://finance.yahoo.com/markets/article/all-about-acceleration-after-nvidia-earnings-the-tech-trade-is-getting-more-segmented-114905135.html" target="_blank" rel="noopener">&#39;All about acceleration&#39;: After Nvidia earnings, the tech trade is getting more segmented
+        <span class="src">· Yahoo Finance</span></a>
+      <a href="https://finance.yahoo.com/markets/article/apples-big-handoff-and-a-jobs-report-what-to-watch-this-week-100000786.html" target="_blank" rel="noopener">Apple&#39;s big handoff and a jobs report: What to watch this week
+        <span class="src">· Yahoo Finance</span></a>
+  </div>
+  <div class="tn">
+    <h3>알파벳<span class="sym">GOOGL</span>
+      <span class="pc down">▼ -0.39%</span></h3>
+      <a href="https://www.fool.com/investing/2026/08/30/why-rezolve-ai-stock-skyrocketed-this-week/" target="_blank" rel="noopener">Why Rezolve AI Stock Skyrocketed This Week
+        <span class="src">· Motley Fool</span></a>
+      <a href="https://www.fool.com/investing/2026/08/30/warren-buffetts-successor-greg-abel-keeps-buying-t/" target="_blank" rel="noopener">Warren Buffett&#39;s Successor, Greg Abel, Keeps Buying This Incredible Artificial Intelligence (AI) Stock That Buffett Also Loved
+        <span class="src">· Motley Fool</span></a>
+  </div>
+  <div class="tn">
+    <h3>아마존<span class="sym">AMZN</span>
+      <span class="pc down">▼ -1.54%</span></h3>
+      <a href="https://www.fool.com/investing/2026/08/30/is-amazons-this-the-single-best-reason-to-buy-the/" target="_blank" rel="noopener">Is This the Single Best Reason to Buy Amazon Stock Right Now?
+        <span class="src">· Motley Fool</span></a>
+      <a href="https://www.fool.com/investing/2026/08/30/history-says-amazon-stock-s-2-worst-years-of-the-past-15-ended-in-net-losses-and-both-rebounds-were-huge/" target="_blank" rel="noopener">History Says Amazon Stock&#39;s 2 Worst Years of the Past 15 Ended in Net Losses, and Both Rebounds Were Huge
+        <span class="src">· Motley Fool</span></a>
+  </div>
+  <div class="tn">
+    <h3>메타<span class="sym">META</span>
+      <span class="pc down">▼ -0.87%</span></h3>
+      <a href="https://www.fool.com/investing/2026/08/30/meta-will-pay-usd17-billion-to-settle-a-federal-lawsuit-here-s-my-prediction-of-where-the-stock-will-go-from-here/" target="_blank" rel="noopener">Meta Will Pay $17 Billion to Settle a Federal Lawsuit. Here’s My Prediction of Where the Stock Will Go From Here.
+        <span class="src">· Motley Fool</span></a>
+      <a href="https://finance.yahoo.com/markets/stocks/articles/meta-stock-2-founder-led-201520433.html" target="_blank" rel="noopener">Meta Stock And 2 Founder Led AI Picks For Higher Rates
+        <span class="src">· Simply Wall St.</span></a>
+  </div>
+  <div class="tn">
+    <h3>테슬라<span class="sym">TSLA</span>
+      <span class="pc up">▲ +2.60%</span></h3>
+      <a href="https://www.fool.com/investing/2026/08/30/the-most-active-stocks-today-include-tesla-nvidia/" target="_blank" rel="noopener">The Most Active Stocks Today Include Tesla, Nvidia, and Apple: Here&#39;s My Contrarian Take on All Three
+        <span class="src">· Motley Fool</span></a>
+      <a href="https://www.fool.com/investing/2026/08/29/tesla-stock-in-2027-why-i-think-tsla-still-has-roo/" target="_blank" rel="noopener">Tesla Stock in 2027: Why I Think TSLA Still Has Room to Run
+        <span class="src">· Motley Fool</span></a>
+  </div>
+  <div class="tn">
+    <h3>브로드컴<span class="sym">AVGO</span>
+      <span class="pc up">▲ +4.49%</span></h3>
+      <a href="https://www.fool.com/investing/2026/08/30/hock-tan-guided-broadcom-past-usd100-billion-of-ai-revenue-in-2027-the-stock-is-25-off-its-high/" target="_blank" rel="noopener">Hock Tan Guided Broadcom Past $100 Billion of AI Revenue in 2027. The Stock Is 25% off Its High.
+        <span class="src">· Motley Fool</span></a>
+      <a href="https://www.fool.com/investing/2026/08/30/broadcom-or-amd-heres-why-the-market-is-pricing/" target="_blank" rel="noopener">Broadcom or AMD? Here&#39;s Why the Market Is Pricing the Same AI Boom So Differently Across 2 Chip Stocks.
+        <span class="src">· Motley Fool</span></a>
+  </div>
+  <div class="tn">
+    <h3>TSMC<span class="sym">TSM</span>
+      <span class="pc up">▲ +2.30%</span></h3>
+      <a href="https://www.barchart.com/story/news/4340050/apple-was-always-1-step-behind-in-ai-in-chipmaking-its-now-1-step-ahead" target="_blank" rel="noopener">Apple Was Always 1 Step Behind in AI. In Chipmaking, It’s Now 1 Step Ahead.
+        <span class="src">· Barchart</span></a>
+      <a href="https://www.fool.com/investing/2026/08/29/tsmc-vs-asml-semiconductor-stock-better-buy/" target="_blank" rel="noopener">TSMC vs. ASML: Which Semiconductor Giant Is the Better Stock Buy?
+        <span class="src">· Motley Fool</span></a>
+  </div>
+  <div class="tn">
+    <h3>팔란티어<span class="sym">PLTR</span>
+      <span class="pc up">▲ +4.75%</span></h3>
+      <a href="https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-microsoft-titans-mask-market-weakness/?src=A00220&amp;yptr=yahoo" target="_blank" rel="noopener">Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now.
+        <span class="src">· Investor&#39;s Business Daily</span></a>
+      <a href="https://finance.yahoo.com/markets/stocks/articles/palantir-technologies-pltr-courts-democrats-081418471.html" target="_blank" rel="noopener">Palantir Technologies (PLTR) Courts Democrats Ahead Of 2026 Midterms Scrutiny
+        <span class="src">· Simply Wall St.</span></a>
+  </div>
+</div>
+
+<h2>오늘의 공부</h2>
+<div class="learn">
+  <div class="lc">
+    <span class="badge">주식 용어</span>
+    <h3>리밸런싱</h3>
+    <p>많이 오른 자산을 조금 팔고 덜 오른 쪽을 채워 원래 비중으로 되돌리는 것입니다.</p>
+    <p class="why">가만두면 잘 나가는 자산 비중이 계속 커져, 나도 모르게 위험이 쏠립니다.</p>
+  </div>
+  <div class="lc">
+    <span class="badge">투자 심리</span>
+    <h3>계획 오류</h3>
+    <p>일이 생각보다 빨리, 순조롭게 끝날 거라 예상하는 성향입니다.</p>
+    <p class="why">‘6개월이면 회복하겠지’ 같은 기대가 여기 해당합니다. 회복에는 대개 예상보다 긴 시간이 걸립니다.</p>
+  </div>
 </div>
 
 

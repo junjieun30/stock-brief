@@ -109,3 +109,51 @@ def fetch_news(feeds: list[dict], max_items: int = 14, lookback_hours: int = 30,
         warnings.append("수집된 뉴스가 없습니다 — lookback_hours 를 늘려보세요.")
 
     return items[:max_items], warnings
+
+
+def fetch_ticker_news(watchlist: list[dict], per_ticker: int = 2,
+                      lookback_hours: int = 48) -> dict[str, list[NewsItem]]:
+    """관심 종목별 뉴스. yfinance 가 종목에 태깅된 기사를 준다.
+
+    전체 시장 뉴스와 달리 '내가 담은 종목에 무슨 일이 있었나'만 본다.
+    """
+    import yfinance as yf
+
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=lookback_hours)
+    out: dict[str, list[NewsItem]] = {}
+
+    for spec in watchlist:
+        sym = spec["symbol"]
+        try:
+            raw = yf.Ticker(sym).news or []
+        except Exception as e:
+            log.debug("종목 뉴스 실패 %s: %s", sym, e)
+            continue
+
+        items: list[NewsItem] = []
+        for entry in raw:
+            c = entry.get("content") or entry
+            title = _clean(c.get("title") or "")
+            if not title:
+                continue
+            url = ((c.get("canonicalUrl") or {}).get("url")
+                   or (c.get("clickThroughUrl") or {}).get("url")
+                   or entry.get("link") or "")
+            published = None
+            stamp = c.get("pubDate") or c.get("displayTime")
+            if stamp:
+                try:
+                    published = datetime.fromisoformat(str(stamp).replace("Z", "+00:00"))
+                except ValueError:
+                    pass
+            if published and published < cutoff:
+                continue
+            provider = (c.get("provider") or {}).get("displayName") or "Yahoo"
+            items.append(NewsItem(title=title, url=url, source=provider, published=published))
+            if len(items) >= per_ticker:
+                break
+
+        if items:
+            out[sym] = items
+
+    return out

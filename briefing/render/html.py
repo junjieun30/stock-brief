@@ -97,6 +97,7 @@ def render(brief: Brief) -> str:
     )
     return env.get_template("report.html.j2").render(
         brief=brief,
+        today=brief.generated_at.date(),
         sectors_sorted=sorted(
             brief.sectors, key=lambda q: q.change_pct if q.ok else -999, reverse=True
         ),

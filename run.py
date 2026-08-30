@@ -26,12 +26,14 @@ for _stream in (sys.stdout, sys.stderr):
         pass
 
 from briefing.config import Config
+from briefing.data import glossary
 from briefing.data.universe import DEFAULT_UNIVERSE
-from briefing.models import Brief
+from briefing.models import Alert, Brief, Lesson
 from briefing.render import html as render_html
 from briefing.render import markdown as render_md
+from briefing.sources import calendar as calendar_src
 from briefing.sources.market import fetch_quotes, scan_movers
-from briefing.sources.news import fetch_news
+from briefing.sources.news import fetch_news, fetch_ticker_news
 
 KST = timezone(timedelta(hours=9))
 log = logging.getLogger("briefing")
@@ -65,6 +67,26 @@ def build_brief(cfg: Config, *, use_ai: bool = True, use_news: bool = True,
         log.info("상승/하락 상위 스캔 중… (%d종목)", len(universe))
         brief.gainers, brief.losers = scan_movers(universe, cfg.secrets, mv.get("top_n", 7))
 
+    # 급등락 알림 — 임계값을 넘은 관심 종목만
+    ac = cfg.get("alerts", {}) or {}
+    if ac.get("enabled", True) and brief.watchlist:
+        th = float(ac.get("threshold_pct", 5.0))
+        brief.alerts = [Alert(quote=q, threshold=th) for q in brief.watchlist
+                        if q.ok and abs(q.change_pct) >= th]
+        brief.alerts.sort(key=lambda a: abs(a.quote.change_pct), reverse=True)
+        if brief.alerts:
+            log.info("급등락 알림 %d건 (기준 ±%.1f%%)", len(brief.alerts), th)
+
+    # 예정된 일정 — FOMC, 고용보고서, 관심종목 실적
+    if cfg.get("calendar", {}).get("enabled", True):
+        log.info("예정 일정 수집 중…")
+        brief.calendar = calendar_src.collect(cfg, brief.generated_at.date())
+
+    # 학습 카드 — 날짜에 따라 용어 1개 + 심리 1개
+    if cfg.get("learn", {}).get("enabled", True):
+        brief.lessons = [Lesson(term=t, kind=k, plain=pl, why=w)
+                         for k, t, pl, w in glossary.pick(brief.generated_at.date().toordinal())]
+
     if use_news:
         nc = cfg.get("news", {})
         log.info("뉴스 수집 중…")
@@ -73,6 +95,12 @@ def build_brief(cfg: Config, *, use_ai: bool = True, use_news: bool = True,
             nc.get("exclude_patterns"),
         )
         brief.warnings += warns
+
+        if cfg.watchlist and nc.get("per_ticker", 2):
+            log.info("관심 종목별 뉴스 수집 중…")
+            brief.ticker_news = fetch_ticker_news(
+                cfg.watchlist, nc.get("per_ticker", 2), nc.get("ticker_lookback_hours", 48)
+            )
 
     failed = [q.name for q in brief.indices + brief.macro + brief.sectors + brief.watchlist
               if not q.ok]

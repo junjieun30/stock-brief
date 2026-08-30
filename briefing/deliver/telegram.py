@@ -33,6 +33,19 @@ def _line(q: Quote) -> str:
 def build_message(brief: Brief, max_news: int = 6) -> str:
     parts = [f"📈 <b>해외 시장 브리핑</b> · {brief.market_date or '미상'}", ""]
 
+    if brief.alerts:
+        th = brief.alerts[0].threshold
+        parts.append(f"⚡ <b>급등락 (±{th:g}% 초과)</b>")
+        parts += [_line(a.quote) for a in brief.alerts]
+        parts.append("")
+
+    if brief.calendar:
+        today = brief.generated_at.date()
+        parts.append("<b>다가오는 일정</b>")
+        for e in brief.calendar[:5]:
+            parts.append(f"{e.d_day(today)} · {_esc(e.title)}")
+        parts.append("")
+
     parts.append("<b>주요 지수</b>")
     parts += [_line(q) for q in brief.indices]
     parts.append("")
@@ -57,6 +70,11 @@ def build_message(brief: Brief, max_news: int = 6) -> str:
             title = _esc(n.summary_ko or n.title)
             parts.append(f'• <a href="{html.escape(n.url, quote=True)}">{title}</a>')
         parts.append("")
+
+    # 학습 카드는 한도에 걸리면 가장 먼저 잘려도 되도록 맨 끝 근처에 둔다
+    for lesson in brief.lessons:
+        badge = "📖 오늘의 용어" if lesson.kind == "term" else "🧠 투자 심리"
+        parts += [f"<b>{badge} — {_esc(lesson.term)}</b>", _esc(lesson.plain), ""]
 
     parts.append("<i>참고 자료이며 투자 권유가 아닙니다.</i>")
 

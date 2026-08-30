@@ -53,6 +53,8 @@ movers:
 
 news:
   max_items: 14
+  per_ticker: 2              # 관심 종목당 뉴스 몇 건 (0 이면 끄기)
+  ticker_lookback_hours: 48
   lookback_hours: 30
   # 개인 재무상담·라이프스타일 칼럼을 걸러낸다 (제목 소문자 기준 정규식)
   exclude_patterns:
@@ -63,12 +65,36 @@ news:
     - '^.{0,3}i (feel|am|was|have) '
     - '(best cd rates|mortgage and refinance|savings interest rates|cd rates today)'
     - '(coupon code|deal of the day|black friday|prime day)'
+    # CNBC Make It 등 라이프스타일 코너 (시장과 무관)
+    - '^i.{0,2}m a '
+    - '(psychologist|therapist|neuroscientist|happiest|marriage|parenting|dating|couples)'
+    - '(self-made|millionaire mindset|here.s what i|i tried|no. 1 thing|number 1 thing)'
   feeds:
     - { name: "CNBC",        url: "https://www.cnbc.com/id/100003114/device/rss/rss.html" }
     - { name: "Yahoo",       url: "https://finance.yahoo.com/news/rssindex" }
     - { name: "MarketWatch", url: "https://feeds.content.dowjones.io/public/rss/mw_marketpulse" }
     - { name: "CNBC Finance", url: "https://www.cnbc.com/id/10000664/device/rss/rss.html" }
     - { name: "Reuters",     url: "https://news.google.com/rss/search?q=stock+market+OR+fed+OR+earnings+when:1d&hl=en-US&gl=US&ceid=US:en" }
+
+# 앞으로 예정된 일정 (예측이 아니라 공표된 일정만)
+calendar:
+  enabled: true
+  horizon_days: 14       # 며칠 앞까지 보여줄지
+  fomc: true             # 연준 공식 캘린더에서 FOMC 회의일 수집
+  recurring_macro: true  # 미국 고용보고서 (통상 매월 첫째 금요일)
+  earnings: true         # 관심 종목 실적 발표일
+  # 직접 챙기고 싶은 일정을 여기에 적습니다 (CPI 발표일 등은 BLS 사이트에서 확인)
+  events: []
+  #  - { date: 2026-09-10, title: "미국 8월 소비자물가(CPI)", detail: "한국시간 밤 9시 30분" }
+
+# 주린이용 학습 카드 — 매일 용어 1개 + 투자심리 1개가 돌아가며 나옵니다
+learn:
+  enabled: true
+
+# 관심 종목 급등락 알림
+alerts:
+  enabled: true
+  threshold_pct: 5.0     # 하루 등락이 이 값(%)을 넘으면 리포트 맨 위에 표시
 
 ai:
   enabled: true

@@ -31,6 +31,14 @@ def render(brief: Brief) -> str:
         "",
     ]
 
+    if brief.alerts:
+        th = brief.alerts[0].threshold
+        out += [f"## 급등락 알림 (±{th:g}% 초과)", ""]
+        for a in brief.alerts:
+            mark = "🔺" if a.direction == "up" else "🔻"
+            out.append(f"- {mark} **{a.quote.name}** ({a.quote.symbol}) {a.quote.change_pct:+.2f}%")
+        out.append("")
+
     if brief.ai_summary:
         out += ["## 시장 총평", "", brief.ai_summary, "",
                 "> AI가 생성한 요약입니다. 투자 판단의 근거로 삼기 전에 원문을 확인하세요.", ""]
@@ -46,6 +54,15 @@ def render(brief: Brief) -> str:
         out.append(_table("상승 상위", brief.gainers))
         out.append(_table("하락 상위", brief.losers))
 
+    if brief.calendar:
+        today = brief.generated_at.date()
+        out += ["## 앞으로 예정된 일정", ""]
+        for e in brief.calendar:
+            kind = "실적" if e.kind == "earnings" else "지표"
+            out.append(f"- **{e.d_day(today)}** · {e.title} ({kind})"
+                       + (f"  \n  <sub>{e.detail}</sub>" if e.detail else ""))
+        out.append("")
+
     if brief.news:
         out += ["## 주요 뉴스", ""]
         for n in brief.news:
@@ -53,6 +70,23 @@ def render(brief: Brief) -> str:
             title = n.summary_ko or n.title
             out.append(f"- **[{title}]({n.url})**  \n  <sub>{n.source} · {when} · {n.title}</sub>")
         out.append("")
+
+    if brief.ticker_news:
+        out += ["## 내 관심 종목 소식", ""]
+        for q in brief.watchlist:
+            items = brief.ticker_news.get(q.symbol)
+            if not items:
+                continue
+            out.append(f"**{q.name}** ({q.symbol})")
+            for n in items:
+                out.append(f"- [{n.summary_ko or n.title}]({n.url}) <sub>{n.source}</sub>")
+            out.append("")
+
+    if brief.lessons:
+        out += ["## 오늘의 공부", ""]
+        for l in brief.lessons:
+            badge = "주식 용어" if l.kind == "term" else "투자 심리"
+            out += [f"### [{badge}] {l.term}", "", l.plain, "", f"> {l.why}", ""]
 
     if brief.warnings:
         out += ["## 수집 경고", ""] + [f"- {w}" for w in brief.warnings] + [""]

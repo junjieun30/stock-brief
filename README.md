@@ -110,6 +110,39 @@ ai:
 
 ---
 
+## 리포트에 들어가는 것
+
+| 섹션 | 내용 |
+|---|---|
+| 급등락 알림 | 관심 종목이 ±5%(설정 가능)를 넘으면 맨 위에 표시 |
+| 시장 총평 | Claude가 쓰는 한국어 요약 + 오늘의 관전 포인트 |
+| 주요 지수 | S&P 500, 나스닥, 다우, 러셀 2000, VIX |
+| 매크로 | 10년물 금리(bp), 달러인덱스, 원/달러, WTI, 금, 비트코인 |
+| 섹터별 등락 | GICS 11섹터 ETF를 막대로 |
+| 관심 종목 | 종가·등락·52주 위치·고점 대비·거래량 |
+| 상승·하락 상위 | 대형주 120종목 스캔 |
+| 앞으로 예정된 일정 | FOMC(연준 공식), 고용보고서, 관심종목 실적 발표일 |
+| 주요 뉴스 | RSS 5개 피드 → 한국어 번역 |
+| 내 관심 종목 소식 | 종목별 뉴스 → 한국어 번역 |
+| 오늘의 공부 | 주식 용어 1개 + 투자 심리 1개 (매일 순환) |
+
+**일정 섹션에 대해** — 예측이 아니라 이미 공표된 일정만 다룹니다. FOMC 회의일은 연준 공식
+캘린더에서 직접 읽어옵니다. CPI 발표일 등 BLS 지표는 사이트가 봇 접근을 막아(403) 자동
+수집이 안 되므로, 필요하면 `config.yaml` 의 `calendar.events` 에 직접 적으세요.
+
+**학습 카드** — 용어 30개, 투자 심리 20개가 날짜에 따라 하루 한 장씩 돌아갑니다.
+`briefing/data/glossary.py` 에서 내용을 편집·추가할 수 있습니다.
+
+## AI 화면 미리보기 (무료)
+
+API 키 없이 AI 요약이 켜진 화면이 어떻게 나오는지 보려면:
+
+```bash
+python _demo_ai.py
+```
+
+`report/demo-ai.html` 에 가짜 요약을 넣은 리포트가 생성됩니다. 실제 API 호출은 하지 않습니다.
+
 ## 구조
 
 ```
@@ -119,12 +152,14 @@ briefing/
   config.py                   config.yaml + .env 로딩
   models.py                   Quote · NewsItem · Brief
   sources/market.py           시세 (yfinance → Finnhub → AlphaVantage 순 fallback)
-  sources/news.py             RSS 수집 · 중복제거 · 노이즈 필터 · 소스 균형
+  sources/news.py             RSS 수집 · 중복제거 · 노이즈 필터 · 소스 균형 · 종목별 뉴스
+  sources/calendar.py         FOMC(연준 공식) · 고용보고서 · 실적 발표일
   summarize.py                Claude 한국어 번역 및 시장 총평
   render/html.py              HTML 렌더 (+ templates/report.html.j2)
   render/markdown.py          마크다운 렌더
   deliver/telegram.py         텔레그램 전송
   data/universe.py            상승/하락 스캔 유니버스
+  data/glossary.py            주식 용어 30개 · 투자 심리 20개
 ```
 
 **데이터 fallback** — 시세는 yfinance 를 먼저 쓰고, 실패한 심볼만 Finnhub → Alpha Vantage 로

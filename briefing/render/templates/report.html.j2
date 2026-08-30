@@ -69,6 +69,44 @@
   .tag{display:inline-block;padding:1px 7px;border-radius:4px;
     background:color-mix(in srgb,var(--accent) 12%,transparent);
     color:var(--accent);font-size:11px;font-weight:600;margin-right:6px}
+  /* --- 급등락 알림 --- */
+  .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
+  .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:11px;
+    background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);font-size:14px}
+  .alert.up{border-left:3px solid var(--up)} .alert.down{border-left:3px solid var(--down)}
+  .alert .nm{font-weight:600} .alert .pc{font-weight:700;font-variant-numeric:tabular-nums}
+  /* --- 일정 --- */
+  .cal{list-style:none;margin:0;padding:0}
+  .cal li{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:baseline;
+    padding:12px 18px;border-bottom:1px solid var(--line)}
+  .cal li:last-child{border-bottom:none}
+  .dday{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .dday.soon{color:var(--up)}
+  .cal .t{font-weight:600;font-size:14.5px}
+  .cal .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .kind{display:inline-block;padding:0 6px;border-radius:4px;font-size:11px;font-weight:600;
+    margin-left:7px;background:color-mix(in srgb,var(--muted) 15%,transparent);color:var(--muted)}
+  /* --- 종목별 뉴스 --- */
+  .tnews{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+  .tn{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);padding:13px 16px}
+  .tn h3{margin:0 0 8px;font-size:13px;display:flex;align-items:baseline;gap:7px}
+  .tn h3 .pc{font-size:12px;font-variant-numeric:tabular-nums}
+  .tn a{display:block;color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.5;
+    margin-bottom:6px}
+  .tn a:last-child{margin-bottom:0}
+  .tn a:hover{color:var(--accent)}
+  .tn .src{color:var(--muted);font-size:11.5px}
+  /* --- 오늘의 공부 --- */
+  .learn{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .lc{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);padding:16px 18px}
+  .lc .badge{display:inline-block;padding:2px 9px;border-radius:5px;font-size:11px;font-weight:700;
+    background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);margin-bottom:9px}
+  .lc h3{margin:0 0 7px;font-size:17px;letter-spacing:-.01em}
+  .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
+  .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
+    font-size:13.5px;color:var(--muted);line-height:1.65}
   .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
   .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
@@ -85,6 +123,18 @@
   <div class="meta">시장 기준일 <b>{{ brief.market_date or '미상' }}</b>
     · 생성 {{ brief.generated_at.strftime('%Y-%m-%d %H:%M') }} KST</div>
 </header>
+
+{% if brief.alerts %}
+<div class="alerts">
+{% for a in brief.alerts %}
+  <div class="alert {{ a.direction }}">
+    <span class="nm">{{ a.quote.name }}</span>
+    <span class="pc {{ a.direction }}">{{ a.quote | pct }}</span>
+    <span class="sym">{{ a.quote.symbol }}</span>
+  </div>
+{% endfor %}
+</div>
+{% endif %}
 
 {% if brief.ai_summary %}
 <div class="card summary">{{ brief.ai_summary | md_bold }}
@@ -174,6 +224,23 @@
 </div>
 {% endif %}
 
+{% if brief.calendar %}
+<h2>앞으로 예정된 일정</h2>
+<div class="card">
+<ul class="cal">
+{% for e in brief.calendar %}
+  <li>
+    <span class="dday {{ 'soon' if (e.day - today).days <= 1 else '' }}">{{ e.d_day(today) }}</span>
+    <span>
+      <span class="t">{{ e.title }}</span><span class="kind">{{ '실적' if e.kind == 'earnings' else '지표' }}</span>
+      {% if e.detail %}<div class="d">{{ e.detail }}</div>{% endif %}
+    </span>
+  </li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+
 {% if brief.news %}
 <h2>주요 뉴스</h2>
 <div class="card">
@@ -185,6 +252,38 @@
   </li>
 {% endfor %}
 </ul>
+</div>
+{% endif %}
+
+{% if brief.ticker_news %}
+<h2>내 관심 종목 소식</h2>
+<div class="tnews">
+{% for q in brief.watchlist %}
+{% if brief.ticker_news.get(q.symbol) %}
+  <div class="tn">
+    <h3>{{ q.name }}<span class="sym">{{ q.symbol }}</span>
+      <span class="pc {{ q.direction }}">{{ q | pct }}</span></h3>
+    {% for n in brief.ticker_news[q.symbol] %}
+      <a href="{{ n.url }}" target="_blank" rel="noopener">{{ n.summary_ko or n.title }}
+        <span class="src">· {{ n.source }}</span></a>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endfor %}
+</div>
+{% endif %}
+
+{% if brief.lessons %}
+<h2>오늘의 공부</h2>
+<div class="learn">
+{% for l in brief.lessons %}
+  <div class="lc">
+    <span class="badge">{{ '주식 용어' if l.kind == 'term' else '투자 심리' }}</span>
+    <h3>{{ l.term }}</h3>
+    <p>{{ l.plain }}</p>
+    <p class="why">{{ l.why }}</p>
+  </div>
+{% endfor %}
 </div>
 {% endif %}
 

@@ -67,6 +67,31 @@ def _quotes_block(label: str, quotes: list[Quote]) -> str:
     return f"[{label}]\n" + ("\n".join(rows) if rows else "- 데이터 없음")
 
 
+def _collect_headlines(brief: Brief, limit: int) -> list[list[NewsItem]]:
+    """번역 대상 헤드라인을 모은다. 시장 뉴스 + 관심종목 뉴스.
+
+    같은 기사가 두 섹션에 겹쳐 나올 수 있으므로 제목이 같은 것끼리 묶고,
+    번역은 한 번만 시킨 뒤 묶인 모두에 적용한다.
+    """
+    groups: dict[str, list[NewsItem]] = {}
+    order: list[str] = []
+
+    def add(item: NewsItem) -> None:
+        key = item.title.strip().lower()[:70]
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(item)
+
+    for n in brief.news[:limit]:
+        add(n)
+    for items in brief.ticker_news.values():
+        for n in items:
+            add(n)
+
+    return [groups[k] for k in order]
+
+
 def _build_prompt(brief: Brief, headlines: list[NewsItem]) -> str:
     parts = [
         f"기준일: {brief.market_date or '미상'} (미국 시장 마감 기준)",
@@ -109,7 +134,8 @@ def summarize(brief: Brief, cfg) -> None:
     import anthropic
 
     ai = cfg.get("ai", {})
-    headlines = brief.news[: ai.get("max_headlines", 16)]
+    groups = _collect_headlines(brief, ai.get("max_headlines", 16))
+    headlines = [g[0] for g in groups]        # 그룹 대표 1건씩만 번역시킨다
     client = anthropic.Anthropic(api_key=cfg.secrets.anthropic, timeout=180.0, max_retries=3)
 
     try:
@@ -156,11 +182,14 @@ def summarize(brief: Brief, cfg) -> None:
     brief.ai_summary = data.get("market_commentary")
     for item in data.get("headlines", []):
         i = item.get("index")
-        if isinstance(i, int) and 0 <= i < len(headlines):
-            note = (item.get("note") or "").strip()
-            headlines[i].summary_ko = item.get("title_ko", "")
-            if note:
-                headlines[i].summary_ko += f" — {note}"
+        if not (isinstance(i, int) and 0 <= i < len(groups)):
+            continue
+        note = (item.get("note") or "").strip()
+        line = item.get("title_ko", "")
+        if note:
+            line += f" — {note}"
+        for n in groups[i]:                   # 같은 기사끼리 번역을 공유
+            n.summary_ko = line
 
     points = data.get("watch_points") or []
     if points:
