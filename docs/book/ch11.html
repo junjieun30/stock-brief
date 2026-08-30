@@ -161,7 +161,8 @@
       var d = document.createElement("div");
       d.className = "mynote";
       d.innerHTML = "<b>내 생각</b>";
-      d.appendChild(document.createTextNode(notes[idx]));
+      var v = notes[idx];
+      d.appendChild(document.createTextNode(typeof v === "string" ? v : v.t));
       p.after(d);
     } else {
       p.classList.remove("noted");
@@ -176,14 +177,18 @@
     box.className = "noteedit";
     var ta = document.createElement("textarea");
     ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
-    ta.value = notes[idx] || "";
+    var cur = notes[idx]; ta.value = cur ? (typeof cur === "string" ? cur : cur.t) : "";
     var row = document.createElement("div"); row.className = "row";
     var ok = document.createElement("button"); ok.textContent = "저장";
-    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    var no = document.createElement("button"); no.textContent = cur ? "삭제" : "취소";
     no.className = "ghostbtn";
     ok.onclick = function () {
       var all = loadNotes();
-      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      if (ta.value.trim()) {
+        notes[idx] = { t: ta.value.trim(),
+                        x: p.textContent.slice(0, 90),
+                        ts: new Date().toISOString().slice(0, 10) };
+      }
       else { delete notes[idx]; }
       all[CH] = notes; saveNotes(all);
       box.remove(); renderNote(idx, p);
@@ -198,9 +203,20 @@
     ta.focus();
   }
 
+  // 드래그(텍스트 선택)와 탭을 구분한다 — 선택 중이거나 8px 이상 움직였으면 열지 않는다
+  var downX = 0, downY = 0;
+  document.addEventListener("pointerdown", function (e) { downX = e.clientX; downY = e.clientY; });
+  function isDragOrSelect(e) {
+    var sel = window.getSelection();
+    if (sel && sel.toString().length > 0) return true;
+    return Math.abs(e.clientX - downX) > 8 || Math.abs(e.clientY - downY) > 8;
+  }
   paras.forEach(function (p, idx) {
     renderNote(idx, p);
-    p.addEventListener("click", function () { openEditor(idx, p); });
+    p.addEventListener("click", function (e) {
+      if (isDragOrSelect(e)) return;
+      openEditor(idx, p);
+    });
   });
 })();
 </script>

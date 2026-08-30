@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import html
+import json
 from pathlib import Path
 
 from . import content_p1, content_p2, content_p3, content_p4, content_p5, content_p6
@@ -166,7 +167,7 @@ def build_index() -> str:
     rows.append("</ul>")
 
     body = f"""<div class="wrap">
-<div class="top"><a href="../index.html">← 오늘의 브리핑</a><span>{len(ALL)}편</span></div>
+<div class="top"><a href="../index.html">← 오늘의 브리핑</a><a href="./notes.html">내 메모 →</a></div>
 <div class="cover">
   <div class="small">과거 · 현재 · 미래는 한 점에 모인다</div>
   <h1>{BOOK_TITLE}</h1>
@@ -297,7 +298,8 @@ def build_chapter(i: int, ch: dict) -> str:
       var d = document.createElement("div");
       d.className = "mynote";
       d.innerHTML = "<b>내 생각</b>";
-      d.appendChild(document.createTextNode(notes[idx]));
+      var v = notes[idx];
+      d.appendChild(document.createTextNode(typeof v === "string" ? v : v.t));
       p.after(d);
     }} else {{
       p.classList.remove("noted");
@@ -312,14 +314,18 @@ def build_chapter(i: int, ch: dict) -> str:
     box.className = "noteedit";
     var ta = document.createElement("textarea");
     ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
-    ta.value = notes[idx] || "";
+    var cur = notes[idx]; ta.value = cur ? (typeof cur === "string" ? cur : cur.t) : "";
     var row = document.createElement("div"); row.className = "row";
     var ok = document.createElement("button"); ok.textContent = "저장";
-    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    var no = document.createElement("button"); no.textContent = cur ? "삭제" : "취소";
     no.className = "ghostbtn";
     ok.onclick = function () {{
       var all = loadNotes();
-      if (ta.value.trim()) {{ notes[idx] = ta.value.trim(); }}
+      if (ta.value.trim()) {{
+        notes[idx] = {{ t: ta.value.trim(),
+                        x: p.textContent.slice(0, 90),
+                        ts: new Date().toISOString().slice(0, 10) }};
+      }}
       else {{ delete notes[idx]; }}
       all[CH] = notes; saveNotes(all);
       box.remove(); renderNote(idx, p);
@@ -334,13 +340,109 @@ def build_chapter(i: int, ch: dict) -> str:
     ta.focus();
   }}
 
+  // 드래그(텍스트 선택)와 탭을 구분한다 — 선택 중이거나 8px 이상 움직였으면 열지 않는다
+  var downX = 0, downY = 0;
+  document.addEventListener("pointerdown", function (e) {{ downX = e.clientX; downY = e.clientY; }});
+  function isDragOrSelect(e) {{
+    var sel = window.getSelection();
+    if (sel && sel.toString().length > 0) return true;
+    return Math.abs(e.clientX - downX) > 8 || Math.abs(e.clientY - downY) > 8;
+  }}
   paras.forEach(function (p, idx) {{
     renderNote(idx, p);
-    p.addEventListener("click", function () {{ openEditor(idx, p); }});
+    p.addEventListener("click", function (e) {{
+      if (isDragOrSelect(e)) return;
+      openEditor(idx, p);
+    }});
   }});
 }})();
 </script>"""
     return _page(f"{ch['title']} · {BOOK_TITLE}", body)
+
+
+# ---------------------------------------------------------------- 내 메모 페이지
+def build_notes() -> str:
+    titles = {str(i): ch["title"] for i, ch in enumerate(ALL, start=1)}
+    body = f"""<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>내 메모</span></div>
+<div class="cover" style="padding:44px 0 36px">
+  <h1 style="font-size:24px">내 메모</h1>
+  <div class="tag">책을 읽으며 남긴 생각들 · 이 기기에만 저장되어 있습니다</div>
+</div>
+<div id="list"></div>
+<div class="pnav" style="margin-top:26px">
+  <a href="#" id="copyall"><span class="lbl">내보내기</span><span class="tt">전체 복사 (영어 학습 앱에 붙여넣기)</span></a>
+  <a href="#" id="dl" class="next"><span class="lbl">백업</span><span class="tt">JSON 파일로 저장</span></a>
+</div>
+<div class="foot">복사한 내용은 영어 말하기 연습의 주제로 쓰거나, 다른 메모 앱에 옮겨둘 수 있습니다.</div>
+</div>
+<script>
+(function () {{
+  var TITLES = {json.dumps(titles, ensure_ascii=False)};
+  var notes = {{}};
+  try {{ notes = JSON.parse(localStorage.getItem("book-notes") || "{{}}"); }} catch (e) {{}}
+
+  var list = document.getElementById("list");
+  var rows = [];
+  var chapters = Object.keys(notes).sort(function (a, b) {{ return a - b; }});
+  var count = 0;
+  chapters.forEach(function (ch) {{
+    var items = notes[ch];
+    var keys = Object.keys(items);
+    if (!keys.length) return;
+    var h = document.createElement("div");
+    h.className = "part";
+    h.textContent = ch.padStart(2, "0") + " · " + (TITLES[ch] || "");
+    list.appendChild(h);
+    var box = document.createElement("div");
+    box.className = "toc";
+    keys.sort(function (a, b) {{ return a - b; }}).forEach(function (k) {{
+      var v = items[k];
+      var t = typeof v === "string" ? v : v.t;
+      var x = typeof v === "string" ? "" : (v.x || "");
+      count++;
+      var li = document.createElement("div");
+      li.style.cssText = "padding:13px 16px;border-bottom:1px solid var(--line)";
+      li.innerHTML = (x ? '<div style="font-size:12px;color:var(--muted);margin-bottom:5px;word-break:keep-all">“' + x + '…”</div>' : "")
+        + '<div style="font-size:14.5px;word-break:keep-all">' + t.replace(/</g, "&lt;") + "</div>";
+      box.appendChild(li);
+      rows.push({{ chapter: TITLES[ch] || ("ch" + ch), quote: x, thought: t }});
+    }});
+    list.appendChild(box);
+  }});
+  if (!count) {{
+    list.innerHTML = '<div class="foot" style="border:0;text-align:center">아직 메모가 없습니다.<br>장을 읽다가 문단을 탭하면 생각을 남길 수 있어요.</div>';
+  }}
+
+  function exportText() {{
+    var NL = String.fromCharCode(10);
+    return rows.map(function (r, i) {{
+      return (i + 1) + ". [" + r.chapter + "]" + (r.quote ? NL + "   책: " + r.quote + "…" : "")
+        + NL + "   내 생각: " + r.thought;
+    }}).join(NL + NL);
+  }}
+
+  document.getElementById("copyall").addEventListener("click", function (e) {{
+    e.preventDefault();
+    var NL = String.fromCharCode(10);
+    var text = "『지금에 모인 미래』를 읽고 남긴 생각 " + rows.length + "개" + NL + NL + exportText();
+    (navigator.clipboard ? navigator.clipboard.writeText(text)
+      : Promise.reject()).then(function () {{
+      e.target.closest("a").querySelector(".tt").textContent = "복사됐습니다 ✓";
+    }}).catch(function () {{ prompt("아래 내용을 복사하세요", text); }});
+  }});
+
+  document.getElementById("dl").addEventListener("click", function (e) {{
+    e.preventDefault();
+    var blob = new Blob([JSON.stringify(rows, null, 2)], {{ type: "application/json" }});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "book-notes.json";
+    a.click();
+  }});
+}})();
+</script>"""
+    return _page("내 메모 · " + BOOK_TITLE, body)
 
 
 # ---------------------------------------------------------------- 엔트리
@@ -348,6 +450,7 @@ def build(outdir: Path) -> int:
     book = outdir / "book"
     book.mkdir(parents=True, exist_ok=True)
     (book / "index.html").write_text(build_index(), encoding="utf-8")
+    (book / "notes.html").write_text(build_notes(), encoding="utf-8")
     for i, ch in enumerate(ALL, start=1):
         (book / f"ch{i:02d}.html").write_text(build_chapter(i, ch), encoding="utf-8")
     return len(ALL)
