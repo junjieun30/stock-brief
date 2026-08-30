@@ -55,27 +55,28 @@
 
 > 이 키를 건너뛰어도 프로그램은 돌아갑니다. 다만 뉴스가 영문 그대로 나오고 시장 총평이 빠집니다.
 
-## 4단계 — 저장소 만들고 코드 올리기 (10분)
+## 4단계 — 코드 올리기
 
-**4-1. 저장소 생성**
-
-1. https://github.com/new 접속
-2. Repository name: `stock-brief`
-3. **Public** 선택 (Private으로 하면 무료 플랜에서 웹페이지 기능을 못 씁니다)
-4. 아래 체크박스는 **전부 비워둡니다** (README, .gitignore, license 모두 체크 해제)
-5. **Create repository** 클릭
+**4-1. 저장소 생성 ✅ 완료** — https://github.com/junjieun30/stock-brief (현재 비어 있음)
 
 **4-2. 코드 올리기**
 
-저장소를 만든 뒤 아래를 그대로 실행합니다. (remote 는 이미 걸어뒀습니다.)
+아래를 실행합니다. remote 는 이미 걸어뒀습니다.
 
-```bash
-cd /d/claud/stock-brief && git push -u origin main
+```powershell
+cd D:\claud\stock-brief; git push -u origin main
 ```
 
-브라우저 창이 뜨면 GitHub 로그인 후 권한을 허용하세요.
+> **명령어는 PowerShell 문법입니다.** 이 PC의 터미널은 Windows PowerShell 5.1 이라
+> 리눅스식 `&&` 를 쓰면 `'&&' 토큰은 이 버전에서 올바른 문 구분 기호가 아닙니다` 오류가 납니다.
+> 명령을 이어 붙일 때는 세미콜론 `;` 을 씁니다.
+
+실행하면 **GitHub 로그인 창**이 뜹니다 — "Sign in with your browser" 를 눌러 로그인한 뒤
+**Authorize** 하세요. 창이 다른 창 뒤에 숨을 수 있으니 작업표시줄도 확인하세요.
 (창이 안 뜨고 비밀번호를 물으면, 비밀번호 대신
 [Personal Access Token](https://github.com/settings/tokens) 을 만들어 붙여넣어야 합니다.)
+
+성공하면 `Writing objects: 100%` 와 `branch 'main' set up to track 'origin/main'` 이 보입니다.
 
 ## 5단계 — 비밀 키 등록 (5분)
 
@@ -149,7 +150,7 @@ GitHub의 스케줄러는 서버가 붐빌 때 **10~30분 늦게** 뜰 수 있�
 | 화~토 오전 8시 | `0 23 * * 1-5` |
 | 매일 오전 7시 | `0 22 * * *` |
 
-고친 뒤 `git add . && git commit -m "시각 변경" && git push` 하면 적용됩니다.
+고친 뒤 `git add .; git commit -m "시각 변경"; git push` 하면 적용됩니다.
 
 ## 설정 바꾸기
 
@@ -178,7 +179,7 @@ watchlist:
 클라우드로 옮겨도 로컬 실행은 그대로 됩니다. 원할 때 즉시 최신 브리핑을 보고 싶으면:
 
 ```bash
-cd /d/claud/stock-brief && python run.py --open
+cd D:\claud\stock-brief; python run.py --open
 ```
 
 로컬은 `report/` 에, 클라우드는 `docs/` 에 저장되어 서로 간섭하지 않습니다.
