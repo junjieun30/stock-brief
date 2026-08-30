@@ -125,6 +125,7 @@ class Brief:
     losers: list[Quote] = field(default_factory=list)
     news: list[NewsItem] = field(default_factory=list)
     ai_summary: str | None = None       # 시장 총평 (한국어)
+    sector_note: str | None = None      # 섹터 등락 해설 (한국어)
     calendar: list[CalendarEvent] = field(default_factory=list)
     alerts: list[Alert] = field(default_factory=list)
     ticker_news: dict[str, list[NewsItem]] = field(default_factory=dict)

@@ -108,7 +108,13 @@
     h2{margin:30px 0 12px}
     .reflect{margin-top:44px}
   }
-  /* --- 장 여는 시간 --- */
+  /* --- 장 여는 시간 (접이식) --- */
+  .fold summary{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .fold summary::-webkit-details-marker{display:none}
+  .fold h2.infold{margin-bottom:0}
+  .fold[open] h2.infold{margin-bottom:14px}
+  .chev{margin-left:2px;color:var(--muted);font-size:11px;transition:transform .15s}
+  .fold[open] .chev{transform:rotate(180deg)}
   .krnote{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.02em}
   .hours{list-style:none;margin:0;padding:0}
   .hours li{display:grid;grid-template-columns:14px 168px 1fr auto;gap:10px;align-items:center;
@@ -125,6 +131,10 @@
     .hours li{grid-template-columns:14px 1fr auto;font-size:13px}
     .mhours{grid-column:2 / -1;grid-row:2;font-size:12px}
   }
+  .secnote{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.9;word-break:keep-all}
+  .secnote b{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.12em;
+    margin-bottom:5px;font-weight:700}
   /* --- 급등락 알림 --- */
   .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
   .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:var(--radius-lg);
@@ -234,10 +244,12 @@
 </div>
 {% endif %}
 
-<h2>장 여는 시간 <span class="krnote">한국시간 기준</span></h2>
+<details class="fold">
+<summary><h2 class="infold">장 여는 시간 <span class="krnote">한국시간 · 탭해서 펼치기</span><span class="chev">▾</span></h2></summary>
 <div class="card">
 <ul class="hours" id="market-hours"></ul>
 </div>
+</details>
 <script>
 (function () {
   // 미국 서머타임: 3월 둘째 일요일 ~ 11월 첫째 일요일 (현지 기준)
@@ -364,6 +376,9 @@
     </div>
   {% endfor %}
   </div>
+  {% if brief.sector_note %}
+  <div class="secnote"><b>왜 이렇게 움직였나</b>{{ brief.sector_note }}</div>
+  {% endif %}
 </div>
 {% endif %}
 

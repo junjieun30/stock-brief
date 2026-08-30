@@ -49,6 +49,8 @@ def render(brief: Brief) -> str:
     out.append(_table("G10 통화", brief.fx))
     out.append(_table("매크로 · 환율 · 원자재", brief.macro))
     out.append(_table("섹터 ETF", brief.sectors))
+    if brief.sector_note:
+        out += ["> **왜 이렇게 움직였나** — " + brief.sector_note, ""]
     out.append(_table("관심 종목", brief.watchlist))
 
     if brief.gainers or brief.losers:

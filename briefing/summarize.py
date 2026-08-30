@@ -46,13 +46,19 @@ SCHEMA = {
                 "additionalProperties": False,
             },
         },
+        "sector_commentary": {
+            "type": "string",
+            "description": ("섹터별 등락 해설. 2~4문장의 한국어. 가장 오른/내린 섹터가 왜 움직였는지를 "
+                            "제공된 헤드라인과 시세에서 근거를 찾아 설명한다. 헤드라인에 근거가 없으면 "
+                            "지어내지 말고 '뚜렷한 단일 재료보다는 ~' 처럼 신중하게 서술한다."),
+        },
         "watch_points": {
             "type": "array",
             "description": "오늘 확인할 관전 포인트 3~5개. 각 항목은 한 문장. 투자 권유가 아닌 확인 사항으로 서술.",
             "items": {"type": "string"},
         },
     },
-    "required": ["market_commentary", "headlines", "watch_points"],
+    "required": ["market_commentary", "sector_commentary", "headlines", "watch_points"],
     "additionalProperties": False,
 }
 
@@ -121,6 +127,7 @@ def _build_prompt(brief: Brief, headlines: list[NewsItem]) -> str:
         "",
         "위 데이터만 근거로 다음을 작성하세요:",
         "1) market_commentary — 전일 해외 증시 총평",
+        "1-1) sector_commentary — 섹터 ETF 등락의 배경 해설 (근거는 위 헤드라인에서만)",
         f"2) headlines — 위 {len(headlines)}개 헤드라인 전부를 같은 번호로 한국어 요약",
         "3) watch_points — 오늘의 관전 포인트",
     ]
@@ -185,6 +192,7 @@ def summarize(brief: Brief, cfg) -> None:
         return
 
     brief.ai_summary = data.get("market_commentary")
+    brief.sector_note = (data.get("sector_commentary") or "").strip() or None
     for item in data.get("headlines", []):
         i = item.get("index")
         if not (isinstance(i, int) and 0 <= i < len(groups)):

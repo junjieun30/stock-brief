@@ -108,7 +108,13 @@
     h2{margin:30px 0 12px}
     .reflect{margin-top:44px}
   }
-  /* --- 장 여는 시간 --- */
+  /* --- 장 여는 시간 (접이식) --- */
+  .fold summary{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .fold summary::-webkit-details-marker{display:none}
+  .fold h2.infold{margin-bottom:0}
+  .fold[open] h2.infold{margin-bottom:14px}
+  .chev{margin-left:2px;color:var(--muted);font-size:11px;transition:transform .15s}
+  .fold[open] .chev{transform:rotate(180deg)}
   .krnote{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.02em}
   .hours{list-style:none;margin:0;padding:0}
   .hours li{display:grid;grid-template-columns:14px 168px 1fr auto;gap:10px;align-items:center;
@@ -125,6 +131,10 @@
     .hours li{grid-template-columns:14px 1fr auto;font-size:13px}
     .mhours{grid-column:2 / -1;grid-row:2;font-size:12px}
   }
+  .secnote{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.9;word-break:keep-all}
+  .secnote b{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.12em;
+    margin-bottom:5px;font-weight:700}
   /* --- 급등락 알림 --- */
   .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
   .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:var(--radius-lg);
@@ -210,7 +220,7 @@
 <header>
   <h1>해외 시장 데일리 브리핑</h1>
   <div class="meta">시장 기준일 <b>2026-08-27</b>
-    · 생성 2026-08-31 00:04 KST</div>
+    · 생성 2026-08-31 00:07 KST</div>
   <button id="install-btn" class="install" hidden>📲 앱으로 설치</button>
 </header>
 
@@ -225,10 +235,12 @@
 </div>
 
 
-<h2>장 여는 시간 <span class="krnote">한국시간 기준</span></h2>
+<details class="fold">
+<summary><h2 class="infold">장 여는 시간 <span class="krnote">한국시간 · 탭해서 펼치기</span><span class="chev">▾</span></h2></summary>
 <div class="card">
 <ul class="hours" id="market-hours"></ul>
 </div>
+</details>
 <script>
 (function () {
   // 미국 서머타임: 3월 둘째 일요일 ~ 11월 첫째 일요일 (현지 기준)
@@ -481,8 +493,8 @@
   </div>
   <div class="tile">
     <div class="n">비트코인</div>
-    <div class="p">$78,680</div>
-    <div class="c up">▲ +1.09%</div>
+    <div class="p">$78,734</div>
+    <div class="c up">▲ +1.16%</div>
   </div>
 </div>
 
@@ -752,8 +764,8 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 13:00 UTC · What new tariff walls in U.S.-Canada trade war mean for the economy&#39;s critical metals</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-delivers-unmistakable-verdict-143700553.html" target="_blank" rel="noopener">Jim Cramer delivers unmistakable verdict on vital tech giant</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 14:37 UTC · Jim Cramer delivers unmistakable verdict on vital tech giant</div>
+    <a href="https://finance.yahoo.com/markets/crypto/articles/man-posed-49ers-player-convinced-142000089.html" target="_blank" rel="noopener">Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-30 14:20 UTC · Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</div>
   </li>
   <li>
     <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQNm9sS1JaTUZZUVZiYk5qQTVONGppVS01cEtQLXQ5N29iVkZuM0ZycWhHZWRRS2VZQXBSdHAxY25jOXlveTJ3RWI3U3pLQ0JJcHpCV0ZoVTdnc1R4ZlNMajIxZFA1UGFjckdSWkFud2xTLS1HNURab1F1aTNRMzZfSjN4YlA4bjh2TUNHVjZOam9Ea1Jy?oc=5" target="_blank" rel="noopener">Bull Markets Rise, Bear Markets Fall: Here&#39;s How I Use Each to Build Wealth - The Motley Fool</a>
@@ -764,8 +776,8 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 12:32 UTC · Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/amazon-badly-underperformed-p-500-143500321.html" target="_blank" rel="noopener">Amazon Has Badly Underperformed the S&amp;P 500 and Nasdaq-100 Since Jeff Bezos Stepped Down as CEO. Could Apple Do the Same Starting Sept. 1 When Tim Cook Steps Down?</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 14:35 UTC · Amazon Has Badly Underperformed the S&amp;P 500 and Nasdaq-100 Since Jeff Bezos Stepped Down as CEO. Could Apple Do the Same Starting Sept. 1 When Tim Cook Steps Down?</div>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/crowdstrike-ceo-says-delivered-best-150002644.html" target="_blank" rel="noopener">CrowdStrike CEO Says It Delivered Its Best Quarter Ever. Surprisingly, That May Be an Understatement.</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 15:00 UTC · CrowdStrike CEO Says It Delivered Its Best Quarter Ever. Surprisingly, That May Be an Understatement.</div>
   </li>
   <li>
     <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNMk55aVQyOGl4NG9VM1d0d0dOb0hGcWViZEhEMEJObHlwWTZQazc4ZnNMdXBaMnFsdHlnbnY3b2JBX29UR182eDJBQ29hb0x2a25XU2MwNGNKY3g4eTROclpFMm05aFpnV0wyZ09WVXoxUWlsMzN4NVNjSnY0R291WEdXQzlsTjFXYWFGUk1vb01hNDN2cWM3RGt0ZUdOc1FJdk4zdnpGdWxsT1RpQUNLeTBMaU5Vd1B3MlQ5RVlQbVV4aC1FY2tHT2dxVkdqYjNK?oc=5" target="_blank" rel="noopener">The S&amp;P 500 Keeps Hitting Highs - But It&#39;s Just Microsoft and Nvidia Carrying the Entire Market - 24/7 Wall St.</a>
@@ -776,8 +788,8 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/prediction-5-000-investment-spacex-142500856.html" target="_blank" rel="noopener">Prediction: This Is What a $5,000 Investment in SpaceX Will Be Worth by 2030</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 14:25 UTC · Prediction: This Is What a $5,000 Investment in SpaceX Will Be Worth by 2030</div>
+    <a href="https://finance.yahoo.com/real-estate/articles/72-homebuyers-paused-search-waiting-150000785.html" target="_blank" rel="noopener">72% of homebuyers have paused their search waiting for lower mortgage rates — and 41% already regret it</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 15:00 UTC · 72% of homebuyers have paused their search waiting for lower mortgage rates — and 41% already regret it</div>
   </li>
   <li>
     <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNTW9EU05RS0NMM1VWUVY1aVJ1eVRDaDNwOS1sNEFmUXVTLVBXazhPNXZRQ29JRVJCUGgzSjB4UWRtaXVUWS1UY2p6TGVqSElNbnZtanliR1pQUjNUYU1OUEp6T2NkU24tS2Y3TnpmSnkxdWlaekdLYWR4ZVVESWh6c0E1RF9pS1dXUVp0bnJWSnFXMXBrNFplaU42cHRfd0FXVTRaTERZdjlxWWk1UG9OdzZ6VW4?oc=5" target="_blank" rel="noopener">Here are the 3 big things we&#39;re watching in the stock market in the week ahead - CNBC</a>
@@ -788,8 +800,8 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · He beat Big Tobacco. Will the same playbook work against Meta and social media?</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/options/articles/68-old-collects-3-300-142305231.html" target="_blank" rel="noopener">How a 68-Year-Old Collects $3,300 a Month From a Single Fund: JEPQ</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 14:23 UTC · How a 68-Year-Old Collects $3,300 a Month From a Single Fund: JEPQ</div>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/visa-stock-underperforming-dow-145730618.html" target="_blank" rel="noopener">Is Visa Stock Underperforming the Dow?</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:57 UTC · Is Visa Stock Underperforming the Dow?</div>
   </li>
   <li>
     <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQWWxWekJCUWFfaE5aZzlwcjBiNlZvNjNYcUdaemxZQzVibHgweU02YkZDOUlnSkxoYzhveEprVU1qakc5Z1FJX2FpajAwTFhfTDN0cF93bWc1aUEtMUR4ZEZ5bTg1SXhMVlBGSlFqNXBmZTFJVkljTzB2d1dESmJIQmFlRjNPOF96VGdTVnhlN0Q0ZTlkZTc4?oc=5" target="_blank" rel="noopener">(NUBF) Investment Performance Report (NUBF:CA) - Stock Traders Daily</a>
@@ -800,8 +812,8 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 10:42 UTC · Top Wall Street analysts suggest these 3 dividend stocks for consistent income</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/crypto/articles/man-posed-49ers-player-convinced-142000089.html" target="_blank" rel="noopener">Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 14:20 UTC · Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</div>
+    <a href="https://finance.yahoo.com/economy/articles/kevin-oleary-worth-400-million-143000770.html" target="_blank" rel="noopener">Kevin O&#39;Leary, worth $400 million, compares paper towel prices at Walmart as grocery costs climb 5.9%</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:30 UTC · Kevin O&#39;Leary, worth $400 million, compares paper towel prices at Walmart as grocery costs climb 5.9%</div>
   </li>
 </ul>
 </div>
