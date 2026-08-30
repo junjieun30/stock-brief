@@ -158,7 +158,17 @@ def write_outputs(brief: Brief, cfg: Config) -> dict[str, Path]:
     _cleanup(outdir, cfg.get("output", {}).get("keep_days", 60))
     if "html" in formats:
         written["archive"] = _write_archive(outdir)
+        _copy_static(outdir)
     return written
+
+
+def _copy_static(outdir: Path) -> None:
+    """PWA 자산(manifest, 서비스워커, 아이콘)을 출력 폴더에 복사한다."""
+    import shutil
+    static = Path(__file__).resolve().parent / "briefing" / "render" / "static"
+    for f in static.iterdir():
+        if f.is_file():
+            shutil.copy2(f, outdir / f.name)
 
 
 ARCHIVE_TPL = """<!doctype html><html lang="ko"><head><meta charset="utf-8">
