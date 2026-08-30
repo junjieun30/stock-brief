@@ -25,7 +25,7 @@ def _line(q: Quote) -> str:
         return f"{_esc(q.name)}: —"
     mark = "🔺" if q.change_pct > 0 else ("🔻" if q.change_pct < 0 else "▪")
     delta = f"{q.change * 100:+.1f}bp" if q.change_mode == "bp" else f"{q.change_pct:+.2f}%"
-    body = f"{q.price:,.2f}"
+    body = f"{q.price:,.{q.digits if q.digits is not None else 2}f}"
     price = f"{q.unit}{body}" if q.unit in ("$", "€", "¥") else f"{body}{q.unit}"
     return f"{mark} {_esc(q.name)} {price} ({delta})"
 
@@ -49,6 +49,11 @@ def build_message(brief: Brief, max_news: int = 6) -> str:
     parts.append("<b>주요 지수</b>")
     parts += [_line(q) for q in brief.indices]
     parts.append("")
+
+    if brief.global_indices:
+        parts.append("<b>글로벌 증시</b>")
+        parts += [_line(q) for q in brief.global_indices]
+        parts.append("")
 
     parts.append("<b>매크로</b>")
     parts += [_line(q) for q in brief.macro]
@@ -75,6 +80,12 @@ def build_message(brief: Brief, max_news: int = 6) -> str:
     for lesson in brief.lessons:
         badge = "📖 오늘의 용어" if lesson.kind == "term" else "🧠 투자 심리"
         parts += [f"<b>{badge} — {_esc(lesson.term)}</b>", _esc(lesson.plain), ""]
+
+    if brief.reflection:
+        r = brief.reflection
+        body = f"“{_esc(r.body)}”" if r.kind == "quote" else _esc(r.body)
+        parts += [f"<b>🕯 오늘의 사색 — {_esc(r.name)}</b>", body,
+                  f"<i>{_esc(r.sit)}</i>", ""]
 
     parts.append("<i>참고 자료이며 투자 권유가 아닙니다.</i>")
 

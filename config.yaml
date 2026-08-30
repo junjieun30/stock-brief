@@ -10,6 +10,36 @@ market:
     - { symbol: "^RUT",   name: "러셀 2000" }
     - { symbol: "^VIX",   name: "VIX 변동성" }
 
+  # 글로벌 증시 — G10 주요국 + 아시아
+  global_indices:
+    - { symbol: "^STOXX50E", name: "유로스톡스50" }
+    - { symbol: "^GDAXI",    name: "독일 DAX" }
+    - { symbol: "^FTSE",     name: "영국 FTSE100" }
+    - { symbol: "^FCHI",     name: "프랑스 CAC40" }
+    - { symbol: "^SSMI",     name: "스위스 SMI" }
+    - { symbol: "^AEX",      name: "네덜란드 AEX" }
+    - { symbol: "^OMX",      name: "스웨덴 OMX30" }
+    - { symbol: "^GSPTSE",   name: "캐나다 TSX" }
+    - { symbol: "^N225",     name: "일본 니케이225" }
+    - { symbol: "^AXJO",     name: "호주 ASX200" }
+    - { symbol: "^KS11",     name: "한국 코스피" }
+    - { symbol: "^HSI",      name: "홍콩 항셍" }
+    - { symbol: "000001.SS", name: "중국 상해종합" }
+
+  # G10 통화 (달러 대비). digits 는 소수점 자리수.
+  fx:
+    - { symbol: "EURUSD=X", name: "유로 / 달러",      digits: 4 }
+    - { symbol: "GBPUSD=X", name: "파운드 / 달러",     digits: 4 }
+    - { symbol: "USDJPY=X", name: "달러 / 엔",        digits: 2 }
+    - { symbol: "USDCHF=X", name: "달러 / 스위스프랑",  digits: 4 }
+    - { symbol: "USDCAD=X", name: "달러 / 캐나다달러",  digits: 4 }
+    - { symbol: "AUDUSD=X", name: "호주달러 / 달러",   digits: 4 }
+    - { symbol: "NZDUSD=X", name: "뉴질랜드달러 / 달러", digits: 4 }
+    - { symbol: "USDSEK=X", name: "달러 / 스웨덴크로나", digits: 3 }
+    - { symbol: "USDNOK=X", name: "달러 / 노르웨이크로네", digits: 3 }
+    - { symbol: "EURKRW=X", name: "유로 / 원",        digits: 1, unit: "원" }
+    - { symbol: "JPYKRW=X", name: "엔 / 원",          digits: 2, unit: "원" }
+
   # 매크로 / 원자재 / 환율
   macro:
     - { symbol: "^TNX",       name: "미국 10년물 금리", unit: "%", change_mode: "bp" }
@@ -86,6 +116,10 @@ calendar:
   # 직접 챙기고 싶은 일정을 여기에 적습니다 (CPI 발표일 등은 BLS 사이트에서 확인)
   events: []
   #  - { date: 2026-09-10, title: "미국 8월 소비자물가(CPI)", detail: "한국시간 밤 9시 30분" }
+
+# 오늘의 사색 — 미래학자들의 생각을 매일 한 편씩
+reflect:
+  enabled: true
 
 # 주린이용 학습 카드 — 매일 용어 1개 + 투자심리 1개가 돌아가며 나옵니다
 learn:

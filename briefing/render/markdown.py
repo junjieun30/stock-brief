@@ -8,7 +8,7 @@ def _fmt(q: Quote) -> str:
     if not q.ok:
         return f"| {q.name} | — | — | {q.error or '데이터 없음'} |"
     arrow = "▲" if q.change_pct > 0 else ("▼" if q.change_pct < 0 else "—")
-    body = f"{q.price:,.2f}"
+    body = f"{q.price:,.{q.digits if q.digits is not None else 2}f}"
     price = f"{q.unit}{body}" if q.unit in ("$", "€", "¥") else f"{body}{q.unit}"
     delta = f"{q.change * 100:+.1f}bp" if q.change_mode == "bp" else f"{q.change_pct:+.2f}%"
     return f"| {q.name} | {price} | {arrow} {delta} | {q.symbol} |"
@@ -45,6 +45,8 @@ def render(brief: Brief) -> str:
 
     out += ["## 시세", ""]
     out.append(_table("주요 지수", brief.indices))
+    out.append(_table("글로벌 증시", brief.global_indices))
+    out.append(_table("G10 통화", brief.fx))
     out.append(_table("매크로 · 환율 · 원자재", brief.macro))
     out.append(_table("섹터 ETF", brief.sectors))
     out.append(_table("관심 종목", brief.watchlist))
@@ -87,6 +89,16 @@ def render(brief: Brief) -> str:
         for l in brief.lessons:
             badge = "주식 용어" if l.kind == "term" else "투자 심리"
             out += [f"### [{badge}] {l.term}", "", l.plain, "", f"> {l.why}", ""]
+
+    if brief.reflection:
+        r = brief.reflection
+        body = f"“{r.body}”" if r.kind == "quote" else r.body
+        kind_label = "인용" if r.kind == "quote" else "사상 요약 · 직접 인용이 아닙니다"
+        out += ["## 오늘의 사색", "", f"> {body}", "",
+                f"— **{r.name}** · {r.who}  ", f"<sub>{kind_label} · {r.source}</sub>", "",
+                f"*{r.sit}*", ""]
+        if r.note:
+            out += [f"<sub>{r.note}</sub>", ""]
 
     if brief.warnings:
         out += ["## 수집 경고", ""] + [f"- {w}" for w in brief.warnings] + [""]

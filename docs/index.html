@@ -107,6 +107,26 @@
   .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
   .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
     font-size:13.5px;color:var(--muted);line-height:1.65}
+  /* --- 오늘의 사색 : 데이터 카드들과 다른 호흡. 여백을 크게 준다 --- */
+  .reflect{margin:56px 0 8px;padding:44px 40px;border-radius:16px;text-align:center;
+    background:color-mix(in srgb,var(--accent) 4%,var(--panel));
+    border:1px solid color-mix(in srgb,var(--accent) 16%,var(--line))}
+  .rlabel{font-size:11.5px;letter-spacing:.22em;color:var(--accent);font-weight:700;
+    margin-bottom:26px;text-transform:none}
+  .rbody{margin:0 auto 26px;max-width:640px;border:0;padding:0;
+    font-size:20px;line-height:1.85;font-weight:450;letter-spacing:-.01em;word-break:keep-all}
+  .rwho{font-size:13.5px;margin-bottom:5px}
+  .rwho b{font-weight:700} .rwho span{color:var(--muted);margin-left:9px}
+  .rsrc{font-size:12px;color:var(--muted)}
+  .rsit{margin:28px auto 0;max-width:560px;padding-top:24px;
+    border-top:1px solid color-mix(in srgb,var(--accent) 18%,transparent);
+    font-size:15px;line-height:1.8;color:var(--ink);opacity:.86;word-break:keep-all}
+  .rnote{margin:18px auto 0;max-width:600px;font-size:11.5px;line-height:1.65;
+    color:var(--muted);opacity:.85}
+  @media (max-width:620px){
+    .reflect{padding:34px 22px}
+    .rbody{font-size:17.5px}
+  }
   .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
   .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
@@ -121,7 +141,7 @@
 <header>
   <h1>해외 시장 데일리 브리핑</h1>
   <div class="meta">시장 기준일 <b>2026-08-27</b>
-    · 생성 2026-08-30 23:24 KST</div>
+    · 생성 2026-08-30 23:31 KST</div>
 </header>
 
 <div class="alerts">
@@ -162,6 +182,134 @@
   </div>
 </div>
 
+<h2>글로벌 증시</h2>
+<div class="grid">
+  <div class="tile">
+    <div class="n">유로스톡스50</div>
+    <div class="p">6,424.73</div>
+    <div class="c down">▼ -0.71%</div>
+  </div>
+  <div class="tile">
+    <div class="n">독일 DAX</div>
+    <div class="p">26,367</div>
+    <div class="c up">▲ +0.31%</div>
+  </div>
+  <div class="tile">
+    <div class="n">영국 FTSE100</div>
+    <div class="p">10,792</div>
+    <div class="c down">▼ -0.79%</div>
+  </div>
+  <div class="tile">
+    <div class="n">프랑스 CAC40</div>
+    <div class="p">8,319.87</div>
+    <div class="c down">▼ -1.68%</div>
+  </div>
+  <div class="tile">
+    <div class="n">스위스 SMI</div>
+    <div class="p">14,384</div>
+    <div class="c down">▼ -1.09%</div>
+  </div>
+  <div class="tile">
+    <div class="n">네덜란드 AEX</div>
+    <div class="p">1,103.38</div>
+    <div class="c down">▼ -0.40%</div>
+  </div>
+  <div class="tile">
+    <div class="n">스웨덴 OMX30</div>
+    <div class="p">3,321.44</div>
+    <div class="c down">▼ -0.15%</div>
+  </div>
+  <div class="tile">
+    <div class="n">캐나다 TSX</div>
+    <div class="p">36,834</div>
+    <div class="c up">▲ +0.06%</div>
+  </div>
+  <div class="tile">
+    <div class="n">일본 니케이225</div>
+    <div class="p">66,132</div>
+    <div class="c down">▼ -0.20%</div>
+  </div>
+  <div class="tile">
+    <div class="n">호주 ASX200</div>
+    <div class="p">9,038.20</div>
+    <div class="c down">▼ -0.98%</div>
+  </div>
+  <div class="tile">
+    <div class="n">한국 코스피</div>
+    <div class="p">6,912.37</div>
+    <div class="c up">▲ +1.53%</div>
+  </div>
+  <div class="tile">
+    <div class="n">홍콩 항셍</div>
+    <div class="p">25,566</div>
+    <div class="c down">▼ -0.34%</div>
+  </div>
+  <div class="tile">
+    <div class="n">중국 상해종합</div>
+    <div class="p">3,956.57</div>
+    <div class="c up">▲ +1.13%</div>
+  </div>
+</div>
+
+<h2>G10 통화</h2>
+<div class="grid">
+  <div class="tile">
+    <div class="n">유로 / 달러</div>
+    <div class="p">1.1587</div>
+    <div class="c down">▼ -0.58%</div>
+  </div>
+  <div class="tile">
+    <div class="n">파운드 / 달러</div>
+    <div class="p">1.3534</div>
+    <div class="c down">▼ -0.46%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 엔</div>
+    <div class="p">160.04</div>
+    <div class="c up">▲ +0.49%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 스위스프랑</div>
+    <div class="p">0.8093</div>
+    <div class="c up">▲ +0.53%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 캐나다달러</div>
+    <div class="p">1.3902</div>
+    <div class="c up">▲ +0.36%</div>
+  </div>
+  <div class="tile">
+    <div class="n">호주달러 / 달러</div>
+    <div class="p">0.7164</div>
+    <div class="c down">▼ -0.43%</div>
+  </div>
+  <div class="tile">
+    <div class="n">뉴질랜드달러 / 달러</div>
+    <div class="p">0.5915</div>
+    <div class="c down">▼ -0.67%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 스웨덴크로나</div>
+    <div class="p">9.594</div>
+    <div class="c up">▲ +0.74%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 노르웨이크로네</div>
+    <div class="p">9.364</div>
+    <div class="c up">▲ +0.49%</div>
+  </div>
+  <div class="tile">
+    <div class="n">유로 / 원</div>
+    <div class="p">1,592.8원</div>
+    <div class="c down">▼ -1.21%</div>
+  </div>
+  <div class="tile">
+    <div class="n">엔 / 원</div>
+    <div class="p">8.57원</div>
+    <div class="c down">▼ -1.32%</div>
+  </div>
+</div>
+
 <h2>매크로 · 환율 · 원자재</h2>
 <div class="grid">
   <div class="tile">
@@ -191,8 +339,8 @@
   </div>
   <div class="tile">
     <div class="n">비트코인</div>
-    <div class="p">$78,818</div>
-    <div class="c up">▲ +1.27%</div>
+    <div class="p">$78,884</div>
+    <div class="c up">▲ +1.35%</div>
   </div>
 </div>
 
@@ -462,20 +610,20 @@
     <div class="sub"><span class="tag">CNBC</span>08-30 13:00 UTC · What new tariff walls in U.S.-Canada trade war mean for the economy&#39;s critical metals</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/healthcare/articles/josh-brown-says-break-ai-134507001.html" target="_blank" rel="noopener">Josh Brown Says ‘Take a Break From AI CapEx World,’ Highlights His 2 Top Healthcare Stock Picks</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 13:45 UTC · Josh Brown Says ‘Take a Break From AI CapEx World,’ Highlights His 2 Top Healthcare Stock Picks</div>
+    <a href="https://finance.yahoo.com/markets/crypto/articles/man-posed-49ers-player-convinced-142000089.html" target="_blank" rel="noopener">Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-30 14:20 UTC · Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</div>
   </li>
   <li>
     <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPZ21YcDFpMjktQkoxeTZra1Jya3FUQnF2LW5qVnJBdDhRV0xmcWdtdEg5T3hHTWVHZndjeDJyZVZnTndXanh4X2x2dmZqQU9ITWVYV2d6c241Sk1CaTJwQVA1TEZicVNPZkRwUkpIVEloWUVMcU1OVExRRlpWNFd0dXdBdHVmUXlkU3RkcGhvVGtHUWRqbjBGUA?oc=5" target="_blank" rel="noopener">Meta Stock Looks Undervalued. Is the Market Missing Something? - The Motley Fool</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 14:18 UTC · Meta Stock Looks Undervalued. Is the Market Missing Something? - The Motley Fool</div>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:24 UTC · Meta Stock Looks Undervalued. Is the Market Missing Something? - The Motley Fool</div>
   </li>
   <li>
     <a href="https://www.cnbc.com/2026/08/30/iceland-eu-accession-referendum-result.html" target="_blank" rel="noopener">Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 12:32 UTC · Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</div>
   </li>
   <li>
-    <a href="https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-microsoft-titans-mask-market-weakness/?src=A00220&amp;yptr=yahoo" target="_blank" rel="noopener">Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now.</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-30 13:28 UTC · Dow Jones Futures Due Amid Bullish, Bearish Market Signals. What To Do Now.</div>
+    <a href="https://finance.yahoo.com/healthcare/articles/josh-brown-says-break-ai-134507001.html" target="_blank" rel="noopener">Josh Brown Says ‘Take a Break From AI CapEx World,’ Highlights His 2 Top Healthcare Stock Picks</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-30 13:45 UTC · Josh Brown Says ‘Take a Break From AI CapEx World,’ Highlights His 2 Top Healthcare Stock Picks</div>
   </li>
   <li>
     <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPeG5GY3ItMllKZkh2NHZqa0ZzQ2Nid0cxbkZ1SWs3S0ZBUnNSMWM3a1JqcFB4R3BRXzh0OEY1MmFoOFlHemtpdmQ3QzdJRmhpX1duN2VMSHJZU2ZldVBKU0tFNVFHN01CNkdtYXZlc29SU0ZuSENfbFFJZDRTQU82d2dsd3lkRS1OZXNTNUt0Q2FwTHlsZ0Uya0tqenV5ZDF2c1Y0dkpyNjNWbmw5STVBcEMxaVZGMDJKNktIanVIMEg1ejdMRXVSRWI4YTNBMWJSNzVwQ1JPUmtRbUdncGFz?oc=5" target="_blank" rel="noopener">Where Will Nvidia Stock Be 6 Months After the Latest Explosive Earnings Report? Here’s What History Says. - The Motley Fool</a>
@@ -569,9 +717,9 @@
   <div class="tn">
     <h3>테슬라<span class="sym">TSLA</span>
       <span class="pc up">▲ +2.60%</span></h3>
-      <a href="https://www.fool.com/investing/2026/08/30/the-most-active-stocks-today-include-tesla-nvidia/" target="_blank" rel="noopener">The Most Active Stocks Today Include Tesla, Nvidia, and Apple: Here&#39;s My Contrarian Take on All Three
+      <a href="https://www.fool.com/investing/2026/08/30/prediction-this-is-what-a-5000-investment-in-space/" target="_blank" rel="noopener">Prediction: This Is What a $5,000 Investment in SpaceX Will Be Worth by 2030
         <span class="src">· Motley Fool</span></a>
-      <a href="https://www.fool.com/investing/2026/08/29/tesla-stock-in-2027-why-i-think-tsla-still-has-roo/" target="_blank" rel="noopener">Tesla Stock in 2027: Why I Think TSLA Still Has Room to Run
+      <a href="https://www.fool.com/investing/2026/08/30/the-most-active-stocks-today-include-tesla-nvidia/" target="_blank" rel="noopener">The Most Active Stocks Today Include Tesla, Nvidia, and Apple: Here&#39;s My Contrarian Take on All Three
         <span class="src">· Motley Fool</span></a>
   </div>
   <div class="tn">
@@ -615,6 +763,14 @@
     <p class="why">‘6개월이면 회복하겠지’ 같은 기대가 여기 해당합니다. 회복에는 대개 예상보다 긴 시간이 걸립니다.</p>
   </div>
 </div>
+
+<section class="reflect">
+  <div class="rlabel">오늘의 사색</div>
+  <blockquote class="rbody">“미래에 대한 쓸모 있는 진술은 처음에는 우스꽝스럽게 들리기 마련이다.”</blockquote>
+  <div class="rwho"><b>짐 데이터</b><span>하와이대 미래학연구소, 미래학의 개척자 (1933–)</span></div>
+  <div class="rsrc">인용 · ‘데이터의 법칙’</div>
+  <div class="rsit">지금 터무니없어 보여서 내가 웃어넘긴 이야기 중, 10년 뒤에 남을 것이 있을까요?</div>
+</section>
 
 
 <footer>

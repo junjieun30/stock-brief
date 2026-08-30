@@ -63,7 +63,8 @@ def _quotes_block(label: str, quotes: list[Quote]) -> str:
         if not q.ok:
             continue
         delta = f"{q.change * 100:+.1f}bp" if q.change_mode == "bp" else f"{q.change_pct:+.2f}%"
-        rows.append(f"- {q.name} ({q.symbol}): {q.price:,.2f}{q.unit} ({delta})")
+        digits = q.digits if q.digits is not None else 2
+        rows.append(f"- {q.name} ({q.symbol}): {q.price:,.{digits}f}{q.unit} ({delta})")
     return f"[{label}]\n" + ("\n".join(rows) if rows else "- 데이터 없음")
 
 
@@ -97,6 +98,10 @@ def _build_prompt(brief: Brief, headlines: list[NewsItem]) -> str:
         f"기준일: {brief.market_date or '미상'} (미국 시장 마감 기준)",
         "",
         _quotes_block("주요 지수", brief.indices),
+        "",
+        _quotes_block("글로벌 증시 (G10 등)", brief.global_indices),
+        "",
+        _quotes_block("G10 통화 (달러 대비)", brief.fx),
         "",
         _quotes_block("매크로/환율/원자재", brief.macro),
         "",

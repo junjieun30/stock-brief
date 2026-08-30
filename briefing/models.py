@@ -18,6 +18,7 @@ class Quote:
     year_high: float | None = None
     year_low: float | None = None
     unit: str = ""
+    digits: int | None = None   # 표시 소수점 자리수 (환율처럼 정밀도가 필요한 경우)
     change_mode: str = "pct"   # "pct" = 등락률, "bp" = 금리 변동폭(베이시스포인트)
     source: str = ""          # 어느 provider 에서 왔는지 (fallback 추적용)
     error: str | None = None
@@ -86,6 +87,18 @@ class Alert:
 
 
 @dataclass
+class Reflection:
+    """오늘의 사색 — 미래를 오래 들여다본 사람의 생각 한 편."""
+    name: str
+    who: str
+    kind: str                  # "quote" (출처 있는 인용) | "idea" (사상 요약)
+    body: str
+    source: str
+    sit: str                   # 잠시 머물러볼 질문
+    note: str = ""             # 오귀속 등 출처에 대한 각주
+
+
+@dataclass
 class Lesson:
     """주식 용어 · 투자 심리 학습 카드."""
     term: str
@@ -100,6 +113,8 @@ class Brief:
     generated_at: datetime
     market_date: str = ""
     indices: list[Quote] = field(default_factory=list)
+    global_indices: list[Quote] = field(default_factory=list)
+    fx: list[Quote] = field(default_factory=list)
     macro: list[Quote] = field(default_factory=list)
     sectors: list[Quote] = field(default_factory=list)
     watchlist: list[Quote] = field(default_factory=list)
@@ -111,6 +126,7 @@ class Brief:
     alerts: list[Alert] = field(default_factory=list)
     ticker_news: dict[str, list[NewsItem]] = field(default_factory=dict)
     lessons: list[Lesson] = field(default_factory=list)
+    reflection: Reflection | None = None
     warnings: list[str] = field(default_factory=list)
 
     @property

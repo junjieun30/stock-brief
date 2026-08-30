@@ -60,6 +60,14 @@ class Config:
         return self.raw["market"]["macro"]
 
     @property
+    def global_indices(self) -> list[dict]:
+        return self.raw["market"].get("global_indices", [])
+
+    @property
+    def fx(self) -> list[dict]:
+        return self.raw["market"].get("fx", [])
+
+    @property
     def sectors(self) -> list[dict]:
         return self.raw["market"]["sectors"]
 

@@ -26,9 +26,9 @@ for _stream in (sys.stdout, sys.stderr):
         pass
 
 from briefing.config import Config
-from briefing.data import glossary
+from briefing.data import futurists, glossary
 from briefing.data.universe import DEFAULT_UNIVERSE
-from briefing.models import Alert, Brief, Lesson
+from briefing.models import Alert, Brief, Lesson, Reflection
 from briefing.render import html as render_html
 from briefing.render import markdown as render_md
 from briefing.sources import calendar as calendar_src
@@ -52,6 +52,14 @@ def build_brief(cfg: Config, *, use_ai: bool = True, use_news: bool = True,
     n_idx = len(cfg.indices)
     brief.indices, brief.macro = quotes[:n_idx], quotes[n_idx:]
     brief.market_date = market_date
+
+    if cfg.global_indices:
+        log.info("글로벌 증시 %d개국 수집 중…", len(cfg.global_indices))
+        brief.global_indices, _ = fetch_quotes(cfg.global_indices, cfg.secrets)
+
+    if cfg.fx:
+        log.info("G10 통화 수집 중…")
+        brief.fx, _ = fetch_quotes(cfg.fx, cfg.secrets)
 
     log.info("섹터 ETF 수집 중…")
     brief.sectors, _ = fetch_quotes(cfg.sectors, cfg.secrets)
@@ -87,6 +95,13 @@ def build_brief(cfg: Config, *, use_ai: bool = True, use_news: bool = True,
         brief.lessons = [Lesson(term=t, kind=k, plain=pl, why=w)
                          for k, t, pl, w in glossary.pick(brief.generated_at.date().toordinal())]
 
+    # 오늘의 사색 — 미래학자 한 명
+    if cfg.get("reflect", {}).get("enabled", True):
+        name, who, kind, body, source, sit, note = futurists.pick(
+            brief.generated_at.date().toordinal())
+        brief.reflection = Reflection(name=name, who=who, kind=kind, body=body,
+                                      source=source, sit=sit, note=note)
+
     if use_news:
         nc = cfg.get("news", {})
         log.info("뉴스 수집 중…")
@@ -102,8 +117,8 @@ def build_brief(cfg: Config, *, use_ai: bool = True, use_news: bool = True,
                 cfg.watchlist, nc.get("per_ticker", 2), nc.get("ticker_lookback_hours", 48)
             )
 
-    failed = [q.name for q in brief.indices + brief.macro + brief.sectors + brief.watchlist
-              if not q.ok]
+    failed = [q.name for q in brief.indices + brief.global_indices + brief.fx
+              + brief.macro + brief.sectors + brief.watchlist if not q.ok]
     if failed:
         brief.warnings.append("시세 조회 실패: " + ", ".join(failed))
 

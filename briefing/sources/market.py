@@ -166,7 +166,8 @@ def fetch_quotes(specs: list[dict], secrets, want_52w: bool = False) -> tuple[li
     for spec in specs:
         sym = spec["symbol"]
         q = Quote(symbol=sym, name=spec.get("name", sym), unit=spec.get("unit", ""),
-                  change_mode=spec.get("change_mode", "pct"))
+                  change_mode=spec.get("change_mode", "pct"),
+                  digits=spec.get("digits"))
         rec = data.get(sym)
         if not rec:
             q.error = "시세 조회 실패"

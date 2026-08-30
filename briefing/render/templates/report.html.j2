@@ -107,6 +107,26 @@
   .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
   .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
     font-size:13.5px;color:var(--muted);line-height:1.65}
+  /* --- 오늘의 사색 : 데이터 카드들과 다른 호흡. 여백을 크게 준다 --- */
+  .reflect{margin:56px 0 8px;padding:44px 40px;border-radius:16px;text-align:center;
+    background:color-mix(in srgb,var(--accent) 4%,var(--panel));
+    border:1px solid color-mix(in srgb,var(--accent) 16%,var(--line))}
+  .rlabel{font-size:11.5px;letter-spacing:.22em;color:var(--accent);font-weight:700;
+    margin-bottom:26px;text-transform:none}
+  .rbody{margin:0 auto 26px;max-width:640px;border:0;padding:0;
+    font-size:20px;line-height:1.85;font-weight:450;letter-spacing:-.01em;word-break:keep-all}
+  .rwho{font-size:13.5px;margin-bottom:5px}
+  .rwho b{font-weight:700} .rwho span{color:var(--muted);margin-left:9px}
+  .rsrc{font-size:12px;color:var(--muted)}
+  .rsit{margin:28px auto 0;max-width:560px;padding-top:24px;
+    border-top:1px solid color-mix(in srgb,var(--accent) 18%,transparent);
+    font-size:15px;line-height:1.8;color:var(--ink);opacity:.86;word-break:keep-all}
+  .rnote{margin:18px auto 0;max-width:600px;font-size:11.5px;line-height:1.65;
+    color:var(--muted);opacity:.85}
+  @media (max-width:620px){
+    .reflect{padding:34px 22px}
+    .rbody{font-size:17.5px}
+  }
   .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
   .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
@@ -152,6 +172,32 @@
   </div>
 {% endfor %}
 </div>
+
+{% if brief.global_indices %}
+<h2>글로벌 증시</h2>
+<div class="grid">
+{% for q in brief.global_indices %}
+  <div class="tile">
+    <div class="n">{{ q.name }}</div>
+    <div class="p">{{ q | price }}</div>
+    <div class="c {{ q.direction }}">{{ q | pct }}</div>
+  </div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if brief.fx %}
+<h2>G10 통화</h2>
+<div class="grid">
+{% for q in brief.fx %}
+  <div class="tile">
+    <div class="n">{{ q.name }}</div>
+    <div class="p">{{ q | price }}</div>
+    <div class="c {{ q.direction }}">{{ q | pct }}</div>
+  </div>
+{% endfor %}
+</div>
+{% endif %}
 
 <h2>매크로 · 환율 · 원자재</h2>
 <div class="grid">
@@ -285,6 +331,18 @@
   </div>
 {% endfor %}
 </div>
+{% endif %}
+
+{% if brief.reflection %}
+{% set r = brief.reflection %}
+<section class="reflect">
+  <div class="rlabel">오늘의 사색</div>
+  <blockquote class="rbody">{% if r.kind == 'quote' %}“{{ r.body }}”{% else %}{{ r.body }}{% endif %}</blockquote>
+  <div class="rwho"><b>{{ r.name }}</b><span>{{ r.who }}</span></div>
+  <div class="rsrc">{% if r.kind == 'quote' %}인용{% else %}사상 요약 · 직접 인용이 아닙니다{% endif %} · {{ r.source }}</div>
+  <div class="rsit">{{ r.sit }}</div>
+  {% if r.note %}<div class="rnote">{{ r.note }}</div>{% endif %}
+</section>
 {% endif %}
 
 {% if brief.warnings %}

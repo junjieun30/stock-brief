@@ -17,7 +17,7 @@ TEMPLATE_DIR = Path(__file__).parent / "templates"
 def f_price(q: Quote) -> str:
     if q.price is None:
         return "—"
-    digits = 2 if abs(q.price) < 10000 else 0
+    digits = q.digits if q.digits is not None else (2 if abs(q.price) < 10000 else 0)
     body = f"{q.price:,.{digits}f}"
     return f"{q.unit}{body}" if q.unit in ("$", "€", "¥") else f"{body}{q.unit}"
 
