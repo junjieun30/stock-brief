@@ -1,0 +1,56 @@
+name: 데일리 브리핑
+
+on:
+  schedule:
+    # UTC 22:00 = 한국시간 다음날 07:00.
+    # UTC 월~금 = 한국시간 화~토 (미국장 월~금 마감분을 다음날 아침에 받는다).
+    # GitHub 의 cron 은 혼잡할 때 10~30분 늦게 뜰 수 있습니다.
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch:        # Actions 탭에서 수동 실행 버튼
+
+permissions:
+  contents: write           # 생성한 리포트를 docs/ 에 커밋하기 위해 필요
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: 브리핑 생성
+        env:
+          BRIEF_OUTPUT_DIR: docs          # GitHub Pages 가 서빙하는 폴더
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python run.py --telegram
+
+      - name: 리포트 커밋
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --staged --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "브리핑 $(TZ=Asia/Seoul date +%Y-%m-%d)"
+            # 다른 실행과 겹쳤을 때를 대비해 rebase 후 push
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

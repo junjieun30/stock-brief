@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>해외 시장 브리핑 · {{ brief.market_date }}</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#ffffff; --line:#e3e6ea; --ink:#141821; --muted:#6b7480;
+    --up:#d92c2c; --down:#1b64d1; --flat:#8a929c; --accent:#3d5afe;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0e1116; --panel:#161b22; --line:#252c36; --ink:#e6eaf0; --muted:#8d97a5;
+           --up:#ff6b6b; --down:#5b9dff; --flat:#7a838f; --accent:#7c8cff; --shadow:none; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:22px}
+  h1{font-size:24px;margin:0;letter-spacing:-.02em}
+  .meta{color:var(--muted);font-size:13px}
+  .meta b{color:var(--ink);font-weight:600}
+  h2{font-size:15px;margin:34px 0 12px;letter-spacing:-.01em;
+     display:flex;align-items:center;gap:9px}
+  h2::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+  .summary{padding:20px 22px;white-space:pre-wrap}
+  .summary strong{display:block;margin-top:14px;margin-bottom:2px;font-size:12.5px;color:var(--muted);
+    letter-spacing:.04em}
+  .disclaimer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
+    font-size:12px;color:var(--muted);white-space:normal}
+  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+  .tile{padding:13px 15px;background:var(--panel);border:1px solid var(--line);
+    border-radius:11px;box-shadow:var(--shadow)}
+  .tile .n{font-size:12.5px;color:var(--muted);margin-bottom:5px}
+  .tile .p{font-size:20px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tile .c{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;
+    background:var(--panel);box-shadow:var(--shadow)}
+  th,td{padding:10px 14px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+  th{font-size:12px;font-weight:600;color:var(--muted)}
+  th:first-child,td:first-child{text-align:left}
+  tbody tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums}
+  .sym{color:var(--muted);font-size:12px;margin-left:6px}
+  .bars{display:grid;gap:7px}
+  .bar{display:grid;grid-template-columns:104px 1fr 82px;align-items:center;gap:10px;font-size:13.5px}
+  .track{position:relative;height:20px;background:color-mix(in srgb,var(--line) 60%,transparent);
+    border-radius:5px}
+  .track i{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
+  .fill{position:absolute;top:2px;bottom:2px;border-radius:4px}
+  .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  .pos{position:relative;width:84px;height:6px;
+    background:color-mix(in srgb,var(--line) 70%,transparent);
+    border-radius:3px;display:inline-block;vertical-align:middle}
+  .pos b{position:absolute;top:-2px;width:2px;height:10px;background:var(--accent);border-radius:1px}
+  .news{list-style:none;margin:0;padding:0}
+  .news li{padding:13px 18px;border-bottom:1px solid var(--line)}
+  .news li:last-child{border-bottom:none}
+  .news a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14.5px;line-height:1.5}
+  .news a:hover{color:var(--accent)}
+  .news .sub{margin-top:4px;font-size:12px;color:var(--muted);line-height:1.5;
+    white-space:normal;word-break:break-word}
+  .tag{display:inline-block;padding:1px 7px;border-radius:4px;
+    background:color-mix(in srgb,var(--accent) 12%,transparent);
+    color:var(--accent);font-size:11px;font-weight:600;margin-right:6px}
+  .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
+  .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  footer .archive{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
+  footer .archive:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>해외 시장 데일리 브리핑</h1>
+  <div class="meta">시장 기준일 <b>{{ brief.market_date or '미상' }}</b>
+    · 생성 {{ brief.generated_at.strftime('%Y-%m-%d %H:%M') }} KST</div>
+</header>
+
+{% if brief.ai_summary %}
+<div class="card summary">{{ brief.ai_summary | md_bold }}
+  <div class="disclaimer">AI가 공개 데이터를 바탕으로 생성한 요약입니다. 사실관계는 원문 기사로 확인하세요.</div>
+</div>
+{% endif %}
+
+<h2>주요 지수</h2>
+<div class="grid">
+{% for q in brief.indices %}
+  <div class="tile">
+    <div class="n">{{ q.name }}</div>
+    <div class="p">{{ q | price }}</div>
+    <div class="c {{ q.direction }}">{{ q | pct }}</div>
+  </div>
+{% endfor %}
+</div>
+
+<h2>매크로 · 환율 · 원자재</h2>
+<div class="grid">
+{% for q in brief.macro %}
+  <div class="tile">
+    <div class="n">{{ q.name }}</div>
+    <div class="p">{{ q | price }}</div>
+    <div class="c {{ q.direction }}">{{ q | pct }}</div>
+  </div>
+{% endfor %}
+</div>
+
+{% if brief.sectors %}
+<h2>섹터별 등락</h2>
+<div class="card" style="padding:16px 18px">
+  <div class="bars">
+  {% for q in sectors_sorted %}
+    <div class="bar">
+      <div>{{ q.name }}</div>
+      <div class="track"><i></i>{{ q | sector_fill }}</div>
+      <div class="v {{ q.direction }}">{{ q | pct }}</div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if brief.watchlist %}
+<h2>관심 종목</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr>
+    <th>종목</th><th>종가</th><th>등락</th><th>52주 위치</th><th>고점 대비</th><th>거래량</th>
+  </tr></thead>
+  <tbody>
+  {% for q in brief.watchlist %}
+    <tr>
+      <td>{{ q.name }}<span class="sym">{{ q.symbol }}</span></td>
+      <td class="num">{{ q | price }}</td>
+      <td class="num {{ q.direction }}"><b>{{ q | pct }}</b></td>
+      <td>{{ q | pos_bar }}</td>
+      <td class="num {{ 'down' if q.pct_from_high is not none and q.pct_from_high < -0.05 else 'flat' }}">{{ q | from_high }}</td>
+      <td class="num">{{ q | vol }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+{% if brief.gainers or brief.losers %}
+<h2>상승 · 하락 상위</h2>
+<div class="cols">
+  {% for label, rows in mover_tables %}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>{{ label }}</th><th>종가</th><th>등락</th></tr></thead>
+      <tbody>
+      {% for q in rows %}
+        <tr>
+          <td>{{ q.symbol }}</td>
+          <td class="num">{{ q | price }}</td>
+          <td class="num {{ q.direction }}"><b>{{ q | pct }}</b></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if brief.news %}
+<h2>주요 뉴스</h2>
+<div class="card">
+<ul class="news">
+{% for n in brief.news %}
+  <li>
+    <a href="{{ n.url }}" target="_blank" rel="noopener">{{ n.summary_ko or n.title }}</a>
+    <div class="sub"><span class="tag">{{ n.source }}</span>{% if n.published %}{{ n.published.strftime('%m-%d %H:%M') }} UTC · {% endif %}{{ n.title }}</div>
+  </li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+
+{% if brief.warnings %}
+<h2>수집 경고</h2>
+<div class="card warn"><ul>{% for w in brief.warnings %}<li>{{ w }}</li>{% endfor %}</ul></div>
+{% endif %}
+
+<footer>
+  <a class="archive" href="./archive.html">지난 브리핑 보기 →</a><br><br>
+  이 리포트는 공개된 시세·뉴스 데이터를 자동으로 수집해 정리한 <b>참고 자료</b>입니다.
+  투자 자문이나 매매 권유가 아니며, 데이터에 지연·누락·오류가 있을 수 있습니다.
+  투자 판단과 그 결과에 대한 책임은 이용자 본인에게 있습니다.<br>
+  데이터: Yahoo Finance / Finnhub / Alpha Vantage · 뉴스: RSS 피드
+</footer>
+
+</div>
+</body>
+</html>
