@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">눈에 띄지 않는 곳부터 바뀐다</div>
   <span class="hz now">이미 진행 중</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>기술 혁명은 대개 화려한 무대에서 상상되지만, 실제로는 가장 지루한 곳에서 먼저 일어난다. 창고가 그렇다. 상자를 옮기고, 분류하고, 세는 일. 아무도 다큐멘터리를 찍지 않는 이 공간이 지금 지구에서 가장 밀도 높게 자동화되는 현장이다.</p><p>이유는 조건이 완벽하기 때문이다. 실내라 날씨가 없고, 바닥이 평평하고, 다루는 물건이 규격화돼 있고, 동선이 반복적이다. 자율주행이 도로에서 10년째 씨름하는 엣지 케이스가 창고 안에는 거의 없다. 로봇에게 창고는 자율주행차의 고속도로보다 쉬운 환경이다.</p></div><h2>보이지 않는 손에서 보이지 않는 기계로</h2><div><p>현대식 물류센터 안에서는 선반이 로봇 위에 실려 사람에게 걸어오고, 로봇 팔이 상자를 집어 분류 라인에 올리고, 소프트웨어가 어떤 상품을 어느 센터에 미리 쌓아둘지 수요를 예측해 결정한다. '주문하면 다음 날 온다'는 일상의 마법은 이 보이지 않는 기계들의 합작이다.</p><p>이 영역이 중요한 이유는 규모다. 물류비는 거의 모든 상품의 가격에 녹아 있다. 창고 자동화가 처리 비용을 몇 퍼센트 줄이면 그 효과는 특정 회사가 아니라 경제 전체의 물가 구조로 스며든다. 화려하지 않은 기술이 총량에서는 가장 큰 기술이 되는 전형적인 경우다.</p></div><h2>창고 밖으로</h2><div><p>다음 단계는 벽 바깥이다. 항만에서 컨테이너를 옮기는 자율 크레인과 야드 트럭, 고속도로 구간의 자율 화물차, 아파트 단지의 배송 로봇, 도서 지역의 드론 배송. 각각은 아직 부분적이지만 방향은 하나로 수렴한다 — 물건이 공장에서 문 앞까지 오는 여정에서 사람 손이 닿는 구간이 줄어드는 것.</p><p>동시에 물류는 데이터 산업이 됐다. 어디에 재고를 둘지, 어떤 경로로 보낼지, 수요가 어디서 튈지를 예측하는 소프트웨어가 지게차만큼 중요해졌다. 물류 회사의 채용 공고에 데이터 과학자가 늘어나는 것은 이 전환의 정직한 신호다.</p></div><h2>미래학자들의 시선</h2><div><p>제러미 리프킨은 『한계비용 제로 사회』에서 재화와 서비스를 하나 더 생산·전달하는 비용이 0에 수렴하는 영역이 늘어나며 경제의 작동 방식 자체가 바뀐다고 주장했다. 디지털 재화에서는 이미 현실이 된 이 논리가, 물류 자동화를 통해 물리적 세계에서도 부분적으로 검증되고 있다. 배송 한 건의 한계비용이 낮아질수록, '무료 배송'은 마케팅이 아니라 원가 구조가 된다.</p></div><h2>다르게 보는 시각</h2><div><p>자동화가 늘어도 총비용이 기대만큼 줄지 않는다는 반론은 현장에서 꾸준히 나온다. 설비 투자, 유지보수, 소프트웨어 통합, 그리고 자동화 설비에 맞춰 건물을 다시 짓는 비용이 인건비 절감분을 상쇄하는 경우가 많다는 것이다. 자동화의 손익분기는 물동량이 크고 안정적인 곳에서만 성립한다 — 그래서 이 기술은 대형 사업자에게 유리하고, 물류 산업의 집중을 가속하는 면이 있다.</p></div><h2>남는 질문</h2><div><p>물류 자동화는 '기술이 어디로 스며드는가'에 대한 감각을 길러주는 좋은 사례다. 뉴스가 가리키는 곳(휴머노이드 시연 무대)과 돈이 실제로 움직이는 곳(창고 천장 아래)은 자주 다르다. 지루한 곳을 볼 줄 아는 눈 — 그것이 이 장이 남기는 도구다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>물류·유통, 창고 자동화 설비, 산업용 로봇, 공급망 소프트웨어, 항만·운송 인프라.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『한계비용 제로 사회』</span><span class="ba">제러미 리프킨</span><span class="bd">물류 장의 배경 논리. 공유경제와 사물인터넷까지 이어진다</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch07.html"><span class="lbl">← 이전</span><span class="tt">가장 오래 지연된 미래</span></a><a class="next" href="./ch09.html"><span class="lbl">다음 →</span><span class="tt">비만이 처방의 영역으로 들어왔다</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "8";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">대답하는 기계에서 실행하는 기계로</div>
   <span class="hz now">이미 진행 중</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>챗봇에게 '이번 달 지출 정리해줘'라고 물으면 정리하는 방법을 알려준다. 에이전트에게 같은 말을 하면 — 카드 내역을 불러오고, 항목을 분류하고, 표를 만들어 저장한 다음 '끝났습니다'라고 답한다. 이 차이가 지금 소프트웨어 산업이 넘고 있는 문턱이다. 대답과 실행 사이의 문턱.</p><p>에이전트라는 말은 오래됐지만, 언어모델이 붙으면서 의미가 달라졌다. 목표를 주면 스스로 단계를 나누고, 필요한 도구(검색, 파일, 결제, 이메일)를 호출하고, 결과를 확인하고, 실패하면 다른 방법을 시도한다. 사람이 일하는 방식과 구조적으로 같다. 다만 지치지 않고, 여럿을 동시에 돌릴 수 있다는 점이 다르다.</p></div><h2>자동화의 문턱이 내려간다</h2><div><p>이 방식이 진짜로 바꾸는 것은 '자동화할 수 있는 일의 범위'다. 지금까지 무언가를 자동화하려면 절차를 빠짐없이 코드로 적어야 했다. 그래서 자동화는 반복이 많고 예외가 적은 일 — 급여 계산, 재고 집계 — 에 갇혀 있었다. 예외가 많은 일은 예외 처리 코드가 본체보다 커져서 수지가 안 맞았다.</p><p>에이전트는 절차를 다 적어주지 않아도 된다. '이 메일함에서 환불 요청을 찾아 규정에 맞으면 처리하고 애매하면 나에게 넘겨라' 정도의 지시로 움직인다. 매번 조금씩 다른 일, 판단이 섞인 일 — 지금까지 자동화가 포기했던 넓은 중간지대가 열리는 것이다. 사무직 업무의 상당 부분이 바로 이 중간지대에 있다.</p></div><h2>새로 생기는 문제</h2><div><p>대신 예전에 없던 문제가 생긴다. 스스로 행동하는 소프트웨어에게 무엇을 허용할 것인가. 이메일을 읽게 할 것인가, 보내게도 할 것인가. 결제 권한은? 실수하면 누가 책임지는가? 그래서 이 분야의 실무는 '더 똑똑한 에이전트'보다 '믿고 맡길 수 있는 에이전트' 쪽으로 무게가 옮겨가 있다. 권한을 잘게 쪼개고, 모든 행동을 기록으로 남기고, 중요한 일은 사람의 승인을 거치게 하고, 잘못되면 되돌릴 수 있게 만드는 것. 화려하지 않지만 여기가 승부처다.</p><p>흥미로운 파생 효과도 있다. 에이전트가 소프트웨어를 '사용'하게 되면서, 소프트웨어가 사람이 아니라 기계를 고객으로 삼기 시작했다. 사람용 화면 대신 기계용 통로(API)가 제품의 얼굴이 되는 것이다. 웹사이트가 사람과 검색엔진 양쪽을 상대로 지어졌듯, 이제 서비스는 사람과 에이전트 양쪽을 상대로 지어진다.</p></div><h2>미래학자들의 시선</h2><div><p>케빈 켈리는 『인에비터블』에서 기술이 완성품이 아니라 영원히 '되어가는(becoming)' 상태로 존재하게 된다고 썼다. 에이전트는 그 성격이 극단적으로 강하다. 매달 능력이 달라지고, 쓰는 법도 달라진다. 켈리의 표현을 빌리면 우리는 이제 평생 초보자다. 숙련이 쌓이기 전에 대상이 바뀌기 때문이다. 이것을 피로로 받아들일 수도, 진입장벽이 계속 리셋되는 기회로 받아들일 수도 있다.</p></div><h2>다르게 보는 시각</h2><div><p>로봇공학자 로드니 브룩스는 수십 년간 같은 경고를 반복해 왔다. 시연에서 되는 것과 현장에서 매일 되는 것 사이의 간격을 사람들은 체계적으로 과소평가한다는 것이다. 에이전트의 성공률이 95%라면 시연으로는 충분하지만, 하루 천 건을 처리하는 현장에서는 매일 50건의 사고라는 뜻이다. 자율성이 높아질수록 그 5%의 값이 비싸진다. 에이전트 도입이 기대보다 느린 곳에서는 대개 이 산수가 발목을 잡고 있다.</p></div><h2>남는 질문</h2><div><p>일을 시키는 능력이 새로운 리터러시가 되고 있다. 좋은 지시는 목표와 제약과 예외 처리를 담는다 — 사실 좋은 위임이 원래 그렇다. 부하 직원에게 일을 잘 맡기는 사람이 에이전트도 잘 쓴다는 관찰은 우연이 아니다. 기계에게 일을 맡기는 시대의 핵심 기술이, 결국 사람에게 일을 맡기던 기술과 같다는 것은 묘한 위안이기도 하다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>기업용 소프트웨어, 업무 자동화, 고객 서비스, 그리고 이를 뒷받침하는 컴퓨팅 인프라.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『인에비터블: 미래의 정체』</span><span class="ba">케빈 켈리</span><span class="bd">기술이 향하는 12가지 방향. '되어감'과 '흐름'의 개념이 이 장의 배경이다</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch01.html"><span class="lbl">← 이전</span><span class="tt">언어를 다루게 된 기계</span></a><a class="next" href="./ch03.html"><span class="lbl">다음 →</span><span class="tt">무어의 법칙 이후의 셈법</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "2";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

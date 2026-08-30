@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">단백질 구조 예측이 연 것</div>
   <span class="hz now">이미 진행 중</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>약이 몸에서 하는 일의 본질은 열쇠와 자물쇠다. 질병에 관여하는 단백질(자물쇠)에 꼭 맞는 분자(열쇠)를 찾아 끼우는 것. 문제는 자물쇠의 모양을 아는 것부터가 난제였다는 점이다. 단백질은 아미노산 사슬이 3차원으로 접힌 구조인데, 서열만 보고 접힌 모양을 예측하는 문제는 반세기 동안 생물학의 그랜드 챌린지였다.</p><p>2020년, AI 모델이 이 문제를 사실상 풀었다. 실험으로 몇 달에서 몇 년 걸리던 구조 규명이 계산 몇 분의 일이 됐고, 알려진 거의 모든 단백질의 예측 구조가 공개 데이터베이스로 풀렸다. 2024년 노벨 화학상이 이 작업에 주어졌다. 자물쇠의 설계도가 공공재가 된 것이다.</p></div><h2>탐색의 문법이 바뀐다</h2><div><p>이제 산업의 관심은 역방향으로 이동했다. 자물쇠를 보고 열쇠를 설계하는 것 — 나아가 존재한 적 없는 단백질을 목적에 맞게 새로 설계하는 것이다. 후보 물질을 컴퓨터에서 수백만 개 생성하고 걸러낸 뒤, 소수만 실험실에서 합성해 확인하는 흐름이 표준 절차로 자리 잡고 있다. 로봇이 밤새 실험을 돌리고 AI가 다음 실험을 제안하는 '자율 실험실'도 부분적으로 현실이 됐다.</p><p>초기 단계의 시간과 비용이 실제로 줄었다는 보고가 쌓이고 있다. AI가 설계에 관여한 후보 물질들이 임상시험 단계에 들어가 있고, 그 결과가 이 분야의 진짜 성적표가 될 것이다.</p></div><h2>병목은 이동했을 뿐이다</h2><div><p>냉정하게 보면, 신약 개발이 오래 걸리는 이유의 대부분은 탐색이 아니라 검증에 있다. 임상시험 — 사람에게 안전한가, 실제로 효과가 있는가 — 이 전체 기간과 비용의 대부분을 차지하고, 실패의 대부분도 여기서 난다. 표적에 잘 붙는 분자를 찾는 속도가 빨라져도, 독성과 효능이라는 관문은 그대로다. AI는 병목을 없앤 것이 아니라 앞단의 병목을 뒷단으로 옮겼다 — 이것이 현재까지의 정확한 요약이다.</p></div><h2>미래학자들의 시선</h2><div><p>아짐 아자르는 『기하급수 시대』에서 계산 비용의 하락이 원래 느리던 분야 — 생물학, 재료, 에너지 — 의 시계를 바꾸는 순간을 포착한다. 생물학이 '실험의 과학'에서 '계산의 과학'으로 무게를 옮기는 지금이 정확히 그 순간이다. 커즈와일 식으로 말하면, 생명과학이 정보기술이 되는 순간부터 지수 곡선에 올라탄다는 오래된 주장이 처음으로 실증 시험대에 오른 셈이다.</p></div><h2>다르게 보는 시각</h2><div><p>제약 산업에는 '이번에야말로'가 여러 번 있었다. 조합화학, 유전체학, 고속 스크리닝 — 각 세대의 신기술이 개발 속도를 바꾼다고 약속했지만, 신약 승인 수는 수십 년째 완만하다. 오히려 개발비는 계속 올랐다(이룸의 법칙 — 무어의 법칙을 뒤집은 이 자조적 명명이 이 산업의 역사다). AI가 이 곡선을 정말 꺾었는지는, 지금 임상에 들어간 AI 설계 약물들의 성공률이 수년 안에 답해줄 것이다. 그전까지의 열광은 가설이다.</p></div><h2>남는 질문</h2><div><p>구조 예측의 진짜 유산은 특정 약이 아니라 공개된 데이터베이스일지 모른다. 수억 개 단백질의 설계도가 누구에게나 열려 있다는 것 — 다음 세대의 발견이 어느 대학원생의 노트북에서 나올 수 있게 됐다는 것. 도구의 민주화는 언제나 예측 못 한 곳에서 결실을 맺어 왔다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>제약·바이오, 연구용 소프트웨어·AI, 클라우드 컴퓨팅, 실험 자동화 장비.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『기하급수 시대가 온다』</span><span class="ba">아짐 아자르</span><span class="bd">기술의 속도와 제도의 속도가 벌어질 때 생기는 일들</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch12.html"><span class="lbl">← 이전</span><span class="tt">뇌와 기계를 직접 잇는다는 것</span></a><a class="next" href="./ch14.html"><span class="lbl">다음 →</span><span class="tt">생명을 제조업처럼 다루기</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "13";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

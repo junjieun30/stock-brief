@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">의료에서 시작해 어디까지 갈 것인가</div>
   <span class="hz">10년 이상</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>생각만으로 커서를 움직인다 — 공상과학의 문장이었던 이 일은 이제 임상 보고서의 문장이다. 뇌-컴퓨터 인터페이스(BCI)는 신경세포의 전기 신호를 읽어 기계 명령으로 바꾸는 기술이다. 척수를 다쳐 손을 못 쓰는 사람이 화면의 커서를 움직여 글을 쓰고, 루게릭병으로 말을 잃어가는 사람의 발화 의도를 해독해 음성으로 합성한 연구들이 최근 몇 년 사이 잇따라 발표됐다.</p><p>이 기술의 출발점은 처음부터 의료였다. 잃어버린 통로를 우회로로 복원하는 것 — 마비 환자에게는 운동 신호의 우회로를, 실어 환자에게는 언어의 우회로를 놓는 일이다.</p></div><h2>성능보다 어려운 것</h2><div><p>머리를 열고 전극을 심는 침습식은 신호가 선명한 대신 뇌수술의 위험을 진다. 두피에서 재는 비침습식은 안전한 대신 신호가 벽 너머 소음처럼 흐릿하다. 이 딜레마 사이에서 혈관을 통해 전극을 넣는 절충안 같은 시도들이 나오고 있다.</p><p>그런데 이 분야 연구자들이 입을 모아 말하는 진짜 난제는 따로 있다. 지속성이다. 뇌는 이물질을 반기지 않는다. 전극 주변에 흉터 조직이 자라고, 시간이 지나면 신호가 나빠진다. 시연에서 한 달 작동하는 것과 환자의 삶에서 20년 작동하는 것 사이의 거리 — 여기서도 브룩스의 법칙이 작동한다. 배터리, 무선 전송, 감염 관리까지, BCI의 미래는 신경과학만큼 재료공학에 달려 있다.</p></div><h2>확장이라는 상상, 규범이라는 현실</h2><div><p>기억을 백업하고, 생각으로 대화하고, 지능을 증강한다는 이야기는 아직 과학이 아니라 상상이다. 뇌의 언어를 우리는 아직 극히 일부만 해독했다. 그러나 상상은 규범을 앞서 만든다. 신경 데이터는 누구의 소유인가. 뇌 신호를 읽는 기기의 기록을 보험사가, 고용주가, 수사기관이 요구할 수 있는가. 몇몇 나라에서는 '신경권(neurorights)'을 법에 넣는 논의가 이미 시작됐다. 기술이 도착하기 전에 질문이 먼저 도착한 경우다.</p></div><h2>미래학자들의 시선</h2><div><p>미치오 카쿠는 『마음의 미래』에서 뇌 신호의 기록과 전송이 통신의 다음 단계가 될 수 있다고 전망했다. 유발 하라리는 방향이 다르다 — 그는 뇌 데이터에 접근하는 자가 설득과 통제의 새로운 수단을 얻게 되며, 이것이 감시 자본주의의 마지막 국경이 될 수 있다고 경고한다. 낙관과 경고 모두에서 공통된 전제는 하나다. 뇌가 읽히는 순간, '내면'이라는 마지막 사적 공간의 정의가 바뀐다는 것.</p></div><h2>다르게 보는 시각</h2><div><p>임상 현장의 시선은 훨씬 건조하다. 침습식 BCI가 정당화되는 것은 잃을 것이 더 많은 중증 환자뿐이고, 그 시장은 작다. 건강한 사람이 뇌수술의 위험을 감수할 유인은 현재로선 없으며, 비침습 기기의 성능은 소비자 제품이 되기에 아직 부족하다. '누구나 쓰는 BCI'는 이 두 한계가 동시에 풀려야 하는데, 그 시점을 진지하게 10년 안으로 보는 연구자는 드물다.</p></div><h2>남는 질문</h2><div><p>타인에게 온전히 전할 수 없다는 것 — 그것이 지금까지 생각의 정의였다. 그 벽에 처음으로 기술적 균열이 가고 있다. 균열의 첫 수혜자가 말을 잃은 사람들이라는 사실은 이 기술의 가장 좋은 출발점이다. 문제는 언제나 두 번째, 세 번째 쓰임새에서 시작된다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>의료기기, 신경과학 연구, 재활 산업, 그리고 장기적으로 데이터·프라이버시 규제.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『마음의 미래』</span><span class="ba">미치오 카쿠</span><span class="bd">뇌과학과 기술의 접점에 대한 대중적 전망서</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch11.html"><span class="lbl">← 이전</span><span class="tt">질병이 아닌 것을 치료하려는 시도</span></a><a class="next" href="./ch13.html"><span class="lbl">다음 →</span><span class="tt">신약을 찾는 방식이 바뀌는 중</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "12";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

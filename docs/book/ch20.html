@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">공간 컴퓨팅이 아직 넘지 못한 것</div>
   <span class="hz">10년 이상</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>컴퓨터와 사람이 만나는 접점은 몇 번 크게 바뀌었고, 바뀔 때마다 산업의 지도가 다시 그려졌다. 천공카드에서 키보드로, 키보드에서 마우스와 창(window)으로, 그리고 손가락과 유리판으로. 각 전환의 승자는 그 전의 승자가 아니었다. 그래서 모두가 다음 전환을 주시한다 — 정보가 화면 안이 아니라 우리 주변 공간에 놓이는 것, 이른바 공간 컴퓨팅이다.</p><p>안경 너머의 현실 위에 길 안내가 겹치고, 책상 위에 가상 모니터 세 장이 떠 있고, 멀리 있는 사람이 실물 크기로 맞은편에 앉는다 — 데모는 이미 이 수준에 와 있다.</p></div><h2>기술은 왔는데 이유가 안 왔다</h2><div><p>하드웨어의 진보는 실제로 놀랍다. 밀리미터 단위의 공간 추적, 시선 인식, 망막 수준 해상도의 마이크로 디스플레이. 그런데 판매량은 데모만큼 놀랍지 않다. 이유를 업계 스스로 안다 — 무겁고, 배터리가 짧고, 쓰고 있으면 어색하고, 무엇보다 '매일 써야 할 이유'가 아직 없다.</p><p>역사가 힌트를 준다. 새 인터페이스는 언제나 옛것의 흉내에서 출발했다 — 초기 웹은 종이 카탈로그를 닮았고, 초기 스마트폰 앱은 PC 프로그램의 축소판이었다. 각 전환의 진짜 개화는 그 매체에서만 가능한 것(검색, 소셜, 위치 기반 호출)이 발명된 순간이었다. 지금의 공간 컴퓨팅은 대체로 '공중에 뜬 모니터'를 보여준다. 즉, 아직 흉내 단계다. 킬러 앱은 정의상 흉내가 아닌 곳에서 나온다.</p></div><h2>안경이라는 우회로</h2><div><p>무거운 헤드셋 대신, 카메라와 AI 비서를 단 가벼운 스마트 안경이 뜻밖의 가교가 되고 있다. 화면을 띄우는 대신 보고 듣고 말해주는 것 — 디스플레이 문제를 통째로 우회한 이 접근이 먼저 일상에 안착하고, 디스플레이는 광학 기술이 익을 때까지 기다린다는 시나리오가 힘을 얻는 중이다. 1부의 언어모델이 이 시나리오의 엔진이다. AI가 좋아질수록 '화면 없는 컴퓨팅'의 실용성이 올라가기 때문이다.</p></div><h2>미래학자들의 시선</h2><div><p>'우리는 도구를 만들고, 그다음엔 도구가 우리를 만든다' — 매클루언을 해설한 존 컬킨의 이 문장은 인터페이스 전환기마다 소환된다. 스마트폰은 우리의 자세, 대화, 주의력, 어린 시절의 모양까지 바꿨다. 컴퓨터가 시야 자체에 들어온다면 무엇이 바뀔지 — 이 질문은 기술 예측이 아니라 인간 예측의 영역이고, 그래서 매클루언식 관점이 사양 비교표보다 유용하다.</p></div><h2>다르게 보는 시각</h2><div><p>이 분야는 실패의 목록이 유난히 길다. 지난 10여 년간 여러 세대의 AR/VR 기기가 '올해가 원년'이라는 선언과 함께 나왔고 조용히 물러났다. 회의론의 핵심은 사회적 비용이다 — 얼굴에 컴퓨터를 쓰는 행위는 배터리나 해상도가 아니라 '남들 앞에서 이상해 보이는가'라는 문제에 걸려 넘어졌다. 카메라 달린 안경은 프라이버시 반발이라는 추가 관문도 있다. 기술 로드맵은 명확한데 수용 로드맵이 불명확한, 드문 유형의 기술이다.</p></div><h2>남는 질문</h2><div><p>확실한 것 하나 — 화면 앞에 앉아 있는 지금의 컴퓨팅이 최종 형태일 가능성은 낮다. 불확실한 것 하나 — 다음 형태가 무엇인지, 언제 오는지는 업계의 누구도 모른다. 확신과 겸손이 동시에 필요한 지점에 이 기술이 서 있다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>소비자 전자, 디스플레이·광학, 반도체, 게임·콘텐츠, AI 비서.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『미디어의 이해』</span><span class="ba">마셜 매클루언</span><span class="bd">인터페이스가 인간을 바꾼다는 관점의 원전. 어렵지만 첫 장만이라도</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch19.html"><span class="lbl">← 이전</span><span class="tt">발사 비용이 무너진 뒤</span></a><a class="next" href="./ch21.html"><span class="lbl">다음 →</span><span class="tt">언어의 벽이 낮아진다는 것</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "20";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

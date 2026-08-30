@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">소재가 바뀌면 무엇이 열리는가</div>
   <span class="hz">5~10년</span>
 </div>
-<div class="lede"><p>리튬이온 배터리는 1991년 상용화 이후 한 세대 동안 세상을 다시 배선했다. 휴대폰과 노트북을 만들었고, 전기차를 만들었고, 이제 전력망의 저장장치를 만들고 있다. 그 공로로 2019년 노벨 화학상이 주어졌다. 그러나 30년을 개량한 지금도 근본 한계는 남아 있다 — 무게당 담는 에너지의 상한, 급속충전의 한계, 액체 전해질의 화재 위험, 그리고 리튬·코발트·니켈이라는 특정 광물에 대한 의존.</p><p>이 한계들이 전기차의 주행거리 불안, 충전 대기, 화재 뉴스, 그리고 공급망 지정학의 형태로 일상에 번역된다. 배터리의 다음 세대를 둘러싼 경쟁은 그래서 소재의 경쟁이다.</p></div><h2>전고체 — 본명은 '제조 문제'</h2><div><p>전고체 배터리는 액체 전해질을 고체로 바꾸는 시도다. 원리적 이점은 목록이 길다 — 불이 잘 안 나고, 에너지 밀도를 높일 여지가 크고, 급속충전에 유리하다. 원리는 수십 년 전부터 알려져 있었다. 안 된 것은 과학이 아니라 제조다. 고체와 고체가 맞닿는 계면은 충방전을 반복하면 틈이 벌어지고, 얇고 결함 없는 고체 전해질 층을 기가와트시 규모로 찍어내는 공정은 아직 아무도 완성하지 못했다.</p><p>주요 배터리·자동차 회사들이 2027~2030년 언저리를 양산 목표로 내걸고 있지만, 이 시간표는 이미 여러 번 밀린 시간표의 최신판이다. 실험실 셀과 차량 탑재 셀 사이의 거리 — 2부의 자율주행이 가르쳐 준 바로 그 거리가 여기에도 있다.</p></div><h2>반대 방향의 혁신 — 더 싸게, 더 흔하게</h2><div><p>흥미로운 것은 시장의 실제 움직임이 '더 좋게'만이 아니라 '더 싸게'로도 갔다는 점이다. 코발트·니켈을 뺀 인산철(LFP) 배터리는 에너지 밀도를 조금 양보하는 대신 싸고 안전해서, 보급형 전기차와 전력망 저장의 주류가 됐다. 그 다음 줄에는 리튬 대신 나트륨 — 소금의 그 나트륨 — 을 쓰는 배터리가 서 있다. 성능은 낮지만 원료가 사실상 무한하다.</p><p>교훈은 명확하다. 배터리 시장은 하나가 아니다. 무게가 생명인 곳(항공, 프리미엄 차)과 무게가 상관없는 곳(전력망, 지게차)의 최적해는 다르며, '최고의 배터리'가 아니라 '용도별 최적 배터리'의 포트폴리오로 산업이 재편되고 있다.</p></div><h2>미래학자들의 시선</h2><div><p>카를로타 페레스의 틀을 빌리면 배터리 소재는 지금 '설치기'의 특징을 전부 보여준다 — 경쟁하는 복수의 기술 방식, 과잉 투자, 과장된 발표, 그리고 주기적인 파산. 이 단계에서 승자를 미리 고르는 것은 도박이지만, 이 단계가 지나면 표준이 굳고 이득이 산업 전체로 퍼진다는 것은 역사의 패턴이다. 4부 첫 장의 학습곡선이 여기서도 예열되고 있는 셈이다.</p></div><h2>다르게 보는 시각</h2><div><p>전고체 회의론의 논거는 상대의 정지 상태를 가정하지 말라는 것이다. 기존 리튬이온은 지금도 매년 밀도가 오르고 단가가 내려간다. 신기술이 이겨야 하는 기준선 자체가 움직이는 표적이다. 게다가 배터리 산업의 승부는 성능 지표가 아니라 '기가팩토리를 수율 있게 돌리는 능력'에서 나는 경우가 많았다 — 그 능력은 논문이 아니라 십 년의 양산 경험에서 나온다. 화학의 우위가 곧 산업의 우위는 아니다.</p></div><h2>남는 질문</h2><div><p>배터리는 '에너지를 어디서 얻는가'만큼 '에너지를 언제 쓰는가'를 바꾸는 기술이다. 태양이 만든 정오의 전기를 밤에 쓰게 하는 것 — 4부 전체를 관통하는 시간 이동의 문제가 결국 이 소재 위에 놓여 있다.</p></div>
+<div class="content" id="content">
+<div class="lede"><p>리튬이온 배터리는 1991년 상용화 이후 한 세대 동안 세상을 다시 배선했다. 휴대폰과 노트북을 만들었고, 전기차를 만들었고, 이제 전력망의 저장장치를 만들고 있다. 그 공로로 2019년 노벨 화학상이 주어졌다. 그러나 30년을 개량한 지금도 근본 한계는 남아 있다 — 무게당 담는 에너지의 상한, 급속충전의 한계, 액체 전해질의 화재 위험, 그리고 리튬·코발트·니켈이라는 특정 광물에 대한 의존.</p><p>이 한계들이 전기차의 주행거리 불안, 충전 대기, 화재 뉴스, 그리고 공급망 지정학의 형태로 일상에 번역된다. 배터리의 다음 세대를 둘러싼 경쟁은 그래서 소재의 경쟁이다.</p></div><h2>전고체 — 본명은 '제조 문제'</h2><div><p>전고체 배터리는 액체 전해질을 고체로 바꾸는 시도다. 원리적 이점은 목록이 길다 — 불이 잘 안 나고, 에너지 밀도를 높일 여지가 크고, 급속충전에 유리하다. 원리는 수십 년 전부터 알려져 있었다. 안 된 것은 과학이 아니라 제조다. 고체와 고체가 맞닿는 계면은 충방전을 반복하면 틈이 벌어지고, 얇고 결함 없는 고체 전해질 층을 기가와트시 규모로 찍어내는 공정은 아직 아무도 완성하지 못했다.</p><p>주요 배터리·자동차 회사들이 2027~2030년 언저리를 양산 목표로 내걸고 있지만, 이 시간표는 이미 여러 번 밀린 시간표의 최신판이다. 실험실 셀과 차량 탑재 셀 사이의 거리 — 2부의 자율주행이 가르쳐 준 바로 그 거리가 여기에도 있다.</p></div><h2>반대 방향의 혁신 — 더 싸게, 더 흔하게</h2><div><p>흥미로운 것은 시장의 실제 움직임이 '더 좋게'만이 아니라 '더 싸게'로도 갔다는 점이다. 코발트·니켈을 뺀 인산철(LFP) 배터리는 에너지 밀도를 조금 양보하는 대신 싸고 안전해서, 보급형 전기차와 전력망 저장의 주류가 됐다. 그 다음 줄에는 리튬 대신 나트륨 — 소금의 그 나트륨 — 을 쓰는 배터리가 서 있다. 성능은 낮지만 원료가 사실상 무한하다.</p><p>교훈은 명확하다. 배터리 시장은 하나가 아니다. 무게가 생명인 곳(항공, 프리미엄 차)과 무게가 상관없는 곳(전력망, 지게차)의 최적해는 다르며, '최고의 배터리'가 아니라 '용도별 최적 배터리'의 포트폴리오로 산업이 재편되고 있다.</p></div><h2>미래학자들의 시선</h2><div><p>카를로타 페레스의 틀을 빌리면 배터리 소재는 지금 '설치기'의 특징을 전부 보여준다 — 경쟁하는 복수의 기술 방식, 과잉 투자, 과장된 발표, 그리고 주기적인 파산. 이 단계에서 승자를 미리 고르는 것은 도박이지만, 이 단계가 지나면 표준이 굳고 이득이 산업 전체로 퍼진다는 것은 역사의 패턴이다. 4부 첫 장의 학습곡선이 여기서도 예열되고 있는 셈이다.</p></div><h2>다르게 보는 시각</h2><div><p>전고체 회의론의 논거는 상대의 정지 상태를 가정하지 말라는 것이다. 기존 리튬이온은 지금도 매년 밀도가 오르고 단가가 내려간다. 신기술이 이겨야 하는 기준선 자체가 움직이는 표적이다. 게다가 배터리 산업의 승부는 성능 지표가 아니라 '기가팩토리를 수율 있게 돌리는 능력'에서 나는 경우가 많았다 — 그 능력은 논문이 아니라 십 년의 양산 경험에서 나온다. 화학의 우위가 곧 산업의 우위는 아니다.</p></div><h2>2026년 늦여름, 현장에서</h2><div><p>전고체의 시간표에 구체적인 좌표들이 찍혔다. 한국의 배터리 대기업은 2027년 양산 목표와 함께 현행 리튬이온의 두 배 가까운 에너지 밀도의 시제품을 시연했고, 일본 완성차 업체는 2026년 초 전해질 원료의 파일럿 공장을 착공했다. 업계 컨센서스는 2027~28년 한정 물량 탑재, 2030년 전후 대량 생산으로 수렴하는 중이다.</p><p>본문의 경고 — 시간표는 이미 여러 번 밀린 시간표의 최신판 — 은 그대로 두고 읽어야 한다. 다만 발표의 단위가 '연구 성과'에서 '공장 착공'으로 바뀐 것은, 설치기의 다음 단계로 넘어가는 신호로 읽을 만하다.</p></div><h2>남는 질문</h2><div><p>배터리는 '에너지를 어디서 얻는가'만큼 '에너지를 언제 쓰는가'를 바꾸는 기술이다. 태양이 만든 정오의 전기를 밤에 쓰게 하는 것 — 4부 전체를 관통하는 시간 이동의 문제가 결국 이 소재 위에 놓여 있다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>배터리 제조, 양극·음극·전해질 소재, 자동차, 에너지 저장, 광물·재활용.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『배터리 전쟁』</span><span class="ba">루카스 베드나르스키</span><span class="bd">배터리 공급망의 지정학과 산업 구조</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch16.html"><span class="lbl">← 이전</span><span class="tt">원자력이 다시 이야기되는 이유</span></a><a class="next" href="./ch18.html"><span class="lbl">다음 →</span><span class="tt">막는 기술에서 견디는 기술로</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "17";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

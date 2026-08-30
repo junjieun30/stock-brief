@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">인구 감소와 자동화가 만나는 지점</div>
   <span class="hz now">이미 진행 중</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>미래 예측의 대부분은 틀린다. 그러나 한 종류의 예측만은 거의 틀리지 않는다 — 인구다. 2050년의 40대 인구는 이미 태어나 있다. 새로 만들 방법이 없기 때문에, 이것은 전망이 아니라 산수다. 그리고 그 산수가 가리키는 방향은 명확하다. 한국의 합계출산율은 세계 최저 수준으로 떨어졌고, 일본·중국·유럽 대부분이 인구 유지선(2.1) 아래로 내려간 지 오래다. 세계 인구 자체가 이번 세기 안에 정점을 지날 것이라는 전망이 주류가 됐다.</p><p>인류사에서 전쟁이나 역병 없이 인구가 줄어드는 것은 사실상 처음 있는 일이다. 성장하는 인구를 전제로 설계된 거의 모든 제도 — 연금, 부동산, 교육, 군대, 성장률 — 가 처음 겪는 조건에 들어선다.</p></div><h2>자동화 논쟁의 프레임이 뒤집힌다</h2><div><p>이 조건은 기술 논쟁 하나를 근본적으로 다시 쓴다. 지난 10년의 자동화 논쟁은 '기계가 일자리를 뺏는가'였다. 노동인구가 해마다 줄어드는 사회에서 질문은 반대가 된다 — 줄어드는 사람으로 같은 사회를 어떻게 굴릴 것인가. 버스 기사, 용접공, 간병인이 부족해서 서비스가 축소되는 나라에서 로봇은 위협이 아니라 결원 보충이다.</p><p>2부의 휴머노이드와 물류 자동화, 1부의 에이전트가 이 장과 만나는 지점이 여기다. 한국과 일본이 산업용 로봇 밀도에서 세계 최상위권인 것은 우연이 아니다 — 자동화의 속도는 기술의 성숙도만큼 노동력의 절박함이 결정한다.</p></div><h2>수요의 모양이 바뀐다</h2><div><p>인구 변화는 공급(노동)만이 아니라 수요의 모양도 바꾼다. 고령 인구가 늘면 의료·돌봄·연금 지출이 구조적으로 늘고, 학령 인구가 줄면 학교·학원·아동 산업이 줄어든다. 주택 수요는 총량보다 형태가 바뀐다 — 4인 가족용에서 1~2인용으로, 신축에서 관리로. 지방 소멸과 수도권 집중이 동시에 진행되며 인프라의 채산성 지도가 다시 그려진다.</p><p>이것은 특정 종목의 이야기가 아니라, 앞으로 수십 년간 모든 산업의 수요 곡선 밑에 깔리는 기저 흐름이다. 가장 느리게 움직이지만 가장 확실하게 도착하는 변수 — 인구는 그런 변수다.</p></div><h2>미래학자들의 시선</h2><div><p>스튜어트 브랜드의 페이스 레이어에서 인구는 가장 느린 층 — 문화와 자연의 층 — 에 속한다. 유행과 시장은 매년 요동치지만, 이 층의 방향은 한번 정해지면 한 세대 안에 되돌리기 어렵다. 실제로 출산율을 반등시킨 정책 사례는 세계적으로 드물고, 있어도 효과가 제한적이었다. 그래서 이 분야의 현실적 논의는 '어떻게 되돌릴까'에서 '어떻게 적응할까' — 이민, 자동화, 정년 연장, 제도 재설계 — 로 무게중심이 옮겨가 있다.</p></div><h2>다르게 보는 시각</h2><div><p>자동화가 노동력 공백을 메운다는 전제 자체에 대한 의문도 있다. 가장 급하게 비는 자리 — 돌봄, 간호, 보육 — 는 사람의 존재 자체가 서비스의 본질인 영역이라, 로봇 팔이 아니라 사람의 손과 눈맞춤이 필요하다. 모라벡의 역설(2부)이 여기서 가장 잔인하게 작동한다. 기계가 잘하는 것과 사회가 급한 것이 어긋나 있는 것이다. 또한 인구 감소를 '1인당'의 관점에서 보면 재앙이 아니라는 반론도 있다 — 총량은 줄어도 1인당 자본과 공간은 늘 수 있다. 성장의 정의를 총량에서 1인당으로 바꾸는 것, 그것이 진짜 숙제라는 시각이다.</p></div><h2>남는 질문</h2><div><p>이 책의 다른 장들이 '무엇이 오는가'를 다뤘다면, 이 장은 '무엇이 이미 정해져 있는가'를 다뤘다. 기술 예측이 빗나가는 세계에서, 인구는 몇 안 되는 고정점이다. 불확실한 것을 예측하는 것보다 확실한 것을 직시하는 것 — 미래를 읽는 일의 절반은 사실 후자다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>의료·돌봄, 자동화 설비, 주택·건설, 교육, 보험·연금, 소비재 수요 구조 전반.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『텅 빈 지구 (Empty Planet)』</span><span class="ba">대럴 브리커·존 이빗슨</span><span class="bd">인구 정점이 예상보다 빨리 온다는 논지의 대중서</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch22.html"><span class="lbl">← 이전</span><span class="tt">자산을 쪼개서 기록한다는 발상</span></a><a class="next" href="./ch24.html"><span class="lbl">다음 →</span><span class="tt">미래의 공격에 지금 대비하는 일</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "23";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

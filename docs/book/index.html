@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -98,9 +117,9 @@
 </div>
 <div class="part">1부 · 계산하는 기계</div><ul class="toc"><li><a href="./ch01.html" data-ch="1"><span class="no">01</span><span class="t">언어를 다루게 된 기계</span><span class="done">읽음</span></a></li><li><a href="./ch02.html" data-ch="2"><span class="no">02</span><span class="t">스스로 일을 끝내는 소프트웨어</span><span class="done">읽음</span></a></li><li><a href="./ch03.html" data-ch="3"><span class="no">03</span><span class="t">무어의 법칙 이후의 셈법</span><span class="done">읽음</span></a></li><li><a href="./ch04.html" data-ch="4"><span class="no">04</span><span class="t">AI의 진짜 병목은 전기였다</span><span class="done">읽음</span></a></li><li><a href="./ch05.html" data-ch="5"><span class="no">05</span><span class="t">아직 오지 않은 계산</span><span class="done">읽음</span></a></li></ul><div class="part">2부 · 움직이는 기계</div><ul class="toc"><li><a href="./ch06.html" data-ch="6"><span class="no">06</span><span class="t">로봇은 왜 사람 모양이어야 하는가</span><span class="done">읽음</span></a></li><li><a href="./ch07.html" data-ch="7"><span class="no">07</span><span class="t">가장 오래 지연된 미래</span><span class="done">읽음</span></a></li><li><a href="./ch08.html" data-ch="8"><span class="no">08</span><span class="t">물류가 조용히 자동화되는 방식</span><span class="done">읽음</span></a></li></ul><div class="part">3부 · 몸과 생명</div><ul class="toc"><li><a href="./ch09.html" data-ch="9"><span class="no">09</span><span class="t">비만이 처방의 영역으로 들어왔다</span><span class="done">읽음</span></a></li><li><a href="./ch10.html" data-ch="10"><span class="no">10</span><span class="t">코드를 고치는 의학</span><span class="done">읽음</span></a></li><li><a href="./ch11.html" data-ch="11"><span class="no">11</span><span class="t">질병이 아닌 것을 치료하려는 시도</span><span class="done">읽음</span></a></li><li><a href="./ch12.html" data-ch="12"><span class="no">12</span><span class="t">뇌와 기계를 직접 잇는다는 것</span><span class="done">읽음</span></a></li><li><a href="./ch13.html" data-ch="13"><span class="no">13</span><span class="t">신약을 찾는 방식이 바뀌는 중</span><span class="done">읽음</span></a></li><li><a href="./ch14.html" data-ch="14"><span class="no">14</span><span class="t">생명을 제조업처럼 다루기</span><span class="done">읽음</span></a></li></ul><div class="part">4부 · 에너지와 물질</div><ul class="toc"><li><a href="./ch15.html" data-ch="15"><span class="no">15</span><span class="t">학습곡선이라는 조용한 힘</span><span class="done">읽음</span></a></li><li><a href="./ch16.html" data-ch="16"><span class="no">16</span><span class="t">원자력이 다시 이야기되는 이유</span><span class="done">읽음</span></a></li><li><a href="./ch17.html" data-ch="17"><span class="no">17</span><span class="t">배터리 다음의 배터리</span><span class="done">읽음</span></a></li><li><a href="./ch18.html" data-ch="18"><span class="no">18</span><span class="t">막는 기술에서 견디는 기술로</span><span class="done">읽음</span></a></li></ul><div class="part">5부 · 공간과 연결</div><ul class="toc"><li><a href="./ch19.html" data-ch="19"><span class="no">19</span><span class="t">발사 비용이 무너진 뒤</span><span class="done">읽음</span></a></li><li><a href="./ch20.html" data-ch="20"><span class="no">20</span><span class="t">화면 이후의 인터페이스</span><span class="done">읽음</span></a></li><li><a href="./ch21.html" data-ch="21"><span class="no">21</span><span class="t">언어의 벽이 낮아진다는 것</span><span class="done">읽음</span></a></li></ul><div class="part">6부 · 돈과 사회</div><ul class="toc"><li><a href="./ch22.html" data-ch="22"><span class="no">22</span><span class="t">자산을 쪼개서 기록한다는 발상</span><span class="done">읽음</span></a></li><li><a href="./ch23.html" data-ch="23"><span class="no">23</span><span class="t">사람이 줄어드는 세계</span><span class="done">읽음</span></a></li><li><a href="./ch24.html" data-ch="24"><span class="no">24</span><span class="t">미래의 공격에 지금 대비하는 일</span><span class="done">읽음</span></a></li><li><a href="./ch25.html" data-ch="25"><span class="no">25</span><span class="t">기술은 언제 경제를 바꾸는가</span><span class="done">읽음</span></a></li></ul>
 <div class="foot">하루 한 편이면 한 달이 조금 안 걸립니다. 읽은 장은 이 기기에만 표시됩니다.<br><br>
-<b>이 책에 대하여</b> — 2026년 중반까지 공개된 사실(노벨상, 규제 승인, 표준 확정, 공개 실험 결과 등)과
+<b>이 책에 대하여</b> — 2026년 8월까지 공개된 사실·보도(노벨상, 규제 승인, 표준 확정, 공개 실험 결과 등)과
 실존 미래학자·연구자들의 출간된 주장을 바탕으로 새로 쓴 글입니다. 특정 저서의 번역·발췌가 아니며,
-확실하지 않은 수치는 싣지 않았습니다. 속보가 아닌 구조적 흐름을 다루므로 시점이 지나도 골격은 유효하지만,
+확실하지 않은 수치는 싣지 않았고, 최근 소식은 각 장의 '2026년 늦여름, 현장에서'에 모았습니다. 속보가 아닌 구조적 흐름을 다루므로 시점이 지나도 골격은 유효하지만,
 이후의 새 사건은 반영되어 있지 않습니다.<br><br>
 특정 종목·매매에 대한 이야기가 아니며, 투자 권유가 아닙니다.</div>
 </div>
@@ -109,8 +128,16 @@
   var read = {}, last = 0;
   try { read = JSON.parse(localStorage.getItem("book-read") || "{}");
         last = parseInt(localStorage.getItem("book-last") || "0", 10); } catch (e) {}
+  var allNotes = {};
+  try { allNotes = JSON.parse(localStorage.getItem("book-notes") || "{}"); } catch (e) {}
   document.querySelectorAll(".toc a").forEach(function (a) {
     if (read[a.dataset.ch]) a.classList.add("read");
+    var n = allNotes[a.dataset.ch] ? Object.keys(allNotes[a.dataset.ch]).length : 0;
+    if (n > 0) {
+      var m = document.createElement("span");
+      m.className = "memo"; m.textContent = "📝" + n;
+      a.querySelector(".t").appendChild(m);
+    }
   });
   var btn = document.getElementById("continue");
   if (last > 0 && last < 25) {

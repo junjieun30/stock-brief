@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">양자컴퓨터는 무엇을 바꾸고 무엇은 바꾸지 않는가</div>
   <span class="hz">10년 이상</span>
 </div>
-<div class="lede"><p>양자컴퓨터만큼 오해가 켜켜이 쌓인 기술도 드물다. 가장 흔한 오해는 '모든 걸 훨씬 빨리 하는 컴퓨터'라는 것이다. 아니다. 양자컴퓨터는 특정한 종류의 문제에서만 근본적으로 다른 방식으로 답을 찾는 기계다. 엑셀도, 게임도, 웹서핑도 빨라지지 않는다. 잘하는 것은 분자의 행동을 흉내 내는 일, 특정한 최적화, 그리고 — 여기서 이야기가 심각해지는데 — 현재 암호체계의 기반인 소인수분해다.</p><p>일반 컴퓨터의 비트는 0 아니면 1이다. 양자비트(큐비트)는 0과 1의 중첩 상태로 존재할 수 있고, 여러 큐비트가 얽히면 방대한 경우의 수를 동시에 품은 채 계산이 진행된다. 자연 자체가 양자적으로 작동하기 때문에, 자연을 시뮬레이션하는 데는 이쪽이 원리적으로 유리하다.</p></div><h2>왜 이렇게 오래 걸리나</h2><div><p>문제는 양자 상태가 기가 막히게 연약하다는 것이다. 미세한 진동, 온도, 전자기 노이즈에도 상태가 무너진다(결어긋남). 그래서 오류가 끊임없이 생기고, 이 오류를 잡으려면 '진짜 큐비트' 하나를 만들기 위해 물리적 큐비트 수백~수천 개를 오류 정정에 동원해야 한다. 배보다 배꼽이 훨씬 큰 구조다.</p><p>그래서 최근 몇 년 사이 이 분야의 화두는 '큐비트 몇 개'라는 숫자 자랑에서 '오류를 얼마나 잘 잡는가'로 완전히 넘어갔다. 오류 정정에서 의미 있는 이정표들이 나오고 있지만, 실용적인 규모의 오류 정정 양자컴퓨터까지는 여전히 갈 길이 멀다는 것이 다수 의견이다.</p></div><h2>기계보다 먼저 도착한 대비</h2><div><p>흥미로운 것은, 기계가 오기 전에 대비가 먼저 시작됐다는 점이다. 이유는 '지금 수확해서 나중에 해독한다(harvest now, decrypt later)'는 시나리오다. 누군가 오늘 암호화된 통신을 통째로 저장해 뒀다가, 10년 뒤 양자컴퓨터로 풀 수 있다면 — 외교 전문이든 의료 기록이든 오늘 보낸 데이터가 이미 위험하다는 뜻이 된다.</p><p>그래서 미국 표준기술연구소(NIST)는 양자컴퓨터로도 풀기 어려운 새 암호 알고리즘(양자내성암호)을 표준화했고, 각국 정부와 금융권이 전환 일정을 짜기 시작했다. 존재하지 않는 기계에 대한 방어가 실존하는 산업이 된 드문 사례다. 이 이야기는 6부에서 따로 다룬다.</p></div><h2>미래학자들의 시선</h2><div><p>물리학자 미치오 카쿠 같은 대중 과학자들은 양자 시뮬레이션이 신소재와 신약 개발의 판을 바꿀 것이라고 전망한다. 배터리 전해질, 비료 촉매, 단백질 접힘 — 모두 본질적으로 양자적인 문제들이다. 한편 이 분야만큼 로이 아마라의 법칙이 잘 들어맞는 곳도 없다. 단기 효과는 체계적으로 과대평가되고(매년 '양자 상용화 원년'이라는 기사가 나온다), 장기 효과는 아마 과소평가되고 있을 것이다.</p></div><h2>다르게 보는 시각</h2><div><p>적잖은 물리학자와 컴퓨터과학자가 상업적 유용성까지 수십 년이 더 걸리거나, 일부 응용은 끝내 고전 컴퓨터를 못 이길 수 있다고 본다. 실제로 '양자 우위'를 주장한 실험 결과가 나중에 개선된 고전 알고리즘에 따라잡힌 사례가 반복됐다. 이 분야는 발표와 실체의 간격이 큰 것으로 악명이 높다. 화려한 보도자료일수록 '오류 정정된 논리 큐비트 기준으로 몇 개인가'를 물어보는 것이 좋은 습관이다.</p></div><h2>남는 질문</h2><div><p>양자컴퓨터는 '언제 오느냐'를 묻는 기술이 아니라 '무엇이 먼저 오느냐'를 묻는 기술이다. 기계보다 암호 전환이 먼저 왔고, 아마 범용 활용보다 좁은 과학 계산이 먼저 올 것이다. 서두를 필요는 없지만, 목록에서 지워버릴 수도 없는 — 장기 관찰 대상의 전형이다.</p></div>
+<div class="content" id="content">
+<div class="lede"><p>양자컴퓨터만큼 오해가 켜켜이 쌓인 기술도 드물다. 가장 흔한 오해는 '모든 걸 훨씬 빨리 하는 컴퓨터'라는 것이다. 아니다. 양자컴퓨터는 특정한 종류의 문제에서만 근본적으로 다른 방식으로 답을 찾는 기계다. 엑셀도, 게임도, 웹서핑도 빨라지지 않는다. 잘하는 것은 분자의 행동을 흉내 내는 일, 특정한 최적화, 그리고 — 여기서 이야기가 심각해지는데 — 현재 암호체계의 기반인 소인수분해다.</p><p>일반 컴퓨터의 비트는 0 아니면 1이다. 양자비트(큐비트)는 0과 1의 중첩 상태로 존재할 수 있고, 여러 큐비트가 얽히면 방대한 경우의 수를 동시에 품은 채 계산이 진행된다. 자연 자체가 양자적으로 작동하기 때문에, 자연을 시뮬레이션하는 데는 이쪽이 원리적으로 유리하다.</p></div><h2>왜 이렇게 오래 걸리나</h2><div><p>문제는 양자 상태가 기가 막히게 연약하다는 것이다. 미세한 진동, 온도, 전자기 노이즈에도 상태가 무너진다(결어긋남). 그래서 오류가 끊임없이 생기고, 이 오류를 잡으려면 '진짜 큐비트' 하나를 만들기 위해 물리적 큐비트 수백~수천 개를 오류 정정에 동원해야 한다. 배보다 배꼽이 훨씬 큰 구조다.</p><p>그래서 최근 몇 년 사이 이 분야의 화두는 '큐비트 몇 개'라는 숫자 자랑에서 '오류를 얼마나 잘 잡는가'로 완전히 넘어갔다. 오류 정정에서 의미 있는 이정표들이 나오고 있지만, 실용적인 규모의 오류 정정 양자컴퓨터까지는 여전히 갈 길이 멀다는 것이 다수 의견이다.</p></div><h2>기계보다 먼저 도착한 대비</h2><div><p>흥미로운 것은, 기계가 오기 전에 대비가 먼저 시작됐다는 점이다. 이유는 '지금 수확해서 나중에 해독한다(harvest now, decrypt later)'는 시나리오다. 누군가 오늘 암호화된 통신을 통째로 저장해 뒀다가, 10년 뒤 양자컴퓨터로 풀 수 있다면 — 외교 전문이든 의료 기록이든 오늘 보낸 데이터가 이미 위험하다는 뜻이 된다.</p><p>그래서 미국 표준기술연구소(NIST)는 양자컴퓨터로도 풀기 어려운 새 암호 알고리즘(양자내성암호)을 표준화했고, 각국 정부와 금융권이 전환 일정을 짜기 시작했다. 존재하지 않는 기계에 대한 방어가 실존하는 산업이 된 드문 사례다. 이 이야기는 6부에서 따로 다룬다.</p></div><h2>미래학자들의 시선</h2><div><p>물리학자 미치오 카쿠 같은 대중 과학자들은 양자 시뮬레이션이 신소재와 신약 개발의 판을 바꿀 것이라고 전망한다. 배터리 전해질, 비료 촉매, 단백질 접힘 — 모두 본질적으로 양자적인 문제들이다. 한편 이 분야만큼 로이 아마라의 법칙이 잘 들어맞는 곳도 없다. 단기 효과는 체계적으로 과대평가되고(매년 '양자 상용화 원년'이라는 기사가 나온다), 장기 효과는 아마 과소평가되고 있을 것이다.</p></div><h2>다르게 보는 시각</h2><div><p>적잖은 물리학자와 컴퓨터과학자가 상업적 유용성까지 수십 년이 더 걸리거나, 일부 응용은 끝내 고전 컴퓨터를 못 이길 수 있다고 본다. 실제로 '양자 우위'를 주장한 실험 결과가 나중에 개선된 고전 알고리즘에 따라잡힌 사례가 반복됐다. 이 분야는 발표와 실체의 간격이 큰 것으로 악명이 높다. 화려한 보도자료일수록 '오류 정정된 논리 큐비트 기준으로 몇 개인가'를 물어보는 것이 좋은 습관이다.</p></div><h2>2026년 늦여름, 현장에서</h2><div><p>'오류 정정으로 화두가 넘어갔다'는 본문의 서술은 2026년 상반기에 빠르게 구체화됐다. 복수의 개발사가 검증된 논리 큐비트를 시연했고 — 물리 큐비트 수백 개로 논리 큐비트 수십~백 개를 만드는 수준 — 오류율과 해독 지연도 눈에 띄게 개선됐다. '오류 정정이 실험에서 공학으로 넘어온 해'라는 평가가 업계 안팎에서 나왔다.</p><p>물론 본문의 경고도 그대로 유효하다. 논리 큐비트 100개와 암호를 위협하는 수백만 물리 큐비트 사이의 거리는 여전히 멀고, 발표 경쟁의 관성도 여전하다. 다만 방향 — 숫자 자랑에서 오류 정정으로 — 이 확인됐다는 것은 기록해 둘 만하다.</p></div><h2>남는 질문</h2><div><p>양자컴퓨터는 '언제 오느냐'를 묻는 기술이 아니라 '무엇이 먼저 오느냐'를 묻는 기술이다. 기계보다 암호 전환이 먼저 왔고, 아마 범용 활용보다 좁은 과학 계산이 먼저 올 것이다. 서두를 필요는 없지만, 목록에서 지워버릴 수도 없는 — 장기 관찰 대상의 전형이다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>연구용 하드웨어, 클라우드 양자 서비스, 그리고 당장은 암호·보안 산업.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『퀀텀의 세계』</span><span class="ba">이순칠</span><span class="bd">국내 연구자가 쓴 양자컴퓨팅 개론. 과장 없이 원리를 설명한다</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch04.html"><span class="lbl">← 이전</span><span class="tt">AI의 진짜 병목은 전기였다</span></a><a class="next" href="./ch06.html"><span class="lbl">다음 →</span><span class="tt">로봇은 왜 사람 모양이어야 하는가</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "5";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

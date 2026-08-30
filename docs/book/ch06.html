@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">세상이 사람 몸에 맞춰 지어졌기 때문</div>
   <span class="hz">5~10년</span>
 </div>
-<div class="lede"><p>공장에는 이미 로봇이 가득하다. 용접하고, 도장하고, 부품을 나른다. 그런데 왜 갑자기 '사람 모양' 로봇인가. 답은 로봇이 아니라 세상 쪽에 있다. 계단의 높이, 문손잡이의 위치, 작업대의 폭, 공구의 그립 — 인류가 지어놓은 물리적 세계 전체가 사람의 몸을 규격으로 삼고 있다. 세상을 로봇에 맞게 다시 짓는 것보다, 로봇을 세상에 맞게 짓는 편이 싸다는 계산. 휴머노이드는 그 계산의 산물이다.</p><p>기존 산업용 로봇은 볼트로 바닥에 고정된 채 한 가지 동작을 수백만 번 반복하는 기계였다. 환경이 조금만 달라져도 멈췄다. 휴머노이드가 노리는 것은 정반대 — 환경을 바꾸지 않고 로봇이 적응하는 것이다.</p></div><h2>두 가지가 동시에 바뀌었다</h2><div><p>휴머노이드가 수십 년의 겨울을 지나 다시 달아오른 데는 두 개의 동시적 변화가 있다. 첫째는 두뇌다. 시각과 언어를 함께 학습한 모델이 나오면서, 로봇이 '저기 파란 상자를 집어 선반에 올려라' 같은 지시를 처음 보는 환경에서도 해석할 수 있게 됐다. 예전에는 동작 하나하나를 프로그래밍했다면, 이제는 시연 영상과 시뮬레이션으로 '가르치는' 쪽에 가까워졌다.</p><p>둘째는 몸값이다. 전기차 산업이 모터, 배터리, 감속기, 센서를 대량생산하면서 로봇의 부품 원가가 급락했다. 한 대에 수억 원 하던 연구용 휴머노이드의 목표 가격이 자동차 한 대 값 수준으로 내려온 것은 기술 혁신 못지않게 이 공급망 덕이다. 전기차가 휴머노이드의 부품 공장을 미리 지어준 셈이다.</p></div><h2>손이라는 최후의 요새</h2><div><p>그럼에도 가장 어려운 부분은 변하지 않았다. 손이다. 사람은 젖은 유리컵, 비닐봉지, 처음 보는 공구를 아무 생각 없이 다루지만, 이 '아무 생각 없음'이야말로 수억 년 진화가 압축된 능력이다. 힘 조절, 미끄러짐 감지, 부서지기 쉬움에 대한 직관 — 로봇에게는 하나하나가 미해결 문제다.</p><p>그래서 휴머노이드의 첫 일터는 정밀한 손끝이 필요 없는 곳이다. 물류창고의 상하차, 공장의 자재 운반, 단순 조립 보조. 화려한 시연 영상 속 백덤블링이 아니라, 상자를 들어 옮기는 지루한 반복 — 거기서 경제성이 먼저 증명되어야 다음 단계가 열린다.</p></div><h2>미래학자들의 시선</h2><div><p>로봇공학자 한스 모라벡은 1980년대에 이미 핵심을 짚었다. 체스처럼 사람에게 어려운 추론은 기계에 쉽고, 걷고 집는 것처럼 사람에게 쉬운 지각·운동은 기계에 극도로 어렵다는 것 — '모라벡의 역설'이다. 이유는 진화의 시간이다. 추론은 인류가 몇만 년 연습한 신기술이지만, 지각과 운동은 수억 년 다듬어진 기반 기술이다. 오래된 능력일수록 무의식에 녹아 있고, 무의식에 녹아 있을수록 기계로 옮기기 어렵다. 40년 전의 통찰이 지금 휴머노이드 개발 현장에서 매일 재확인되고 있다.</p></div><h2>다르게 보는 시각</h2><div><p>로드니 브룩스 — 룸바를 만든 회사의 창업자이기도 하다 — 는 휴머노이드 열풍에 가장 신랄한 회의론자다. 그의 논점은 단순하다. 시연 영상과 '매일, 안전하게, 수리 없이' 사이의 거리는 언제나 과소평가된다는 것. 로봇이 사람 옆에서 일하려면 성능보다 안전 인증, 내구성, 유지보수 비용이 먼저 해결돼야 하는데, 이것들은 데모 영상에 찍히지 않는다. 그는 사람 모양 자체에도 회의적이다 — 바퀴가 다리보다 싸고 안정적인 환경이라면 굳이 다리일 이유가 없다는 것이다.</p></div><h2>남는 질문</h2><div><p>노동력이 줄어드는 나라들 — 한국, 일본, 중국, 독일 — 에서 이 기술의 의미는 '사람을 대체하는가'가 아니라 '비는 자리를 메울 수 있는가'로 이동하고 있다. 6부의 인구 이야기와 이 장은 사실 한 이야기의 양면이다. 로봇이 온다는 뉴스보다, 사람이 줄어든다는 통계가 먼저 와 있다.</p></div>
+<div class="content" id="content">
+<div class="lede"><p>공장에는 이미 로봇이 가득하다. 용접하고, 도장하고, 부품을 나른다. 그런데 왜 갑자기 '사람 모양' 로봇인가. 답은 로봇이 아니라 세상 쪽에 있다. 계단의 높이, 문손잡이의 위치, 작업대의 폭, 공구의 그립 — 인류가 지어놓은 물리적 세계 전체가 사람의 몸을 규격으로 삼고 있다. 세상을 로봇에 맞게 다시 짓는 것보다, 로봇을 세상에 맞게 짓는 편이 싸다는 계산. 휴머노이드는 그 계산의 산물이다.</p><p>기존 산업용 로봇은 볼트로 바닥에 고정된 채 한 가지 동작을 수백만 번 반복하는 기계였다. 환경이 조금만 달라져도 멈췄다. 휴머노이드가 노리는 것은 정반대 — 환경을 바꾸지 않고 로봇이 적응하는 것이다.</p></div><h2>두 가지가 동시에 바뀌었다</h2><div><p>휴머노이드가 수십 년의 겨울을 지나 다시 달아오른 데는 두 개의 동시적 변화가 있다. 첫째는 두뇌다. 시각과 언어를 함께 학습한 모델이 나오면서, 로봇이 '저기 파란 상자를 집어 선반에 올려라' 같은 지시를 처음 보는 환경에서도 해석할 수 있게 됐다. 예전에는 동작 하나하나를 프로그래밍했다면, 이제는 시연 영상과 시뮬레이션으로 '가르치는' 쪽에 가까워졌다.</p><p>둘째는 몸값이다. 전기차 산업이 모터, 배터리, 감속기, 센서를 대량생산하면서 로봇의 부품 원가가 급락했다. 한 대에 수억 원 하던 연구용 휴머노이드의 목표 가격이 자동차 한 대 값 수준으로 내려온 것은 기술 혁신 못지않게 이 공급망 덕이다. 전기차가 휴머노이드의 부품 공장을 미리 지어준 셈이다.</p></div><h2>손이라는 최후의 요새</h2><div><p>그럼에도 가장 어려운 부분은 변하지 않았다. 손이다. 사람은 젖은 유리컵, 비닐봉지, 처음 보는 공구를 아무 생각 없이 다루지만, 이 '아무 생각 없음'이야말로 수억 년 진화가 압축된 능력이다. 힘 조절, 미끄러짐 감지, 부서지기 쉬움에 대한 직관 — 로봇에게는 하나하나가 미해결 문제다.</p><p>그래서 휴머노이드의 첫 일터는 정밀한 손끝이 필요 없는 곳이다. 물류창고의 상하차, 공장의 자재 운반, 단순 조립 보조. 화려한 시연 영상 속 백덤블링이 아니라, 상자를 들어 옮기는 지루한 반복 — 거기서 경제성이 먼저 증명되어야 다음 단계가 열린다.</p></div><h2>미래학자들의 시선</h2><div><p>로봇공학자 한스 모라벡은 1980년대에 이미 핵심을 짚었다. 체스처럼 사람에게 어려운 추론은 기계에 쉽고, 걷고 집는 것처럼 사람에게 쉬운 지각·운동은 기계에 극도로 어렵다는 것 — '모라벡의 역설'이다. 이유는 진화의 시간이다. 추론은 인류가 몇만 년 연습한 신기술이지만, 지각과 운동은 수억 년 다듬어진 기반 기술이다. 오래된 능력일수록 무의식에 녹아 있고, 무의식에 녹아 있을수록 기계로 옮기기 어렵다. 40년 전의 통찰이 지금 휴머노이드 개발 현장에서 매일 재확인되고 있다.</p></div><h2>다르게 보는 시각</h2><div><p>로드니 브룩스 — 룸바를 만든 회사의 창업자이기도 하다 — 는 휴머노이드 열풍에 가장 신랄한 회의론자다. 그의 논점은 단순하다. 시연 영상과 '매일, 안전하게, 수리 없이' 사이의 거리는 언제나 과소평가된다는 것. 로봇이 사람 옆에서 일하려면 성능보다 안전 인증, 내구성, 유지보수 비용이 먼저 해결돼야 하는데, 이것들은 데모 영상에 찍히지 않는다. 그는 사람 모양 자체에도 회의적이다 — 바퀴가 다리보다 싸고 안정적인 환경이라면 굳이 다리일 이유가 없다는 것이다.</p></div><h2>2026년 늦여름, 현장에서</h2><div><p>2026년 여름, 이 산업은 '시연'에서 '출하'의 어휘로 넘어가기 시작했다. 중국의 한 로봇 기업이 누적 1만 5천 대 생산을 공식화했고, 물류·제조 현장의 유료 배치 사례가 집계되기 시작했으며, 전기차 회사들이 잇따라 휴머노이드 진출을 선언했다. 미국 개발사들도 차세대 기체와 대규모 데이터 수집 시설을 공개하며 응수했다.</p><p>동시에 이 장의 반도체 편과 같은 그림자가 드리웠다. 미국 통신 당국이 외국산 휴머노이드·사족보행 로봇을 규제 목록에 올려 신규 모델의 미국 시장 진입을 막은 것이다. 로봇이 채 걷기도 전에 지정학이 먼저 도착했다 — 이 산업이 반도체의 길을 그대로 걷게 될 것이라는 예고편이다.</p></div><h2>남는 질문</h2><div><p>노동력이 줄어드는 나라들 — 한국, 일본, 중국, 독일 — 에서 이 기술의 의미는 '사람을 대체하는가'가 아니라 '비는 자리를 메울 수 있는가'로 이동하고 있다. 6부의 인구 이야기와 이 장은 사실 한 이야기의 양면이다. 로봇이 온다는 뉴스보다, 사람이 줄어든다는 통계가 먼저 와 있다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>산업 자동화, 물류, 모터·감속기·센서 부품, 배터리, 그리고 노동집약 제조업 전반.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『로봇의 부상』</span><span class="ba">마틴 포드</span><span class="bd">자동화가 노동시장에 미치는 영향에 대한 표준적 논의</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch05.html"><span class="lbl">← 이전</span><span class="tt">아직 오지 않은 계산</span></a><a class="next" href="./ch07.html"><span class="lbl">다음 →</span><span class="tt">가장 오래 지연된 미래</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "6";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

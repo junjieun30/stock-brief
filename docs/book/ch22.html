@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">토큰화가 실제로 노리는 것</div>
   <span class="hz">5~10년</span>
 </div>
-<div class="lede"><p>블록체인이라는 단어는 십수 년간 가격 차트와 함께 소비됐다. 오르내림의 드라마가 헤드라인을 가져가는 동안, 같은 기술의 다른 갈래 하나가 눈에 띄지 않게 자랐다. 기존 금융자산 — 채권, 펀드, 예금, 부동산 지분 — 을 공유된 디지털 장부 위의 기록으로 옮기는 것. 업계는 이것을 토큰화라 부른다.</p><p>핵심을 오해하지 않는 것이 중요하다. 토큰화는 새로운 자산을 만드는 이야기가 아니라, 자산이 기록되고 이전되는 '배관'을 교체하는 이야기다. 화폐의 발명이 아니라 회계의 개혁에 가깝다.</p></div><h2>지금의 배관은 왜 느린가</h2><div><p>주식을 사면 내 것이 되기까지 이틀이 걸린다는 사실을 아는 사람은 많지 않다. 증권 거래의 뒤편에는 증권사, 예탁결제기관, 은행이 각자의 장부를 맞춰보는 정산 과정이 있고, 이 다단계 대조가 시간과 비용과 오류의 원천이다. 국경을 넘으면 더 심해진다 — 송금 하나가 며칠씩 걸리고 수수료가 몇 퍼센트씩 떨어져 나가는 것은 기술의 한계가 아니라 배관의 구조 때문이다.</p><p>모든 참여자가 같은 장부를 보면 대조가 필요 없어진다 — 이것이 토큰화의 한 줄 논리다. 결제는 며칠에서 몇 초로, 시장은 개장 시간에서 24시간으로, 자산의 최소 단위는 한 채·한 좌에서 소수점 아래로 쪼개질 수 있다.</p></div><h2>조용한 쪽에서 먼저 움직인다</h2><div><p>실제 움직임은 소매 투기가 아니라 기관의 뒷단에서 진행되고 있다. 세계 최대 자산운용사들이 미국 국채에 투자하는 머니마켓펀드를 토큰 형태로 발행했고, 대형 은행들이 기관 간 결제에 토큰화된 예금을 쓰는 실험을 반복하고 있으며, 각국 중앙은행은 도매용 디지털 화폐를 시험한다. 스테이블코인 — 달러에 값을 고정한 토큰 — 은 이미 연간 결제액이 주요 카드망과 비교되는 규모로 자랐고, 관련 법제화가 주요국에서 진행됐다.</p><p>화려한 뉴스가 아니라 배관 교체 공사 특유의 지루한 뉴스들 — 그것이 이 흐름이 진짜라는 역설적 증거다.</p></div><h2>미래학자들의 시선</h2><div><p>제러미 리프킨의 한계비용 프레임으로 보면, 토큰화는 '거래 비용이 0에 수렴하는' 마지막 큰 영역이 금융이라는 이야기다. 다만 초기 블록체인 이상주의가 그린 탈중앙 — 중개자의 소멸 — 과 지금의 현실은 다르다. 움직이는 것은 기존 금융기관 자신이고, 동기는 혁명이 아니라 비용 절감이다. 기술은 급진적이었지만 채택은 보수적으로 진행되는 것 — 금융의 역사에서 반복된 패턴이다.</p></div><h2>다르게 보는 시각</h2><div><p>근본적 반론은 법에 있다. 장부에 기록됐다는 것과 법적으로 소유했다는 것은 다른 문제다. 토큰을 가진 사람이 파산 절차에서 실제로 보호받는가, 국경을 넘은 토큰의 재판 관할은 어디인가 — 이런 질문에 대한 법제가 기술보다 한참 뒤에 있다. 또 하나, 24시간 실시간 결제는 효율인 동시에 위험이다. 은행 위기 때 예금이 며칠에 걸쳐 빠지던 것이 몇 분 만에 빠질 수 있는 시스템은, 위기의 속도도 함께 토큰화한다.</p></div><h2>남는 질문</h2><div><p>인터넷이 정보의 유통 비용을 무너뜨렸을 때, 신문과 방송은 형태를 바꿔야 했다. 가치의 유통 비용이 무너지면 은행과 거래소는 무엇으로 남을까. 중개가 사라지는 것이 아니라, 중개의 정의가 바뀌는 것 — 아마도 그쪽이 정답에 가까울 것이다.</p></div>
+<div class="content" id="content">
+<div class="lede"><p>블록체인이라는 단어는 십수 년간 가격 차트와 함께 소비됐다. 오르내림의 드라마가 헤드라인을 가져가는 동안, 같은 기술의 다른 갈래 하나가 눈에 띄지 않게 자랐다. 기존 금융자산 — 채권, 펀드, 예금, 부동산 지분 — 을 공유된 디지털 장부 위의 기록으로 옮기는 것. 업계는 이것을 토큰화라 부른다.</p><p>핵심을 오해하지 않는 것이 중요하다. 토큰화는 새로운 자산을 만드는 이야기가 아니라, 자산이 기록되고 이전되는 '배관'을 교체하는 이야기다. 화폐의 발명이 아니라 회계의 개혁에 가깝다.</p></div><h2>지금의 배관은 왜 느린가</h2><div><p>주식을 사면 내 것이 되기까지 이틀이 걸린다는 사실을 아는 사람은 많지 않다. 증권 거래의 뒤편에는 증권사, 예탁결제기관, 은행이 각자의 장부를 맞춰보는 정산 과정이 있고, 이 다단계 대조가 시간과 비용과 오류의 원천이다. 국경을 넘으면 더 심해진다 — 송금 하나가 며칠씩 걸리고 수수료가 몇 퍼센트씩 떨어져 나가는 것은 기술의 한계가 아니라 배관의 구조 때문이다.</p><p>모든 참여자가 같은 장부를 보면 대조가 필요 없어진다 — 이것이 토큰화의 한 줄 논리다. 결제는 며칠에서 몇 초로, 시장은 개장 시간에서 24시간으로, 자산의 최소 단위는 한 채·한 좌에서 소수점 아래로 쪼개질 수 있다.</p></div><h2>조용한 쪽에서 먼저 움직인다</h2><div><p>실제 움직임은 소매 투기가 아니라 기관의 뒷단에서 진행되고 있다. 세계 최대 자산운용사들이 미국 국채에 투자하는 머니마켓펀드를 토큰 형태로 발행했고, 대형 은행들이 기관 간 결제에 토큰화된 예금을 쓰는 실험을 반복하고 있으며, 각국 중앙은행은 도매용 디지털 화폐를 시험한다. 스테이블코인 — 달러에 값을 고정한 토큰 — 은 이미 연간 결제액이 주요 카드망과 비교되는 규모로 자랐고, 관련 법제화가 주요국에서 진행됐다.</p><p>화려한 뉴스가 아니라 배관 교체 공사 특유의 지루한 뉴스들 — 그것이 이 흐름이 진짜라는 역설적 증거다.</p></div><h2>미래학자들의 시선</h2><div><p>제러미 리프킨의 한계비용 프레임으로 보면, 토큰화는 '거래 비용이 0에 수렴하는' 마지막 큰 영역이 금융이라는 이야기다. 다만 초기 블록체인 이상주의가 그린 탈중앙 — 중개자의 소멸 — 과 지금의 현실은 다르다. 움직이는 것은 기존 금융기관 자신이고, 동기는 혁명이 아니라 비용 절감이다. 기술은 급진적이었지만 채택은 보수적으로 진행되는 것 — 금융의 역사에서 반복된 패턴이다.</p></div><h2>다르게 보는 시각</h2><div><p>근본적 반론은 법에 있다. 장부에 기록됐다는 것과 법적으로 소유했다는 것은 다른 문제다. 토큰을 가진 사람이 파산 절차에서 실제로 보호받는가, 국경을 넘은 토큰의 재판 관할은 어디인가 — 이런 질문에 대한 법제가 기술보다 한참 뒤에 있다. 또 하나, 24시간 실시간 결제는 효율인 동시에 위험이다. 은행 위기 때 예금이 며칠에 걸쳐 빠지던 것이 몇 분 만에 빠질 수 있는 시스템은, 위기의 속도도 함께 토큰화한다.</p></div><h2>2026년 늦여름, 현장에서</h2><div><p>본문의 '법이 기술보다 느리다'는 서술에 미국이 예외를 만들기 시작했다. 2025년 여름 제정된 스테이블코인 연방법의 시행 세칙이 2026년 내내 만들어졌고, 예금보험 당국이 발행사 기준을 승인하면서 대형 은행들의 시장 진입 준비가 공식화됐다. 한 대형 은행은 기관 결제용 예금 토큰을 공용 블록체인 위에서 운용하기 시작했다 — 본문이 말한 '조용한 쪽의 움직임'이 규제의 우산 아래로 들어온 것이다.</p><p>수천억 달러 규모로 자란 이 시장의 다음 관전 포인트는 은행권 발행이 본격화된 뒤의 지형이다. 배관 교체 공사는 이제 인허가 도장이 찍힌 공사가 됐다.</p></div><h2>남는 질문</h2><div><p>인터넷이 정보의 유통 비용을 무너뜨렸을 때, 신문과 방송은 형태를 바꿔야 했다. 가치의 유통 비용이 무너지면 은행과 거래소는 무엇으로 남을까. 중개가 사라지는 것이 아니라, 중개의 정의가 바뀌는 것 — 아마도 그쪽이 정답에 가까울 것이다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>금융 인프라, 자산운용, 결제·수탁, 은행 IT, 규제 대응 소프트웨어.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『돈의 미래 (The Future of Money)』</span><span class="ba">에스와르 프라사드</span><span class="bd">디지털 화폐와 금융 배관의 변화를 다룬 균형 잡힌 개관</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch21.html"><span class="lbl">← 이전</span><span class="tt">언어의 벽이 낮아진다는 것</span></a><a class="next" href="./ch23.html"><span class="lbl">다음 →</span><span class="tt">사람이 줄어드는 세계</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "22";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

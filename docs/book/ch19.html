@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">우주가 연구에서 사업으로 옮겨간 이유</div>
   <span class="hz now">이미 진행 중</span>
 </div>
-<div class="lede"><p>우주 시대의 첫 반세기 동안, 로켓은 한 번 쓰고 버리는 물건이었다. 수천억 원짜리 기계를 바다에 버리는 일이 표준이었다는 뜻이다. 비행기를 한 번 타고 폐기한다면 항공권이 얼마일지 상상해 보면, 우주가 왜 국가만의 영역이었는지 알 수 있다.</p><p>지난 15년의 가장 큰 사건은 이 전제가 무너진 것이다. 발사체 1단이 스스로 돌아와 착륙하고, 정비 후 다시 날아오르는 재사용이 일상이 됐다. 킬로그램당 발사 비용은 자릿수가 바뀌었고, 발사 빈도는 연간 수십 회에서 수백 회 규모로 뛰었다. 비쌌기 때문에 못 하던 사업들이 갑자기 계산이 서기 시작했다.</p></div><h2>궤도 위의 인프라 사업</h2><div><p>가장 먼저 계산이 선 것은 통신이다. 저궤도에 수천 기의 위성을 깔아 지구 전역에 인터넷을 뿌리는 메가컨스텔레이션 — 한 번의 발사로 수십 기를 올릴 수 있게 되면서 비로소 가능해진 사업이다. 오지, 바다, 전쟁터, 재해 지역처럼 광케이블이 못 가는 곳에서 이미 실전 인프라가 됐다.</p><p>두 번째는 관측이다. 수백 기의 소형 위성이 지구를 매일 촬영하면서, 농작물 작황, 유조선의 이동, 공장 주차장의 차량 수, 산불과 홍수가 '데이터 상품'이 됐다. 4부의 기후 적응이 이 데이터 위에서 굴러간다. 세 번째 줄에는 궤도 정비, 우주 쓰레기 수거, 미세중력 제조 같은 아직 초기 단계의 사업들이 서 있다.</p></div><h2>달과 화성은 어디에 있나</h2><div><p>뉴스의 헤드라인은 달 착륙과 화성 이주가 가져가지만, 손익계산서는 저궤도에 있다. 우주 산업 매출의 대부분은 지구를 위한 서비스 — 통신과 관측 — 에서 나온다. 심우주 탐사는 여전히 국가 프로그램과 소수의 야심가가 끄는 영역이고, 상업적 근거는 아직 이야기 단계다. 우주 산업의 현재를 한 줄로 요약하면 — 탐험의 낭만이 아니라 인프라의 실무.</p></div><h2>미래학자들의 시선</h2><div><p>피터 디아만디스는 X프라이즈로 민간 우주 경쟁의 방아쇠를 당긴 인물답게, 발사 비용 하락이 소행성 자원 채굴과 우주 제조업까지 열 것이라 전망해 왔다. 그 전망의 앞부분(발사 비용 붕괴, 민간 주도)은 적중했고 뒷부분은 아직 오지 않았다 — 로이 아마라의 법칙이 이 산업의 시간표에도 정확히 작동하고 있는 셈이다. 단기의 흥분은 과했고, 장기의 변화는 아마 지금 보이는 것보다 클 것이다.</p></div><h2>다르게 보는 시각</h2><div><p>저궤도의 성공이 만든 새 문제들이 있다. 수천 기의 위성이 만드는 충돌 위험과 우주 쓰레기, 천문 관측 방해, 그리고 소수 기업이 궤도라는 공유지를 선점하는 것에 대한 거버넌스 공백. 규제는 국경이 없는 궤도 앞에서 국가 단위로 쪼개져 있다. 또 하나 — 발사 시장의 극단적 집중이다. 재사용을 완성한 소수가 가격을 정하는 시장은, 그 아래의 모든 위성 사업자에게 단일 공급자 리스크로 작동한다.</p></div><h2>남는 질문</h2><div><p>철도가 놓인 뒤에야 우편 주문 카탈로그가 나오고, 인터넷이 깔린 뒤에야 그 위의 산업이 상상됐다. 발사 비용이 무너진 지금은 '궤도라는 철도'가 막 놓인 시점이다. 그 위에서 무엇이 상상될지 — 정직한 답은, 아직 아무도 모른다는 것이다. 인프라의 다음 층은 언제나 인프라가 깔린 뒤에 발명됐다.</p></div>
+<div class="content" id="content">
+<div class="lede"><p>우주 시대의 첫 반세기 동안, 로켓은 한 번 쓰고 버리는 물건이었다. 수천억 원짜리 기계를 바다에 버리는 일이 표준이었다는 뜻이다. 비행기를 한 번 타고 폐기한다면 항공권이 얼마일지 상상해 보면, 우주가 왜 국가만의 영역이었는지 알 수 있다.</p><p>지난 15년의 가장 큰 사건은 이 전제가 무너진 것이다. 발사체 1단이 스스로 돌아와 착륙하고, 정비 후 다시 날아오르는 재사용이 일상이 됐다. 킬로그램당 발사 비용은 자릿수가 바뀌었고, 발사 빈도는 연간 수십 회에서 수백 회 규모로 뛰었다. 비쌌기 때문에 못 하던 사업들이 갑자기 계산이 서기 시작했다.</p></div><h2>궤도 위의 인프라 사업</h2><div><p>가장 먼저 계산이 선 것은 통신이다. 저궤도에 수천 기의 위성을 깔아 지구 전역에 인터넷을 뿌리는 메가컨스텔레이션 — 한 번의 발사로 수십 기를 올릴 수 있게 되면서 비로소 가능해진 사업이다. 오지, 바다, 전쟁터, 재해 지역처럼 광케이블이 못 가는 곳에서 이미 실전 인프라가 됐다.</p><p>두 번째는 관측이다. 수백 기의 소형 위성이 지구를 매일 촬영하면서, 농작물 작황, 유조선의 이동, 공장 주차장의 차량 수, 산불과 홍수가 '데이터 상품'이 됐다. 4부의 기후 적응이 이 데이터 위에서 굴러간다. 세 번째 줄에는 궤도 정비, 우주 쓰레기 수거, 미세중력 제조 같은 아직 초기 단계의 사업들이 서 있다.</p></div><h2>달과 화성은 어디에 있나</h2><div><p>뉴스의 헤드라인은 달 착륙과 화성 이주가 가져가지만, 손익계산서는 저궤도에 있다. 우주 산업 매출의 대부분은 지구를 위한 서비스 — 통신과 관측 — 에서 나온다. 심우주 탐사는 여전히 국가 프로그램과 소수의 야심가가 끄는 영역이고, 상업적 근거는 아직 이야기 단계다. 우주 산업의 현재를 한 줄로 요약하면 — 탐험의 낭만이 아니라 인프라의 실무.</p></div><h2>미래학자들의 시선</h2><div><p>피터 디아만디스는 X프라이즈로 민간 우주 경쟁의 방아쇠를 당긴 인물답게, 발사 비용 하락이 소행성 자원 채굴과 우주 제조업까지 열 것이라 전망해 왔다. 그 전망의 앞부분(발사 비용 붕괴, 민간 주도)은 적중했고 뒷부분은 아직 오지 않았다 — 로이 아마라의 법칙이 이 산업의 시간표에도 정확히 작동하고 있는 셈이다. 단기의 흥분은 과했고, 장기의 변화는 아마 지금 보이는 것보다 클 것이다.</p></div><h2>다르게 보는 시각</h2><div><p>저궤도의 성공이 만든 새 문제들이 있다. 수천 기의 위성이 만드는 충돌 위험과 우주 쓰레기, 천문 관측 방해, 그리고 소수 기업이 궤도라는 공유지를 선점하는 것에 대한 거버넌스 공백. 규제는 국경이 없는 궤도 앞에서 국가 단위로 쪼개져 있다. 또 하나 — 발사 시장의 극단적 집중이다. 재사용을 완성한 소수가 가격을 정하는 시장은, 그 아래의 모든 위성 사업자에게 단일 공급자 리스크로 작동한다.</p></div><h2>2026년 늦여름, 현장에서</h2><div><p>차세대 초대형 발사체의 시험 비행이 2026년 여름 연속 성공 국면에 들어섰다. 5월 신형 기체와 신형 엔진의 첫 비행에 이어 7월의 비행에서는 위성 모사체 사출과 대기권 재진입·열차폐 검증까지 진전됐다. 궤도 재점화와 발사체 완전 회수라는 다음 관문이 남아 있지만, '더 크게, 더 싸게'의 곡선이 한 단계 더 내려가고 있다는 신호다.</p><p>이 기체가 상업 운용에 들어가면 킬로그램당 발사 비용은 다시 자릿수가 바뀔 수 있다 — 본문이 말한 '궤도라는 철도'의 선로 폭이 넓어지는 것이다.</p></div><h2>남는 질문</h2><div><p>철도가 놓인 뒤에야 우편 주문 카탈로그가 나오고, 인터넷이 깔린 뒤에야 그 위의 산업이 상상됐다. 발사 비용이 무너진 지금은 '궤도라는 철도'가 막 놓인 시점이다. 그 위에서 무엇이 상상될지 — 정직한 답은, 아직 아무도 모른다는 것이다. 인프라의 다음 층은 언제나 인프라가 깔린 뒤에 발명됐다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>항공우주·방위, 위성 통신, 지구 관측 데이터, 발사 서비스, 부품·소재.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『스페이스 배런 (The Space Barons)』</span><span class="ba">크리스천 데이븐포트</span><span class="bd">민간 우주 경쟁의 내부 기록</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a href="./ch18.html"><span class="lbl">← 이전</span><span class="tt">막는 기술에서 견디는 기술로</span></a><a class="next" href="./ch20.html"><span class="lbl">다음 →</span><span class="tt">화면 이후의 인터페이스</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "19";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>

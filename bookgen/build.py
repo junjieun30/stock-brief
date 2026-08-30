@@ -99,6 +99,25 @@ CSS = """
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 """
@@ -156,9 +175,9 @@ def build_index() -> str:
 </div>
 {''.join(rows)}
 <div class="foot">하루 한 편이면 한 달이 조금 안 걸립니다. 읽은 장은 이 기기에만 표시됩니다.<br><br>
-<b>이 책에 대하여</b> — 2026년 중반까지 공개된 사실(노벨상, 규제 승인, 표준 확정, 공개 실험 결과 등)과
+<b>이 책에 대하여</b> — 2026년 8월까지 공개된 사실·보도(노벨상, 규제 승인, 표준 확정, 공개 실험 결과 등)과
 실존 미래학자·연구자들의 출간된 주장을 바탕으로 새로 쓴 글입니다. 특정 저서의 번역·발췌가 아니며,
-확실하지 않은 수치는 싣지 않았습니다. 속보가 아닌 구조적 흐름을 다루므로 시점이 지나도 골격은 유효하지만,
+확실하지 않은 수치는 싣지 않았고, 최근 소식은 각 장의 '2026년 늦여름, 현장에서'에 모았습니다. 속보가 아닌 구조적 흐름을 다루므로 시점이 지나도 골격은 유효하지만,
 이후의 새 사건은 반영되어 있지 않습니다.<br><br>
 특정 종목·매매에 대한 이야기가 아니며, 투자 권유가 아닙니다.</div>
 </div>
@@ -167,8 +186,16 @@ def build_index() -> str:
   var read = {{}}, last = 0;
   try {{ read = JSON.parse(localStorage.getItem("book-read") || "{{}}");
         last = parseInt(localStorage.getItem("book-last") || "0", 10); }} catch (e) {{}}
+  var allNotes = {{}};
+  try {{ allNotes = JSON.parse(localStorage.getItem("book-notes") || "{{}}"); }} catch (e) {{}}
   document.querySelectorAll(".toc a").forEach(function (a) {{
     if (read[a.dataset.ch]) a.classList.add("read");
+    var n = allNotes[a.dataset.ch] ? Object.keys(allNotes[a.dataset.ch]).length : 0;
+    if (n > 0) {{
+      var m = document.createElement("span");
+      m.className = "memo"; m.textContent = "📝" + n;
+      a.querySelector(".t").appendChild(m);
+    }}
   }});
   var btn = document.getElementById("continue");
   if (last > 0 && last < {len(ALL)}) {{
@@ -225,9 +252,12 @@ def build_chapter(i: int, ch: dict) -> str:
   <div class="sub">{_esc(ch["subtitle"])}</div>
   <span class="{hz_cls}">{ch["horizon"]}</span>
 </div>
+<div class="content" id="content">
 {''.join(parts_html)}
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>{_esc(ch["where"])}</div>
 {books_html}
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav">{prev_html}{next_html}</div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -246,6 +276,68 @@ def build_chapter(i: int, ch: dict) -> str:
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }}, {{ passive: true }});
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "{i}";
+  function loadNotes() {{
+    try {{ return JSON.parse(localStorage.getItem("book-notes") || "{{}}"); }}
+    catch (e) {{ return {{}}; }}
+  }}
+  function saveNotes(all) {{
+    try {{ localStorage.setItem("book-notes", JSON.stringify(all)); }} catch (e) {{}}
+  }}
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {{}};
+
+  function renderNote(idx, p) {{
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {{
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    }} else {{
+      p.classList.remove("noted");
+    }}
+  }}
+
+  function openEditor(idx, p) {{
+    document.querySelectorAll(".noteedit").forEach(function (e) {{ e.remove(); }});
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {{
+      var all = loadNotes();
+      if (ta.value.trim()) {{ notes[idx] = ta.value.trim(); }}
+      else {{ delete notes[idx]; }}
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    }};
+    no.onclick = function () {{
+      if (notes[idx]) {{ var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }}
+      box.remove(); renderNote(idx, p);
+    }};
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }}
+
+  paras.forEach(function (p, idx) {{
+    renderNote(idx, p);
+    p.addEventListener("click", function () {{ openEditor(idx, p); }});
+  }});
 }})();
 </script>"""
     return _page(f"{ch['title']} · {BOOK_TITLE}", body)

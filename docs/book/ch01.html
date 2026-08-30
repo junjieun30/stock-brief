@@ -83,6 +83,25 @@
   .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
   .pnav .next{text-align:right}
   .pnav .ghost{visibility:hidden}
+  /* 내 생각 메모 */
+  .content p{cursor:pointer;border-left:2px solid transparent;margin-left:-14px;padding-left:12px;
+    transition:border-color .15s}
+  .content p:hover{border-left-color:var(--line)}
+  .content p.noted{border-left-color:var(--up)}
+  .mynote{margin:-8px 0 20px;margin-left:-14px;padding:10px 14px;border-left:2px solid var(--up);
+    background:color-mix(in srgb,var(--up) 6%,var(--panel));font-size:13.5px;line-height:1.7;
+    color:var(--ink);word-break:keep-all;white-space:pre-wrap}
+  .mynote b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--up);margin-bottom:4px}
+  .noteedit{margin:-8px 0 20px;margin-left:-14px;padding:12px 14px;border-left:2px solid var(--up);
+    background:var(--panel)}
+  .noteedit textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+  .noteedit .row{display:flex;gap:8px;margin-top:8px}
+  .noteedit button{padding:7px 16px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .noteedit button.ghostbtn{background:transparent;color:var(--muted);border-color:var(--line)}
+  .notehint{font-size:11.5px;color:var(--muted);text-align:center;margin:26px 0 0;opacity:.8}
+  .toc .memo{font-size:11px;color:var(--up);font-weight:700;margin-left:6px}
   /* 진행 바 */
   .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
 </style>
@@ -97,9 +116,12 @@
   <div class="sub">컴퓨터가 처음으로 '말'을 일반적인 방식으로 다루기 시작했다</div>
   <span class="hz now">이미 진행 중</span>
 </div>
+<div class="content" id="content">
 <div class="lede"><p>컴퓨터의 역사는 사실 분업의 역사였다. 계산과 기억과 검색은 기계가 맡고, 말하고 쓰고 판단하는 일은 사람이 맡았다. 이 분업은 너무 오래, 너무 안정적으로 유지되어서 거의 자연법칙처럼 느껴졌다. 스프레드시트는 숫자를 다루고, 사람은 그 숫자가 무엇을 뜻하는지 설명하는 보고서를 쓴다. 검색엔진은 문서를 찾아주고, 사람은 그 문서를 읽고 요약한다.</p><p>대규모 언어모델은 이 분업을 처음으로 무너뜨린 기술이다. 번역하고, 요약하고, 초안을 쓰고, 코드를 짜는 일 — '읽고 쓰는 노동' 전체가 갑자기 소프트웨어가 다룰 수 있는 대상이 됐다. 산업혁명이 근육의 일을 기계로 옮겼다면, 이번에 옮겨지고 있는 것은 언어의 일이다.</p></div><h2>무엇이 바뀌었나</h2><div><p>기술적으로 무슨 일이 있었는지는 의외로 한 문장으로 요약된다. 인터넷에 쌓인 방대한 글을 통째로 학습시켜서, '다음에 올 말'을 놀랍도록 잘 맞히는 모델을 만든 것이다. 다음 단어를 잘 맞히는 것뿐인데 번역이 되고 요약이 되느냐고 묻는다면 — 된다는 것이 지난 몇 년의 발견이었다. 언어를 충분히 잘 예측하려면 언어 속에 담긴 지식과 논리의 상당 부분을 함께 흡수해야 하기 때문이다.</p><p>더 중요한 변화는 소프트웨어의 '형태'다. 예전의 프로그램은 만들 때 정한 일만 했다. 회계 프로그램은 회계만 하고, 번역기는 번역만 한다. 언어모델은 다르다. 무엇을 시킬지 미리 정해두지 않아도 된다. 오늘은 이메일 초안을, 내일은 계약서 요약을, 모레는 코드 리뷰를 시킬 수 있다. 도구라기보다 '지시를 받는 무언가'에 가깝다. 그래서 이 기술의 가치는 모델을 만드는 쪽 못지않게, 쓰임새를 발명하는 쪽에서 만들어지고 있다.</p></div><h2>이 기술의 결</h2><div><p>동시에 이 기술에는 뚜렷한 결이 있다. 언어모델은 정확함이 아니라 그럴듯함을 최적화한다. 모르는 것을 모른다고 하기보다, 그럴듯한 답을 자신 있게 지어내는 경향이 있다. 이것을 환각(hallucination)이라 부른다. 결함이라기보다 작동 원리에서 나오는 성질이라, 완전히 없애기가 어렵다.</p><p>그래서 확산의 순서가 정해졌다. 틀려도 금방 확인되는 일 — 코드(실행해보면 안다), 번역(읽어보면 안다), 초안(어차피 사람이 다듬는다) — 에서 먼저 자리를 잡았다. 반대로 틀리면 큰일 나는 일 — 의료 판단, 법률 자문, 금융 결정 — 에서는 사람의 확인을 앞에 세운 형태로 조심스럽게 들어가고 있다. 기술의 확산 지도를 그리고 싶다면 '검증 비용'을 축으로 놓으면 된다.</p></div><h2>미래학자들의 시선</h2><div><p>레이 커즈와일은 이미 1990년대부터 계산 능력의 지수적 성장이 언젠가 언어와 인지의 영역에 도달할 것이라고 썼다. 당시에는 공상으로 취급됐지만, 방향 자체는 틀리지 않았던 셈이다. 다만 그가 그린 경로 — 뇌를 역설계한다는 — 와는 다른 길로 왔다. 뇌를 이해해서가 아니라, 데이터를 쏟아부어서 도달했다.</p><p>경제학자 에릭 브린욜프슨의 관찰은 지금 단계에서 더 실용적이다. 그는 전기 같은 범용기술이 도입될 때 생산성이 곧바로 오르지 않고 오히려 한동안 정체됐다가, 조직과 업무 방식이 재편된 뒤에야 급등하는 패턴을 'J커브'라 불렀다. 공장에 전기 모터를 들여놓고도 증기기관 시절의 공장 배치를 그대로 쓰던 수십 년이 있었다. 지금 많은 회사가 언어모델을 '더 빠른 타자기'처럼 쓰고 있다면, 우리는 아직 J커브의 바닥 어디쯤에 있는 것이다.</p></div><h2>다르게 보는 시각</h2><div><p>모두가 동의하는 것은 아니다. 인지과학자 게리 마커스는 지금의 모델이 세계를 이해하는 것이 아니라 통계적 패턴을 흉내 낼 뿐이며, 규모를 키우는 것만으로는 신뢰성의 벽을 넘지 못한다고 오래 주장해 왔다. 실제로 모델이 커져도 환각은 사라지지 않았고, 간단한 논리 문제에서 어이없이 틀리는 일도 여전하다. '지금 곡선을 연장하면 어디까지 간다'는 이야기를 들을 때마다, 곡선이 꺾인 역사도 함께 기억할 필요가 있다.</p></div><h2>남는 질문</h2><div><p>이 기술이 어디까지 갈지는 아무도 모른다. 그러나 이미 확정된 사실이 하나 있다. 읽고 쓰는 일의 값이 구조적으로 내려가기 시작했다는 것이다. 값이 내려간 자원은 언제나 더 많이, 더 헤프게 쓰인다. 글이 너무 많아진 세상에서 귀해지는 것은 무엇일까. 아마도 무엇을 읽을지 고르는 안목, 그리고 무엇을 물을지 아는 능력일 것이다.</p></div>
+</div>
 <div class="where"><b>어디에서 관찰되는가</b>소프트웨어, 반도체, 클라우드 인프라, 그리고 문서·고객응대·번역처럼 텍스트를 많이 다루는 모든 서비스업.</div>
 <div class="books"><b>더 읽어보기</b><div><span class="bt">『제2의 기계시대』</span><span class="ba">에릭 브린욜프슨·앤드루 맥아피</span><span class="bd">디지털 기술이 노동과 경제를 바꾸는 방식에 대한 표준적인 입문</span></div><div><span class="bt">『특이점이 온다』</span><span class="ba">레이 커즈와일</span><span class="bd">지수적 기술 낙관론의 원전. 동의하지 않더라도 읽어둘 가치가 있다</span></div></div>
+<div class="notehint">문단을 탭하면 그 자리에 내 생각을 적어둘 수 있습니다 (이 기기에만 저장)</div>
 <div class="pnav"><a class="ghost"><span class="lbl">.</span><span class="tt">.</span></a><a class="next" href="./ch02.html"><span class="lbl">다음 →</span><span class="tt">스스로 일을 끝내는 소프트웨어</span></a></div>
 <div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </div>
@@ -118,6 +140,68 @@
     var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
     bar.style.width = Math.min(100, pct) + "%";
   }, { passive: true });
+
+  // --- 내 생각 메모: 문단을 탭하면 적을 수 있다. localStorage 에만 저장 ---
+  var CH = "1";
+  function loadNotes() {
+    try { return JSON.parse(localStorage.getItem("book-notes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveNotes(all) {
+    try { localStorage.setItem("book-notes", JSON.stringify(all)); } catch (e) {}
+  }
+  var paras = document.querySelectorAll("#content p");
+  var notes = loadNotes()[CH] || {};
+
+  function renderNote(idx, p) {
+    var old = p.nextElementSibling;
+    if (old && (old.classList.contains("mynote") || old.classList.contains("noteedit"))) old.remove();
+    if (notes[idx]) {
+      p.classList.add("noted");
+      var d = document.createElement("div");
+      d.className = "mynote";
+      d.innerHTML = "<b>내 생각</b>";
+      d.appendChild(document.createTextNode(notes[idx]));
+      p.after(d);
+    } else {
+      p.classList.remove("noted");
+    }
+  }
+
+  function openEditor(idx, p) {
+    document.querySelectorAll(".noteedit").forEach(function (e) { e.remove(); });
+    var old = p.nextElementSibling;
+    if (old && old.classList.contains("mynote")) old.remove();
+    var box = document.createElement("div");
+    box.className = "noteedit";
+    var ta = document.createElement("textarea");
+    ta.placeholder = "이 문단을 읽고 든 생각을 적어두세요…";
+    ta.value = notes[idx] || "";
+    var row = document.createElement("div"); row.className = "row";
+    var ok = document.createElement("button"); ok.textContent = "저장";
+    var no = document.createElement("button"); no.textContent = notes[idx] ? "삭제" : "취소";
+    no.className = "ghostbtn";
+    ok.onclick = function () {
+      var all = loadNotes();
+      if (ta.value.trim()) { notes[idx] = ta.value.trim(); }
+      else { delete notes[idx]; }
+      all[CH] = notes; saveNotes(all);
+      box.remove(); renderNote(idx, p);
+    };
+    no.onclick = function () {
+      if (notes[idx]) { var all = loadNotes(); delete notes[idx]; all[CH] = notes; saveNotes(all); }
+      box.remove(); renderNote(idx, p);
+    };
+    row.appendChild(ok); row.appendChild(no);
+    box.appendChild(ta); box.appendChild(row);
+    p.after(box);
+    ta.focus();
+  }
+
+  paras.forEach(function (p, idx) {
+    renderNote(idx, p);
+    p.addEventListener("click", function () { openEditor(idx, p); });
+  });
 })();
 </script>
 </body>
