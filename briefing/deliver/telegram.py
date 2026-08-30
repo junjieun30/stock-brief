@@ -81,11 +81,11 @@ def build_message(brief: Brief, max_news: int = 6) -> str:
         badge = "📖 오늘의 용어" if lesson.kind == "term" else "🧠 투자 심리"
         parts += [f"<b>{badge} — {_esc(lesson.term)}</b>", _esc(lesson.plain), ""]
 
-    if brief.reflection:
-        r = brief.reflection
-        body = f"“{_esc(r.body)}”" if r.kind == "quote" else _esc(r.body)
-        parts += [f"<b>🕯 오늘의 사색 — {_esc(r.name)}</b>", body,
-                  f"<i>{_esc(r.sit)}</i>", ""]
+    if brief.future:
+        f = brief.future
+        parts += [f"<b>📚 내일의 기술 — {_esc(f.title)}</b> ({f.number}/{f.total})",
+                  _esc(f.body[0]),
+                  "<i>전체 내용은 웹 브리핑에서 읽어보세요.</i>", ""]
 
     parts.append("<i>참고 자료이며 투자 권유가 아닙니다.</i>")
 

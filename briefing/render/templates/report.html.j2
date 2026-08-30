@@ -107,25 +107,38 @@
   .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
   .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
     font-size:13.5px;color:var(--muted);line-height:1.65}
-  /* --- 오늘의 사색 : 데이터 카드들과 다른 호흡. 여백을 크게 준다 --- */
-  .reflect{margin:56px 0 8px;padding:44px 40px;border-radius:16px;text-align:center;
+  /* --- 내일의 기술 : 데이터 카드들과 다른 호흡. 책 한 페이지처럼 --- */
+  .reflect{margin:56px 0 8px;padding:48px 44px;border-radius:16px;
     background:color-mix(in srgb,var(--accent) 4%,var(--panel));
     border:1px solid color-mix(in srgb,var(--accent) 16%,var(--line))}
   .rlabel{font-size:11.5px;letter-spacing:.22em;color:var(--accent);font-weight:700;
-    margin-bottom:26px;text-transform:none}
-  .rbody{margin:0 auto 26px;max-width:640px;border:0;padding:0;
-    font-size:20px;line-height:1.85;font-weight:450;letter-spacing:-.01em;word-break:keep-all}
-  .rwho{font-size:13.5px;margin-bottom:5px}
-  .rwho b{font-weight:700} .rwho span{color:var(--muted);margin-left:9px}
-  .rsrc{font-size:12px;color:var(--muted)}
-  .rsit{margin:28px auto 0;max-width:560px;padding-top:24px;
+    margin-bottom:30px;text-align:center}
+  .bpart{font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:10px}
+  .btitle{margin:0 0 8px;font-size:25px;letter-spacing:-.02em;text-align:center;
+    font-weight:700;word-break:keep-all}
+  .bsub{font-size:14.5px;color:var(--muted);text-align:center;margin-bottom:14px;word-break:keep-all}
+  .bhorizon{display:block;width:fit-content;margin:0 auto 30px;padding:3px 12px;border-radius:20px;
+    font-size:11.5px;font-weight:700;letter-spacing:.02em;
+    background:color-mix(in srgb,var(--muted) 14%,transparent);color:var(--muted)}
+  .bhorizon.now{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+  .bbody{max-width:620px;margin:0 auto}
+  .bbody p{margin:0 0 18px;font-size:15.5px;line-height:1.95;word-break:keep-all;
+    text-indent:1em}
+  .bbody p:first-child{text-indent:0}
+  .bbody p:first-child::first-letter{font-size:1.35em;font-weight:700;color:var(--accent)}
+  .bnotes{max-width:620px;margin:30px auto 0;padding-top:26px;
     border-top:1px solid color-mix(in srgb,var(--accent) 18%,transparent);
-    font-size:15px;line-height:1.8;color:var(--ink);opacity:.86;word-break:keep-all}
-  .rnote{margin:18px auto 0;max-width:600px;font-size:11.5px;line-height:1.65;
-    color:var(--muted);opacity:.85}
+    display:grid;gap:16px}
+  .bnote b{display:block;font-size:12px;color:var(--accent);letter-spacing:.05em;
+    margin-bottom:5px}
+  .bnote p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.88;
+    word-break:keep-all}
+  .bfoot{max-width:620px;margin:26px auto 0;font-size:11.5px;color:var(--muted);
+    text-align:center;opacity:.85}
   @media (max-width:620px){
     .reflect{padding:34px 22px}
-    .rbody{font-size:17.5px}
+    .btitle{font-size:21px}
+    .bbody p{font-size:15px}
   }
   .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
   .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
@@ -333,15 +346,25 @@
 </div>
 {% endif %}
 
-{% if brief.reflection %}
-{% set r = brief.reflection %}
-<section class="reflect">
-  <div class="rlabel">오늘의 사색</div>
-  <blockquote class="rbody">{% if r.kind == 'quote' %}“{{ r.body }}”{% else %}{{ r.body }}{% endif %}</blockquote>
-  <div class="rwho"><b>{{ r.name }}</b><span>{{ r.who }}</span></div>
-  <div class="rsrc">{% if r.kind == 'quote' %}인용{% else %}사상 요약 · 직접 인용이 아닙니다{% endif %} · {{ r.source }}</div>
-  <div class="rsit">{{ r.sit }}</div>
-  {% if r.note %}<div class="rnote">{{ r.note }}</div>{% endif %}
+{% if brief.future %}
+{% set f = brief.future %}
+<section class="reflect book">
+  <div class="rlabel">내일의 기술 · {{ f.number }} / {{ f.total }}</div>
+  <div class="bpart">{{ f.part }}</div>
+  <h3 class="btitle">{{ f.title }}</h3>
+  <div class="bsub">{{ f.subtitle }}</div>
+  <span class="bhorizon {{ 'now' if f.horizon == '이미 진행 중' }}">{{ f.horizon }}</span>
+  <div class="bbody">
+  {% for para in f.body %}
+    <p>{{ para }}</p>
+  {% endfor %}
+  </div>
+  <div class="bnotes">
+    <div class="bnote"><b>미래학자들의 시선</b><p>{{ f.voices }}</p></div>
+    <div class="bnote"><b>다르게 보는 시각</b><p>{{ f.counter }}</p></div>
+    <div class="bnote"><b>어디에서 관찰되는가</b><p>{{ f.where }}</p></div>
+  </div>
+  <div class="bfoot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </section>
 {% endif %}
 

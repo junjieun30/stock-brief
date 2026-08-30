@@ -90,15 +90,16 @@ def render(brief: Brief) -> str:
             badge = "주식 용어" if l.kind == "term" else "투자 심리"
             out += [f"### [{badge}] {l.term}", "", l.plain, "", f"> {l.why}", ""]
 
-    if brief.reflection:
-        r = brief.reflection
-        body = f"“{r.body}”" if r.kind == "quote" else r.body
-        kind_label = "인용" if r.kind == "quote" else "사상 요약 · 직접 인용이 아닙니다"
-        out += ["## 오늘의 사색", "", f"> {body}", "",
-                f"— **{r.name}** · {r.who}  ", f"<sub>{kind_label} · {r.source}</sub>", "",
-                f"*{r.sit}*", ""]
-        if r.note:
-            out += [f"<sub>{r.note}</sub>", ""]
+    if brief.future:
+        f = brief.future
+        out += [f"## 내일의 기술 — {f.title}", "",
+                f"<sub>{f.part} · {f.number}/{f.total}편 · {f.horizon}</sub>", "",
+                f"*{f.subtitle}*", ""]
+        out += list(f.body) + [""]
+        out += [f"**미래학자들의 시선** — {f.voices}", "",
+                f"**다르게 보는 시각** — {f.counter}", "",
+                f"**어디에서 관찰되는가** — {f.where}", "",
+                "> 특정 종목·매매에 대한 이야기가 아닙니다.", ""]
 
     if brief.warnings:
         out += ["## 수집 경고", ""] + [f"- {w}" for w in brief.warnings] + [""]

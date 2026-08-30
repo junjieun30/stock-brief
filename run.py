@@ -26,9 +26,9 @@ for _stream in (sys.stdout, sys.stderr):
         pass
 
 from briefing.config import Config
-from briefing.data import futurists, glossary
+from briefing.data import futures, glossary
 from briefing.data.universe import DEFAULT_UNIVERSE
-from briefing.models import Alert, Brief, Lesson, Reflection
+from briefing.models import Alert, Brief, FutureChapter, Lesson
 from briefing.render import html as render_html
 from briefing.render import markdown as render_md
 from briefing.sources import calendar as calendar_src
@@ -95,12 +95,14 @@ def build_brief(cfg: Config, *, use_ai: bool = True, use_news: bool = True,
         brief.lessons = [Lesson(term=t, kind=k, plain=pl, why=w)
                          for k, t, pl, w in glossary.pick(brief.generated_at.date().toordinal())]
 
-    # 오늘의 사색 — 미래학자 한 명
+    # 내일의 기술 — 하루 한 편, 책처럼 읽는 미래 기술 이야기
     if cfg.get("reflect", {}).get("enabled", True):
-        name, who, kind, body, source, sit, note = futurists.pick(
-            brief.generated_at.date().toordinal())
-        brief.reflection = Reflection(name=name, who=who, kind=kind, body=body,
-                                      source=source, sit=sit, note=note)
+        ch, number, total = futures.pick(brief.generated_at.date().toordinal())
+        brief.future = FutureChapter(
+            part=ch.part, title=ch.title, subtitle=ch.subtitle, horizon=ch.horizon,
+            body=ch.body, voices=ch.voices, counter=ch.counter, where=ch.where,
+            number=number, total=total,
+        )
 
     if use_news:
         nc = cfg.get("news", {})

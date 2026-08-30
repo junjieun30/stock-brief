@@ -87,15 +87,18 @@ class Alert:
 
 
 @dataclass
-class Reflection:
-    """오늘의 사색 — 미래를 오래 들여다본 사람의 생각 한 편."""
-    name: str
-    who: str
-    kind: str                  # "quote" (출처 있는 인용) | "idea" (사상 요약)
-    body: str
-    source: str
-    sit: str                   # 잠시 머물러볼 질문
-    note: str = ""             # 오귀속 등 출처에 대한 각주
+class FutureChapter:
+    """내일의 기술 — 미래학자들이 말한 흐름을 책 한 챕터처럼 읽는 자리."""
+    part: str                  # "1부 · 계산하는 기계" 등
+    title: str
+    subtitle: str
+    horizon: str               # "이미 진행 중" / "5~10년" / "10년 이상"
+    body: tuple[str, ...]      # 본문 문단들
+    voices: str                # 누가 어떤 관점으로 봤나
+    counter: str               # 다르게 보는 시각
+    where: str                 # 어느 산업에서 관찰되는가
+    number: int = 0            # 오늘이 몇 번째 편인지
+    total: int = 0
 
 
 @dataclass
@@ -126,7 +129,7 @@ class Brief:
     alerts: list[Alert] = field(default_factory=list)
     ticker_news: dict[str, list[NewsItem]] = field(default_factory=dict)
     lessons: list[Lesson] = field(default_factory=list)
-    reflection: Reflection | None = None
+    future: FutureChapter | None = None
     warnings: list[str] = field(default_factory=list)
 
     @property
