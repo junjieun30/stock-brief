@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>질병이 아닌 것을 치료하려는 시도 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>11 / 25</span></div>
+<div class="chhead">
+  <div class="pt">3부 · 몸과 생명</div>
+  <h1>질병이 아닌 것을 치료하려는 시도</h1>
+  <div class="sub">노화 연구가 부딪히는 것</div>
+  <span class="hz">10년 이상</span>
+</div>
+<div class="lede"><p>심장병을 고치면 몇 년을 벌까. 통계적으로는 몇 년 남짓이다. 암을 완전히 정복해도 평균 수명은 생각보다 조금 늘어난다. 이유는 단순하다 — 하나를 피해도 나이 든 몸에는 다음 질환이 줄 서 있기 때문이다. 여기서 노화 연구의 출발 질문이 나온다. 질환을 하나씩 상대하는 대신, 그 모두의 공통 원인인 '노화 자체'의 속도를 늦출 수는 없는가.</p><p>이 질문은 더 이상 변방이 아니다. 세포가 늙는 기전 — 손상된 세포가 죽지 않고 버티는 노화세포, 짧아지는 텔로미어, 화학적 낙서가 쌓이는 후성유전체 — 이 하나씩 규명되고 있고, 동물 실험에서는 이 기전에 개입해 건강수명을 늘린 결과가 여럿 보고됐다.</p></div><h2>측정이라는 병목</h2><div><p>사람에서 문제가 되는 것은 시간이다. 어떤 개입이 노화를 늦추는지 확인하려면 수십 년을 지켜봐야 하는데, 그런 임상시험은 설계도 재정도 불가능에 가깝다. 그래서 이 분야의 에너지 상당 부분이 우회로에 쓰인다 — '생물학적 나이'를 재는 지표 개발이다. 혈액의 후성유전적 표지로 달력 나이와 다른 몸의 나이를 추정하는 시계들이 나와 있고, 이 시계가 믿을 만해지면 수십 년짜리 실험을 몇 년짜리로 압축할 수 있다.</p><p>제도의 병목도 있다. 규제기관은 '질병을 치료하는 약'을 승인하도록 설계돼 있는데, 노화는 공식적으로 질병이 아니다. 병이 아닌 것을 겨냥한 약은 승인 경로 자체가 없다. 그래서 노화 연구자들은 당뇨약 메트포르민 같은 기존 약으로 '노화 관련 질환군 전체의 지연'을 겨냥하는 임상을 설계해, 규제의 문법 안에서 노화를 다루는 길을 찾고 있다.</p></div><h2>미래학자들의 시선</h2><div><p>오브리 드 그레이는 노화를 '수리 가능한 손상의 축적'으로 재정의하며 이 분야의 대중적 논쟁을 열었고, 하버드의 데이비드 싱클레어는 노화를 정보의 손실로 보는 가설과 함께 '노화는 질병이며 치료 대상'이라는 명제를 밀어붙였다. 레이 커즈와일은 한 발 더 나가, 의학의 진보 속도가 수명 연장 속도를 앞지르는 '수명 탈출 속도'를 이야기한다. 이들의 공통점은 노화를 운명에서 변수로 옮겨 놓았다는 것 — 그 자체가 지난 20년의 문화적 변화다.</p></div><h2>다르게 보는 시각</h2><div><p>주류 노년학의 다수는 훨씬 신중하다. 생쥐에서 된 것이 사람에서 되리라는 보장은 약하고 — 생쥐는 수명 연장 실험이 유난히 잘 되는 동물이다 — 사람 대상의 확실한 증거는 아직 운동, 수면, 식사 같은 지루한 처방을 넘지 못한다. 그리고 이 분야에는 검증 안 된 보조제와 고가 시술이 과학의 언어를 빌려 팔리는 회색 시장이 함께 자란다. '노화 역전'을 내건 상품일수록, 근거의 등급을 물어야 한다.</p></div><h2>남는 질문</h2><div><p>설령 성공한다 해도 질문은 남는다. 더 오래 사는 사회는 연금, 정년, 세대 교체, 부의 축적 구조가 전부 다시 계산되어야 한다. 수명이 10년 늘어난다는 것은 개인에게는 축복의 얼굴을 하고 오지만, 제도에는 설계 변경 명령서로 도착한다. 6부의 인구 이야기와 이 장이 만나는 지점이다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>바이오텍, 진단·검사, 건강 데이터, 보험, 고령화 관련 서비스 전반.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『노화의 종말』</span><span class="ba">데이비드 싱클레어</span><span class="bd">낙관론의 대표작. 주장과 근거를 구분하며 읽는 연습으로도 좋다</span></div></div>
+<div class="pnav"><a href="./ch10.html"><span class="lbl">← 이전</span><span class="tt">코드를 고치는 의학</span></a><a class="next" href="./ch12.html"><span class="lbl">다음 →</span><span class="tt">뇌와 기계를 직접 잇는다는 것</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[11] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (11 > last) localStorage.setItem("book-last", "11");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

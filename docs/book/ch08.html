@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>물류가 조용히 자동화되는 방식 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>8 / 25</span></div>
+<div class="chhead">
+  <div class="pt">2부 · 움직이는 기계</div>
+  <h1>물류가 조용히 자동화되는 방식</h1>
+  <div class="sub">눈에 띄지 않는 곳부터 바뀐다</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>기술 혁명은 대개 화려한 무대에서 상상되지만, 실제로는 가장 지루한 곳에서 먼저 일어난다. 창고가 그렇다. 상자를 옮기고, 분류하고, 세는 일. 아무도 다큐멘터리를 찍지 않는 이 공간이 지금 지구에서 가장 밀도 높게 자동화되는 현장이다.</p><p>이유는 조건이 완벽하기 때문이다. 실내라 날씨가 없고, 바닥이 평평하고, 다루는 물건이 규격화돼 있고, 동선이 반복적이다. 자율주행이 도로에서 10년째 씨름하는 엣지 케이스가 창고 안에는 거의 없다. 로봇에게 창고는 자율주행차의 고속도로보다 쉬운 환경이다.</p></div><h2>보이지 않는 손에서 보이지 않는 기계로</h2><div><p>현대식 물류센터 안에서는 선반이 로봇 위에 실려 사람에게 걸어오고, 로봇 팔이 상자를 집어 분류 라인에 올리고, 소프트웨어가 어떤 상품을 어느 센터에 미리 쌓아둘지 수요를 예측해 결정한다. '주문하면 다음 날 온다'는 일상의 마법은 이 보이지 않는 기계들의 합작이다.</p><p>이 영역이 중요한 이유는 규모다. 물류비는 거의 모든 상품의 가격에 녹아 있다. 창고 자동화가 처리 비용을 몇 퍼센트 줄이면 그 효과는 특정 회사가 아니라 경제 전체의 물가 구조로 스며든다. 화려하지 않은 기술이 총량에서는 가장 큰 기술이 되는 전형적인 경우다.</p></div><h2>창고 밖으로</h2><div><p>다음 단계는 벽 바깥이다. 항만에서 컨테이너를 옮기는 자율 크레인과 야드 트럭, 고속도로 구간의 자율 화물차, 아파트 단지의 배송 로봇, 도서 지역의 드론 배송. 각각은 아직 부분적이지만 방향은 하나로 수렴한다 — 물건이 공장에서 문 앞까지 오는 여정에서 사람 손이 닿는 구간이 줄어드는 것.</p><p>동시에 물류는 데이터 산업이 됐다. 어디에 재고를 둘지, 어떤 경로로 보낼지, 수요가 어디서 튈지를 예측하는 소프트웨어가 지게차만큼 중요해졌다. 물류 회사의 채용 공고에 데이터 과학자가 늘어나는 것은 이 전환의 정직한 신호다.</p></div><h2>미래학자들의 시선</h2><div><p>제러미 리프킨은 『한계비용 제로 사회』에서 재화와 서비스를 하나 더 생산·전달하는 비용이 0에 수렴하는 영역이 늘어나며 경제의 작동 방식 자체가 바뀐다고 주장했다. 디지털 재화에서는 이미 현실이 된 이 논리가, 물류 자동화를 통해 물리적 세계에서도 부분적으로 검증되고 있다. 배송 한 건의 한계비용이 낮아질수록, '무료 배송'은 마케팅이 아니라 원가 구조가 된다.</p></div><h2>다르게 보는 시각</h2><div><p>자동화가 늘어도 총비용이 기대만큼 줄지 않는다는 반론은 현장에서 꾸준히 나온다. 설비 투자, 유지보수, 소프트웨어 통합, 그리고 자동화 설비에 맞춰 건물을 다시 짓는 비용이 인건비 절감분을 상쇄하는 경우가 많다는 것이다. 자동화의 손익분기는 물동량이 크고 안정적인 곳에서만 성립한다 — 그래서 이 기술은 대형 사업자에게 유리하고, 물류 산업의 집중을 가속하는 면이 있다.</p></div><h2>남는 질문</h2><div><p>물류 자동화는 '기술이 어디로 스며드는가'에 대한 감각을 길러주는 좋은 사례다. 뉴스가 가리키는 곳(휴머노이드 시연 무대)과 돈이 실제로 움직이는 곳(창고 천장 아래)은 자주 다르다. 지루한 곳을 볼 줄 아는 눈 — 그것이 이 장이 남기는 도구다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>물류·유통, 창고 자동화 설비, 산업용 로봇, 공급망 소프트웨어, 항만·운송 인프라.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『한계비용 제로 사회』</span><span class="ba">제러미 리프킨</span><span class="bd">물류 장의 배경 논리. 공유경제와 사물인터넷까지 이어진다</span></div></div>
+<div class="pnav"><a href="./ch07.html"><span class="lbl">← 이전</span><span class="tt">가장 오래 지연된 미래</span></a><a class="next" href="./ch09.html"><span class="lbl">다음 →</span><span class="tt">비만이 처방의 영역으로 들어왔다</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[8] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (8 > last) localStorage.setItem("book-last", "8");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

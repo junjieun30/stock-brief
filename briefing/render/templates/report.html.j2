@@ -199,6 +199,11 @@
     margin-bottom:5px}
   .bnote p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.88;
     word-break:keep-all}
+  .bmore{max-width:620px;margin:28px auto 0;display:flex;flex-wrap:wrap;gap:10px;
+    justify-content:center}
+  .bmore a{padding:10px 18px;border:1px solid var(--ink);border-radius:var(--radius);
+    text-decoration:none;font-size:13px;font-weight:700;color:var(--bg);background:var(--ink)}
+  .bmore a.tocol{background:transparent;color:var(--ink)}
   .bfoot{max-width:620px;margin:26px auto 0;font-size:11.5px;color:var(--muted);
     text-align:center;opacity:.85}
   @media (max-width:620px){
@@ -507,6 +512,10 @@
     <div class="bnote"><b>미래학자들의 시선</b><p>{{ f.voices }}</p></div>
     <div class="bnote"><b>다르게 보는 시각</b><p>{{ f.counter }}</p></div>
     <div class="bnote"><b>어디에서 관찰되는가</b><p>{{ f.where }}</p></div>
+  </div>
+  <div class="bmore">
+    <a href="./book/ch{{ '%02d' % f.number }}.html">이 이야기의 전체 버전 읽기 →</a>
+    <a class="tocol" href="./book/index.html">책 전체 목차 『지금에 모인 미래』</a>
   </div>
   <div class="bfoot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
 </section>

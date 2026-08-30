@@ -1,0 +1,257 @@
+"""『지금에 모인 미래』 — 책 웹앱 생성기.
+
+    python build_book.py             → report/book/ (+ BRIEF_OUTPUT_DIR/book/)
+
+정적 HTML 로 표지·목차(index)와 장별 페이지를 만든다.
+이어읽기와 읽음 표시는 localStorage 로 브라우저에만 저장된다.
+"""
+from __future__ import annotations
+
+import html
+from pathlib import Path
+
+from . import content_p1, content_p2, content_p3, content_p4, content_p5, content_p6
+
+BOOK_TITLE = "지금에 모인 미래"
+BOOK_TAG = "미래학자들이 말한, 이미 와 있는 것들"
+
+PART_TITLES = {
+    1: "계산하는 기계", 2: "움직이는 기계", 3: "몸과 생명",
+    4: "에너지와 물질", 5: "공간과 연결", 6: "돈과 사회",
+}
+
+ALL = (content_p1.CHAPTERS + content_p2.CHAPTERS + content_p3.CHAPTERS
+       + content_p4.CHAPTERS + content_p5.CHAPTERS + content_p6.CHAPTERS)
+
+# ---------------------------------------------------------------- 공통 껍데기
+CSS = """
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+"""
+
+
+def _page(title: str, body: str, depth_prefix: str = "./", extra_head: str = "") -> str:
+    return f"""<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="{depth_prefix}../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>{html.escape(title)}</title>
+<style>{CSS}</style>{extra_head}
+</head>
+<body>
+{body}
+</body>
+</html>"""
+
+
+def _esc(t: str) -> str:
+    return html.escape(t, quote=False)
+
+
+# ---------------------------------------------------------------- 목차 페이지
+def build_index() -> str:
+    rows = []
+    cur_part = 0
+    for i, ch in enumerate(ALL, start=1):
+        if ch["part"] != cur_part:
+            if cur_part:
+                rows.append("</ul>")
+            cur_part = ch["part"]
+            rows.append(f'<div class="part">{cur_part}부 · {PART_TITLES[cur_part]}</div>')
+            rows.append('<ul class="toc">')
+        rows.append(
+            f'<li><a href="./ch{i:02d}.html" data-ch="{i}">'
+            f'<span class="no">{i:02d}</span>'
+            f'<span class="t">{_esc(ch["title"])}</span>'
+            f'<span class="done">읽음</span></a></li>'
+        )
+    rows.append("</ul>")
+
+    body = f"""<div class="wrap">
+<div class="top"><a href="../index.html">← 오늘의 브리핑</a><span>{len(ALL)}편</span></div>
+<div class="cover">
+  <div class="small">과거 · 현재 · 미래는 한 점에 모인다</div>
+  <h1>{BOOK_TITLE}</h1>
+  <div class="tag">{BOOK_TAG}</div>
+  <a class="continue" id="continue" href="./ch01.html">처음부터 읽기</a>
+</div>
+{''.join(rows)}
+<div class="foot">하루 한 편이면 한 달이 조금 안 걸립니다. 읽은 장은 이 기기에만 표시됩니다.<br>
+특정 종목·매매에 대한 이야기가 아니며, 투자 권유가 아닙니다.</div>
+</div>
+<script>
+(function () {{
+  var read = {{}}, last = 0;
+  try {{ read = JSON.parse(localStorage.getItem("book-read") || "{{}}");
+        last = parseInt(localStorage.getItem("book-last") || "0", 10); }} catch (e) {{}}
+  document.querySelectorAll(".toc a").forEach(function (a) {{
+    if (read[a.dataset.ch]) a.classList.add("read");
+  }});
+  var btn = document.getElementById("continue");
+  if (last > 0 && last < {len(ALL)}) {{
+    btn.href = "./ch" + String(last + 1).padStart(2, "0") + ".html";
+    btn.textContent = "이어 읽기 — " + (last + 1) + "편부터";
+  }} else if (last >= {len(ALL)}) {{
+    btn.textContent = "다시 읽기";
+  }}
+}})();
+</script>"""
+    return _page(BOOK_TITLE, body)
+
+
+# ---------------------------------------------------------------- 장 페이지
+def build_chapter(i: int, ch: dict) -> str:
+    total = len(ALL)
+    parts_html = []
+    first = True
+    for heading, paras in ch["sections"]:
+        if heading:
+            parts_html.append(f"<h2>{_esc(heading)}</h2>")
+        cls = ' class="lede"' if first else ""
+        parts_html.append(f"<div{cls}>" + "".join(f"<p>{_esc(p)}</p>" for p in paras) + "</div>")
+        first = False
+
+    books_html = ""
+    if ch.get("books"):
+        items = "".join(
+            f'<div><span class="bt">『{_esc(t)}』</span><span class="ba">{_esc(a)}</span>'
+            f'<span class="bd">{_esc(d)}</span></div>'
+            for t, a, d in ch["books"]
+        )
+        books_html = f'<div class="books"><b>더 읽어보기</b>{items}</div>'
+
+    prev_html = (
+        f'<a href="./ch{i - 1:02d}.html"><span class="lbl">← 이전</span>'
+        f'<span class="tt">{_esc(ALL[i - 2]["title"])}</span></a>'
+        if i > 1 else '<a class="ghost"><span class="lbl">.</span><span class="tt">.</span></a>'
+    )
+    next_html = (
+        f'<a class="next" href="./ch{i + 1:02d}.html"><span class="lbl">다음 →</span>'
+        f'<span class="tt">{_esc(ALL[i]["title"])}</span></a>'
+        if i < total else
+        '<a class="next" href="./index.html"><span class="lbl">끝 →</span><span class="tt">목차로</span></a>'
+    )
+
+    hz_cls = "hz now" if ch["horizon"] == "이미 진행 중" else "hz"
+    body = f"""<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>{i} / {total}</span></div>
+<div class="chhead">
+  <div class="pt">{ch["part"]}부 · {PART_TITLES[ch["part"]]}</div>
+  <h1>{_esc(ch["title"])}</h1>
+  <div class="sub">{_esc(ch["subtitle"])}</div>
+  <span class="{hz_cls}">{ch["horizon"]}</span>
+</div>
+{''.join(parts_html)}
+<div class="where"><b>어디에서 관찰되는가</b>{_esc(ch["where"])}</div>
+{books_html}
+<div class="pnav">{prev_html}{next_html}</div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {{
+  try {{
+    var read = JSON.parse(localStorage.getItem("book-read") || "{{}}");
+    read[{i}] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if ({i} > last) localStorage.setItem("book-last", "{i}");
+  }} catch (e) {{}}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {{
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }}, {{ passive: true }});
+}})();
+</script>"""
+    return _page(f"{ch['title']} · {BOOK_TITLE}", body)
+
+
+# ---------------------------------------------------------------- 엔트리
+def build(outdir: Path) -> int:
+    book = outdir / "book"
+    book.mkdir(parents=True, exist_ok=True)
+    (book / "index.html").write_text(build_index(), encoding="utf-8")
+    for i, ch in enumerate(ALL, start=1):
+        (book / f"ch{i:02d}.html").write_text(build_chapter(i, ch), encoding="utf-8")
+    return len(ALL)

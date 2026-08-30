@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>AI의 진짜 병목은 전기였다 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>4 / 25</span></div>
+<div class="chhead">
+  <div class="pt">1부 · 계산하는 기계</div>
+  <h1>AI의 진짜 병목은 전기였다</h1>
+  <div class="sub">계산을 늘리려면 발전소가 필요하다</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>AI 이야기는 대개 칩에서 시작해서 칩에서 끝난다. 누가 더 좋은 칩을 만들고, 누가 더 많이 확보했는가. 그런데 칩을 산처럼 쌓아도 꽂을 콘센트가 없으면 고철이다. 지난 몇 년 사이 업계가 뒤늦게 깨달은 것이 이것이다. AI의 다음 병목은 알고리즘도 칩도 아니라 전기라는 것.</p><p>데이터센터는 원래도 전기를 많이 쓰는 시설이었지만, AI용은 차원이 다르다. AI 학습과 추론에 쓰이는 칩은 일반 서버보다 몇 배의 전력을 먹고, 그 열을 식히는 데 또 전기와 물이 든다. 대형 AI 데이터센터 하나의 전력 수요가 중소 도시 하나와 맞먹는 수준까지 왔다.</p></div><h2>속도가 다른 두 세계의 충돌</h2><div><p>문제의 핵심은 시간표의 불일치다. AI 모델은 몇 달 단위로 세대가 바뀐다. 데이터센터는 2~3년이면 짓는다. 그런데 발전소는 짓는 데 5년, 송전선은 인허가까지 합치면 10년이 걸리기도 한다. 빠른 세계가 느린 세계에 갑자기 대량 주문을 넣은 셈이고, 느린 세계는 그 속도로 응답할 물리적 방법이 없다.</p><p>그 결과 세계 곳곳에서 기묘한 풍경이 나타났다. 땅도 있고 돈도 있는데 전기를 못 끌어와서 데이터센터 착공이 몇 년씩 밀린다. 전력망 접속 대기줄이 생겼고, 어떤 지역에서는 신규 데이터센터 접속을 아예 중단했다. 킬로와트가 새로운 희소자원이 된 것이다.</p></div><h2>계산 산업과 에너지 산업의 결합</h2><div><p>그러자 두 산업이 붙기 시작했다. 빅테크가 발전 사업자와 수십 년짜리 전력구매계약을 맺고, 폐쇄됐던 원자력 발전소를 되살리는 계약에 서명하고, 소형모듈원자로(SMR) 개발사에 투자한다. 데이터센터를 아예 발전소 옆에 짓는 '전원 병설' 방식도 늘고 있다. 소프트웨어 회사의 재무제표에 발전소가 등장하는 시대다.</p><p>냉각도 다시 발명되고 있다. 공기로 식히던 것을 액체로 식히고(수랭·액침), 추운 지역이나 물이 풍부한 지역으로 입지가 이동한다. 데이터센터 건설은 이제 IT 프로젝트가 아니라 토목·전력·수자원 프로젝트다.</p></div><h2>미래학자들의 시선</h2><div><p>스튜어트 브랜드의 '페이스 레이어' 개념이 이 상황을 정확히 설명한다. 사회는 여러 겹으로 되어 있고 각 겹은 다른 속도로 움직인다 — 유행은 빠르게, 상업은 그보다 느리게, 인프라는 훨씬 느리게. 평소에는 각 층이 따로 놀지만, 빠른 층의 수요가 느린 층의 공급 능력을 넘는 순간 느린 층이 전체의 속도를 결정한다. 지금 AI가 정확히 그 순간을 지나고 있다. 인프라는 기억하고, 유행은 배운다 — 그리고 지금은 유행이 인프라에게 배울 차례다.</p></div><h2>다르게 보는 시각</h2><div><p>에너지 학자 바츨라프 스밀은 평생에 걸쳐 한 가지를 반복해 말했다. 에너지 시스템의 전환은 언제나, 예외 없이, 예상보다 느렸다는 것이다. 수요 전망이 급증한다고 공급이 그 속도로 따라온 적은 없다. 한편 반대쪽 가능성도 있다. 계산 효율이 극적으로 개선되거나 AI 수요 자체가 꺾이면, 지금의 전력 수요 전망이 과장으로 판명날 수도 있다. 전망이 가장 뜨거울 때 지은 발전소가 가동률을 못 채운 역사도 있다.</p></div><h2>남는 질문</h2><div><p>한 가지는 분명하다. '컴퓨팅이 어디에 지어지는가'가 국가 경쟁력의 문제가 됐고, 그 답은 이제 전기가 싸고 풍부한 곳이다. 지능의 값이 전기의 값에 수렴해 간다는 말은 과장이지만, 방향으로는 틀리지 않다. 다음 10년의 산업 지도를 그리는 변수 목록에 전력망이 올라왔다는 것 — 이것이 이번 국면의 조용한 결론이다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>전력 유틸리티, 발전 설비, 송배전, 냉각·공조, 건설, 데이터센터 리츠, 원자력.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『에너지의 역사 (Energy and Civilization)』</span><span class="ba">바츨라프 스밀</span><span class="bd">에너지 전환이 왜 항상 느린지에 대한 가장 단단한 반론서</span></div></div>
+<div class="pnav"><a href="./ch03.html"><span class="lbl">← 이전</span><span class="tt">무어의 법칙 이후의 셈법</span></a><a class="next" href="./ch05.html"><span class="lbl">다음 →</span><span class="tt">아직 오지 않은 계산</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[4] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (4 > last) localStorage.setItem("book-last", "4");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

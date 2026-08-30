@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>발사 비용이 무너진 뒤 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>19 / 25</span></div>
+<div class="chhead">
+  <div class="pt">5부 · 공간과 연결</div>
+  <h1>발사 비용이 무너진 뒤</h1>
+  <div class="sub">우주가 연구에서 사업으로 옮겨간 이유</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>우주 시대의 첫 반세기 동안, 로켓은 한 번 쓰고 버리는 물건이었다. 수천억 원짜리 기계를 바다에 버리는 일이 표준이었다는 뜻이다. 비행기를 한 번 타고 폐기한다면 항공권이 얼마일지 상상해 보면, 우주가 왜 국가만의 영역이었는지 알 수 있다.</p><p>지난 15년의 가장 큰 사건은 이 전제가 무너진 것이다. 발사체 1단이 스스로 돌아와 착륙하고, 정비 후 다시 날아오르는 재사용이 일상이 됐다. 킬로그램당 발사 비용은 자릿수가 바뀌었고, 발사 빈도는 연간 수십 회에서 수백 회 규모로 뛰었다. 비쌌기 때문에 못 하던 사업들이 갑자기 계산이 서기 시작했다.</p></div><h2>궤도 위의 인프라 사업</h2><div><p>가장 먼저 계산이 선 것은 통신이다. 저궤도에 수천 기의 위성을 깔아 지구 전역에 인터넷을 뿌리는 메가컨스텔레이션 — 한 번의 발사로 수십 기를 올릴 수 있게 되면서 비로소 가능해진 사업이다. 오지, 바다, 전쟁터, 재해 지역처럼 광케이블이 못 가는 곳에서 이미 실전 인프라가 됐다.</p><p>두 번째는 관측이다. 수백 기의 소형 위성이 지구를 매일 촬영하면서, 농작물 작황, 유조선의 이동, 공장 주차장의 차량 수, 산불과 홍수가 '데이터 상품'이 됐다. 4부의 기후 적응이 이 데이터 위에서 굴러간다. 세 번째 줄에는 궤도 정비, 우주 쓰레기 수거, 미세중력 제조 같은 아직 초기 단계의 사업들이 서 있다.</p></div><h2>달과 화성은 어디에 있나</h2><div><p>뉴스의 헤드라인은 달 착륙과 화성 이주가 가져가지만, 손익계산서는 저궤도에 있다. 우주 산업 매출의 대부분은 지구를 위한 서비스 — 통신과 관측 — 에서 나온다. 심우주 탐사는 여전히 국가 프로그램과 소수의 야심가가 끄는 영역이고, 상업적 근거는 아직 이야기 단계다. 우주 산업의 현재를 한 줄로 요약하면 — 탐험의 낭만이 아니라 인프라의 실무.</p></div><h2>미래학자들의 시선</h2><div><p>피터 디아만디스는 X프라이즈로 민간 우주 경쟁의 방아쇠를 당긴 인물답게, 발사 비용 하락이 소행성 자원 채굴과 우주 제조업까지 열 것이라 전망해 왔다. 그 전망의 앞부분(발사 비용 붕괴, 민간 주도)은 적중했고 뒷부분은 아직 오지 않았다 — 로이 아마라의 법칙이 이 산업의 시간표에도 정확히 작동하고 있는 셈이다. 단기의 흥분은 과했고, 장기의 변화는 아마 지금 보이는 것보다 클 것이다.</p></div><h2>다르게 보는 시각</h2><div><p>저궤도의 성공이 만든 새 문제들이 있다. 수천 기의 위성이 만드는 충돌 위험과 우주 쓰레기, 천문 관측 방해, 그리고 소수 기업이 궤도라는 공유지를 선점하는 것에 대한 거버넌스 공백. 규제는 국경이 없는 궤도 앞에서 국가 단위로 쪼개져 있다. 또 하나 — 발사 시장의 극단적 집중이다. 재사용을 완성한 소수가 가격을 정하는 시장은, 그 아래의 모든 위성 사업자에게 단일 공급자 리스크로 작동한다.</p></div><h2>남는 질문</h2><div><p>철도가 놓인 뒤에야 우편 주문 카탈로그가 나오고, 인터넷이 깔린 뒤에야 그 위의 산업이 상상됐다. 발사 비용이 무너진 지금은 '궤도라는 철도'가 막 놓인 시점이다. 그 위에서 무엇이 상상될지 — 정직한 답은, 아직 아무도 모른다는 것이다. 인프라의 다음 층은 언제나 인프라가 깔린 뒤에 발명됐다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>항공우주·방위, 위성 통신, 지구 관측 데이터, 발사 서비스, 부품·소재.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『스페이스 배런 (The Space Barons)』</span><span class="ba">크리스천 데이븐포트</span><span class="bd">민간 우주 경쟁의 내부 기록</span></div></div>
+<div class="pnav"><a href="./ch18.html"><span class="lbl">← 이전</span><span class="tt">막는 기술에서 견디는 기술로</span></a><a class="next" href="./ch20.html"><span class="lbl">다음 →</span><span class="tt">화면 이후의 인터페이스</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[19] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (19 > last) localStorage.setItem("book-last", "19");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

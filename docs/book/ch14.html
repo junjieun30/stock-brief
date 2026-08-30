@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>생명을 제조업처럼 다루기 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>14 / 25</span></div>
+<div class="chhead">
+  <div class="pt">3부 · 몸과 생명</div>
+  <h1>생명을 제조업처럼 다루기</h1>
+  <div class="sub">합성생물학이 만들려는 것</div>
+  <span class="hz">5~10년</span>
+</div>
+<div class="lede"><p>맥주 양조는 인류가 가장 오래 운영해 온 생물 공장이다. 효모라는 미생물에게 당을 주면 알코올을 만들어 준다. 합성생물학은 이 오래된 거래를 일반화한다 — 미생물의 유전자를 설계해, 알코올 대신 우리가 원하는 것을 만들게 하는 것이다. 향료, 의약품 원료, 효소, 거미줄 단백질, 팜유 대체 지방. 원리적으로는 탄소로 만들 수 있는 거의 모든 것이 후보다.</p><p>관점을 바꾸면 이것은 화학 산업의 재설계다. 석유를 고온·고압에서 반응시켜 만들던 물질을, 설탕을 먹은 미생물이 상온의 발효조에서 만들게 하는 것. 원료가 바뀌고, 공정이 바뀌고, 탄소 배출의 계산이 바뀐다.</p></div><h2>설계-제작-시험-학습</h2><div><p>이 분야의 작업 흐름은 소프트웨어 개발을 닮아 간다. DNA를 설계하고(코드 작성), 합성해 미생물에 넣고(빌드), 원하는 물질이 나오는지 재고(테스트), 결과로 설계를 고친다(디버깅). DNA 합성 비용이 지수적으로 떨어지면서 이 사이클이 빨라졌고, AI가 설계 단계에 들어오면서 더 빨라지고 있다. '생명공학의 무어의 법칙'이라 불리는 곡선이 실제로 그려지는 중이다.</p></div><h2>스케일업이라는 무덤</h2><div><p>그러나 이 산업의 공동묘지에는 같은 비석이 줄지어 있다 — '실험실에서는 됐다'. 플라스크에서 잘 만들던 미생물이 수십 톤 발효조에서는 말을 듣지 않는다. 산소와 온도가 고르지 않고, 미생물이 진화하며 생산을 멈추고, 수율이 몇 퍼센트만 빠져도 경제성이 무너진다. 화려하게 상장했던 합성생물학 기업들이 잇따라 어려움을 겪은 이유는 과학이 아니라 이 제조의 벽이었다.</p><p>그래서 성공 사례는 값비싼 소량 물질 — 의약품 원료, 특수 향료, 화장품 성분 — 에 몰려 있다. 킬로그램에 수백만 원짜리 물질이라면 발효의 비효율을 감당할 수 있지만, 석유화학과 맞붙는 범용 소재에서는 아직 가격 경쟁이 안 된다. 위에서 아래로 — 비싼 것에서 싼 것으로 — 내려오는 것이 이 산업의 정해진 경로다.</p></div><h2>미래학자들의 시선</h2><div><p>케빈 켈리는 기술이 점점 생물을 닮아간다고 썼다 — 진화하고, 적응하고, 스스로 조직된다고. 합성생물학은 그 거울상이다. 생물이 기술을 닮아가는 것, 설계되고 표준화되고 디버깅되는 것. 물리학자 프리먼 다이슨은 일찍이 '생명공학이 가정용 기술이 되는 세기'를 상상했다. 아이들이 씨앗을 설계하는 세상 — 지금 보면 과장이지만, DNA 합성 가격 곡선은 그 방향을 가리키고 있다.</p></div><h2>다르게 보는 시각</h2><div><p>경제성 외에 안전과 규제의 축이 있다. 설계된 미생물이 환경에 나가면 어떻게 되는가에 대한 생태적 우려, 그리고 병원체 설계에 악용될 수 있다는 이중용도(dual-use) 우려다. DNA 합성 주문을 걸러내는 스크리닝이 업계 표준이 되고 있지만, 도구가 싸지고 흔해질수록 통제는 어려워진다. 이 분야의 미래는 기술 곡선과 거버넌스 곡선의 경주다.</p></div><h2>남는 질문</h2><div><p>20세기의 공장이 굴뚝으로 상징됐다면, 21세기의 어떤 공장은 발효조로 상징될지 모른다. 그 전환이 얼마나 넓게 일어날지는 결국 한 줄의 질문으로 좁혀진다 — 설탕이 석유를 이길 수 있는가. 과학이 아니라 단가의 질문이다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>특수화학, 소재, 식품 원료, 의약품 원료, 바이오 생산 설비(발효·정제).</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『규제 없는 진화 (Regenesis)』</span><span class="ba">조지 처치·에드 레지스</span><span class="bd">합성생물학 선구자가 그리는 가능성의 지도. 국내 번역서 기준 제목은 다를 수 있다</span></div></div>
+<div class="pnav"><a href="./ch13.html"><span class="lbl">← 이전</span><span class="tt">신약을 찾는 방식이 바뀌는 중</span></a><a class="next" href="./ch15.html"><span class="lbl">다음 →</span><span class="tt">학습곡선이라는 조용한 힘</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[14] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (14 > last) localStorage.setItem("book-last", "14");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

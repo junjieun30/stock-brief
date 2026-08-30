@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>막는 기술에서 견디는 기술로 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>18 / 25</span></div>
+<div class="chhead">
+  <div class="pt">4부 · 에너지와 물질</div>
+  <h1>막는 기술에서 견디는 기술로</h1>
+  <div class="sub">기후 적응이라는 새로운 산업</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>기후 대응의 어휘는 오랫동안 하나였다 — 감축. 배출을 줄여 최악을 막는 것. 그런데 최근 정책 문서와 투자 보고서에 두 번째 단어가 빠르게 자리를 넓히고 있다. 적응. 이미 도착한 변화, 그리고 배출을 지금 멈춰도 관성으로 계속될 변화 속에서 사회가 계속 굴러가게 만드는 기술이다.</p><p>이 전환의 논리는 냉정하다. 대기에 쌓인 온실가스는 수십 년 단위로 남는다. 감축이 성공하든 못 하든, 앞으로 한 세대의 폭염·홍수·가뭄·산불은 이미 예약돼 있다. 감축과 적응은 선택지가 아니라 둘 다 해야 하는 일이 됐다.</p></div><h2>적응 기술의 생김새</h2><div><p>적응 기술은 사진이 잘 안 받는다. 더 큰 배수관, 침수에 견디는 변전소, 가뭄에 강한 종자, 물을 반만 쓰는 정밀 관개, 폭염 경보 시스템, 산불을 조기에 잡는 위성 감시. 각각은 수수하지만 합치면 토목·농업·수자원·기상 산업의 재설계다.</p><p>금융도 재설계된다. 보험이 최전선이다 — 재해 손실이 커지면서 일부 지역에서는 민간 보험이 인수를 거부하는 '보험 공백'이 실제로 나타났고, 위성·기상 데이터를 이용해 특정 조건(강우량, 풍속)이 충족되면 자동 지급하는 파라메트릭 보험 같은 새 상품이 자란다. 보험료의 지도는 조용히, 그러나 부동산 가격보다 정직하게 기후 위험을 반영해 간다.</p></div><h2>데이터가 인프라가 된다</h2><div><p>적응의 공통 기반은 예측이다. 어느 하천이 언제 넘칠지, 어느 지역의 수확이 언제 무너질지 — 위성 관측과 기상 모델, 그리고 최근에는 AI 기상 예측이 이 판의 기반 기술이 됐다. 5부의 우주 산업(지구 관측)과 이 장은 여기서 연결된다. 하늘에서 내려다보는 눈이 많아질수록 땅 위의 적응이 정교해진다.</p></div><h2>미래학자들의 시선</h2><div><p>앤드루 맥아피는 『포스트 피크』에서 기술 발전과 시장이 자원 사용을 절대량 기준으로도 줄이기 시작했다는 데이터를 제시하며, 성장과 환경이 반드시 충돌하지는 않는다는 '탈물질화' 낙관론을 편다. 적응 산업은 이 낙관론과 비관론이 만나는 지점이다 — 낙관하기에 문제가 이미 왔고, 비관만 하기에 대응 수단이 실제로 있다.</p></div><h2>다르게 보는 시각</h2><div><p>적응 담론에는 오래된 경고가 붙어 있다. 적응에 돈과 정치적 관심이 쏠리면 감축의 긴급성이 흐려진다는 '도덕적 해이' 우려다. 그리고 분배의 문제 — 적응 투자는 부유한 나라와 도시가 먼저 하게 되어 있고, 피해는 가난한 쪽에 먼저 온다. 방파제의 높이가 소득의 함수가 되는 세계는 기술이 아니라 정치가 풀어야 할 문제다. 적응 '산업'의 성장과 적응 '정의'의 실현은 같은 것이 아니다.</p></div><h2>남는 질문</h2><div><p>적응은 패배의 언어처럼 들리지만, 문명사는 사실 적응의 역사였다 — 댐, 제방, 관개, 난방. 달라진 것은 변화의 속도다. 인프라의 수명(50년)보다 기후의 변화가 빨라질 때, '한 번 짓고 오래 쓰는' 문명의 기본 문법 자체가 시험대에 오른다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>건설·인프라, 농업 기술, 수처리, 보험·재보험, 위성·기상 데이터, 냉방·전력.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『포스트 피크: 거대한 역전의 시작』</span><span class="ba">앤드루 맥아피</span><span class="bd">탈물질화 낙관론의 대표작. 반론과 함께 읽을 것</span></div></div>
+<div class="pnav"><a href="./ch17.html"><span class="lbl">← 이전</span><span class="tt">배터리 다음의 배터리</span></a><a class="next" href="./ch19.html"><span class="lbl">다음 →</span><span class="tt">발사 비용이 무너진 뒤</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[18] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (18 > last) localStorage.setItem("book-last", "18");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

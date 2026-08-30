@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a href="../index.html">← 오늘의 브리핑</a><span>25편</span></div>
+<div class="cover">
+  <div class="small">과거 · 현재 · 미래는 한 점에 모인다</div>
+  <h1>지금에 모인 미래</h1>
+  <div class="tag">미래학자들이 말한, 이미 와 있는 것들</div>
+  <a class="continue" id="continue" href="./ch01.html">처음부터 읽기</a>
+</div>
+<div class="part">1부 · 계산하는 기계</div><ul class="toc"><li><a href="./ch01.html" data-ch="1"><span class="no">01</span><span class="t">언어를 다루게 된 기계</span><span class="done">읽음</span></a></li><li><a href="./ch02.html" data-ch="2"><span class="no">02</span><span class="t">스스로 일을 끝내는 소프트웨어</span><span class="done">읽음</span></a></li><li><a href="./ch03.html" data-ch="3"><span class="no">03</span><span class="t">무어의 법칙 이후의 셈법</span><span class="done">읽음</span></a></li><li><a href="./ch04.html" data-ch="4"><span class="no">04</span><span class="t">AI의 진짜 병목은 전기였다</span><span class="done">읽음</span></a></li><li><a href="./ch05.html" data-ch="5"><span class="no">05</span><span class="t">아직 오지 않은 계산</span><span class="done">읽음</span></a></li></ul><div class="part">2부 · 움직이는 기계</div><ul class="toc"><li><a href="./ch06.html" data-ch="6"><span class="no">06</span><span class="t">로봇은 왜 사람 모양이어야 하는가</span><span class="done">읽음</span></a></li><li><a href="./ch07.html" data-ch="7"><span class="no">07</span><span class="t">가장 오래 지연된 미래</span><span class="done">읽음</span></a></li><li><a href="./ch08.html" data-ch="8"><span class="no">08</span><span class="t">물류가 조용히 자동화되는 방식</span><span class="done">읽음</span></a></li></ul><div class="part">3부 · 몸과 생명</div><ul class="toc"><li><a href="./ch09.html" data-ch="9"><span class="no">09</span><span class="t">비만이 처방의 영역으로 들어왔다</span><span class="done">읽음</span></a></li><li><a href="./ch10.html" data-ch="10"><span class="no">10</span><span class="t">코드를 고치는 의학</span><span class="done">읽음</span></a></li><li><a href="./ch11.html" data-ch="11"><span class="no">11</span><span class="t">질병이 아닌 것을 치료하려는 시도</span><span class="done">읽음</span></a></li><li><a href="./ch12.html" data-ch="12"><span class="no">12</span><span class="t">뇌와 기계를 직접 잇는다는 것</span><span class="done">읽음</span></a></li><li><a href="./ch13.html" data-ch="13"><span class="no">13</span><span class="t">신약을 찾는 방식이 바뀌는 중</span><span class="done">읽음</span></a></li><li><a href="./ch14.html" data-ch="14"><span class="no">14</span><span class="t">생명을 제조업처럼 다루기</span><span class="done">읽음</span></a></li></ul><div class="part">4부 · 에너지와 물질</div><ul class="toc"><li><a href="./ch15.html" data-ch="15"><span class="no">15</span><span class="t">학습곡선이라는 조용한 힘</span><span class="done">읽음</span></a></li><li><a href="./ch16.html" data-ch="16"><span class="no">16</span><span class="t">원자력이 다시 이야기되는 이유</span><span class="done">읽음</span></a></li><li><a href="./ch17.html" data-ch="17"><span class="no">17</span><span class="t">배터리 다음의 배터리</span><span class="done">읽음</span></a></li><li><a href="./ch18.html" data-ch="18"><span class="no">18</span><span class="t">막는 기술에서 견디는 기술로</span><span class="done">읽음</span></a></li></ul><div class="part">5부 · 공간과 연결</div><ul class="toc"><li><a href="./ch19.html" data-ch="19"><span class="no">19</span><span class="t">발사 비용이 무너진 뒤</span><span class="done">읽음</span></a></li><li><a href="./ch20.html" data-ch="20"><span class="no">20</span><span class="t">화면 이후의 인터페이스</span><span class="done">읽음</span></a></li><li><a href="./ch21.html" data-ch="21"><span class="no">21</span><span class="t">언어의 벽이 낮아진다는 것</span><span class="done">읽음</span></a></li></ul><div class="part">6부 · 돈과 사회</div><ul class="toc"><li><a href="./ch22.html" data-ch="22"><span class="no">22</span><span class="t">자산을 쪼개서 기록한다는 발상</span><span class="done">읽음</span></a></li><li><a href="./ch23.html" data-ch="23"><span class="no">23</span><span class="t">사람이 줄어드는 세계</span><span class="done">읽음</span></a></li><li><a href="./ch24.html" data-ch="24"><span class="no">24</span><span class="t">미래의 공격에 지금 대비하는 일</span><span class="done">읽음</span></a></li><li><a href="./ch25.html" data-ch="25"><span class="no">25</span><span class="t">기술은 언제 경제를 바꾸는가</span><span class="done">읽음</span></a></li></ul>
+<div class="foot">하루 한 편이면 한 달이 조금 안 걸립니다. 읽은 장은 이 기기에만 표시됩니다.<br>
+특정 종목·매매에 대한 이야기가 아니며, 투자 권유가 아닙니다.</div>
+</div>
+<script>
+(function () {
+  var read = {}, last = 0;
+  try { read = JSON.parse(localStorage.getItem("book-read") || "{}");
+        last = parseInt(localStorage.getItem("book-last") || "0", 10); } catch (e) {}
+  document.querySelectorAll(".toc a").forEach(function (a) {
+    if (read[a.dataset.ch]) a.classList.add("read");
+  });
+  var btn = document.getElementById("continue");
+  if (last > 0 && last < 25) {
+    btn.href = "./ch" + String(last + 1).padStart(2, "0") + ".html";
+    btn.textContent = "이어 읽기 — " + (last + 1) + "편부터";
+  } else if (last >= 25) {
+    btn.textContent = "다시 읽기";
+  }
+})();
+</script>
+</body>
+</html>

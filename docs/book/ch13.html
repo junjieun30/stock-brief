@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>신약을 찾는 방식이 바뀌는 중 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>13 / 25</span></div>
+<div class="chhead">
+  <div class="pt">3부 · 몸과 생명</div>
+  <h1>신약을 찾는 방식이 바뀌는 중</h1>
+  <div class="sub">단백질 구조 예측이 연 것</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>약이 몸에서 하는 일의 본질은 열쇠와 자물쇠다. 질병에 관여하는 단백질(자물쇠)에 꼭 맞는 분자(열쇠)를 찾아 끼우는 것. 문제는 자물쇠의 모양을 아는 것부터가 난제였다는 점이다. 단백질은 아미노산 사슬이 3차원으로 접힌 구조인데, 서열만 보고 접힌 모양을 예측하는 문제는 반세기 동안 생물학의 그랜드 챌린지였다.</p><p>2020년, AI 모델이 이 문제를 사실상 풀었다. 실험으로 몇 달에서 몇 년 걸리던 구조 규명이 계산 몇 분의 일이 됐고, 알려진 거의 모든 단백질의 예측 구조가 공개 데이터베이스로 풀렸다. 2024년 노벨 화학상이 이 작업에 주어졌다. 자물쇠의 설계도가 공공재가 된 것이다.</p></div><h2>탐색의 문법이 바뀐다</h2><div><p>이제 산업의 관심은 역방향으로 이동했다. 자물쇠를 보고 열쇠를 설계하는 것 — 나아가 존재한 적 없는 단백질을 목적에 맞게 새로 설계하는 것이다. 후보 물질을 컴퓨터에서 수백만 개 생성하고 걸러낸 뒤, 소수만 실험실에서 합성해 확인하는 흐름이 표준 절차로 자리 잡고 있다. 로봇이 밤새 실험을 돌리고 AI가 다음 실험을 제안하는 '자율 실험실'도 부분적으로 현실이 됐다.</p><p>초기 단계의 시간과 비용이 실제로 줄었다는 보고가 쌓이고 있다. AI가 설계에 관여한 후보 물질들이 임상시험 단계에 들어가 있고, 그 결과가 이 분야의 진짜 성적표가 될 것이다.</p></div><h2>병목은 이동했을 뿐이다</h2><div><p>냉정하게 보면, 신약 개발이 오래 걸리는 이유의 대부분은 탐색이 아니라 검증에 있다. 임상시험 — 사람에게 안전한가, 실제로 효과가 있는가 — 이 전체 기간과 비용의 대부분을 차지하고, 실패의 대부분도 여기서 난다. 표적에 잘 붙는 분자를 찾는 속도가 빨라져도, 독성과 효능이라는 관문은 그대로다. AI는 병목을 없앤 것이 아니라 앞단의 병목을 뒷단으로 옮겼다 — 이것이 현재까지의 정확한 요약이다.</p></div><h2>미래학자들의 시선</h2><div><p>아짐 아자르는 『기하급수 시대』에서 계산 비용의 하락이 원래 느리던 분야 — 생물학, 재료, 에너지 — 의 시계를 바꾸는 순간을 포착한다. 생물학이 '실험의 과학'에서 '계산의 과학'으로 무게를 옮기는 지금이 정확히 그 순간이다. 커즈와일 식으로 말하면, 생명과학이 정보기술이 되는 순간부터 지수 곡선에 올라탄다는 오래된 주장이 처음으로 실증 시험대에 오른 셈이다.</p></div><h2>다르게 보는 시각</h2><div><p>제약 산업에는 '이번에야말로'가 여러 번 있었다. 조합화학, 유전체학, 고속 스크리닝 — 각 세대의 신기술이 개발 속도를 바꾼다고 약속했지만, 신약 승인 수는 수십 년째 완만하다. 오히려 개발비는 계속 올랐다(이룸의 법칙 — 무어의 법칙을 뒤집은 이 자조적 명명이 이 산업의 역사다). AI가 이 곡선을 정말 꺾었는지는, 지금 임상에 들어간 AI 설계 약물들의 성공률이 수년 안에 답해줄 것이다. 그전까지의 열광은 가설이다.</p></div><h2>남는 질문</h2><div><p>구조 예측의 진짜 유산은 특정 약이 아니라 공개된 데이터베이스일지 모른다. 수억 개 단백질의 설계도가 누구에게나 열려 있다는 것 — 다음 세대의 발견이 어느 대학원생의 노트북에서 나올 수 있게 됐다는 것. 도구의 민주화는 언제나 예측 못 한 곳에서 결실을 맺어 왔다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>제약·바이오, 연구용 소프트웨어·AI, 클라우드 컴퓨팅, 실험 자동화 장비.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『기하급수 시대가 온다』</span><span class="ba">아짐 아자르</span><span class="bd">기술의 속도와 제도의 속도가 벌어질 때 생기는 일들</span></div></div>
+<div class="pnav"><a href="./ch12.html"><span class="lbl">← 이전</span><span class="tt">뇌와 기계를 직접 잇는다는 것</span></a><a class="next" href="./ch14.html"><span class="lbl">다음 →</span><span class="tt">생명을 제조업처럼 다루기</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[13] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (13 > last) localStorage.setItem("book-last", "13");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

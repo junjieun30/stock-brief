@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>무어의 법칙 이후의 셈법 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>3 / 25</span></div>
+<div class="chhead">
+  <div class="pt">1부 · 계산하는 기계</div>
+  <h1>무어의 법칙 이후의 셈법</h1>
+  <div class="sub">더 작게 만드는 경쟁에서, 다르게 쌓는 경쟁으로</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>1965년 고든 무어는 칩 하나에 들어가는 트랜지스터 수가 대략 2년마다 두 배가 된다고 관찰했다. 이 관찰은 예언이 됐고, 예언은 산업 전체의 시간표가 됐다. 반세기 동안 전자산업의 모든 계획 — 신제품 주기, 투자 일정, 가격 곡선 — 이 이 박자에 맞춰 짜였다. 트랜지스터를 작게 만들면 같은 면적에 더 많이 넣을 수 있고, 작아진 트랜지스터는 더 빠르고 전기도 덜 먹었다. 작게 만들기만 하면 모든 것이 좋아지는, 공학사에서 유례없는 공짜 점심이었다.</p><p>그 공짜 점심이 끝나가고 있다. 트랜지스터가 원자 수십 개 폭까지 작아지면서, 더 줄여도 예전만큼 빨라지지 않고 전기도 예전만큼 절약되지 않는다. 미세화가 멈춘 것은 아니지만, 미세화'만'으로 이득을 보던 시대는 끝났다.</p></div><h2>경쟁의 축이 이동했다</h2><div><p>그래서 산업은 다른 방법을 찾았다. 첫째, 위로 쌓는다. 평면에 늘어놓던 회로와 메모리를 수십 층으로 적층한다. AI 칩에 붙는 고대역폭 메모리(HBM)가 대표적이다. 둘째, 붙인다. 하나의 거대한 칩 대신 작은 칩 조각(칩렛)들을 만들어 한 패키지 안에서 초고속으로 연결한다. 셋째, 특화한다. 모든 일을 하는 범용 칩 대신, AI 계산이면 AI 계산 하나만 극단적으로 잘하는 전용 칩을 만든다.</p><p>공통점은 '얼마나 작게'가 아니라 '어떻게 배치하고 연결하느냐'로 승부가 옮겨갔다는 것이다. 그러면서 예전에는 조연이던 공정 — 패키징, 인터커넥트, 냉각 — 이 주연이 됐다. 반도체 뉴스에서 패키징이라는 단어가 부쩍 자주 보이는 이유다.</p></div><h2>구조가 만든 지정학</h2><div><p>이 변화는 산업 구조를 다시 그렸다. 설계, 제조, 메모리, 패키징, 장비, 소재가 각각 별도의 전문 영역이 되면서, 어느 하나만 막혀도 전체가 멈추는 사슬이 만들어졌다. 그리고 그 사슬의 몇몇 고리는 극단적으로 소수에 몰려 있다. 최첨단 칩 제조는 사실상 대만과 한국에, 최첨단 노광 장비는 네덜란드의 한 회사에 집중돼 있다.</p><p>그래서 반도체는 기술 이야기이면서 동시에 지정학 이야기가 됐다. 주요국들이 보조금을 쏟아부으며 자국 내 공장을 유치하는 것은 경제 논리로는 설명되지 않는다. 이것은 보험이다. 효율을 조금 포기하고 안전을 사는 것이다. 향후 10년의 반도체 산업을 읽을 때는 기술 로드맵과 함께 이 보험의 논리를 같이 봐야 한다.</p></div><h2>미래학자들의 시선</h2><div><p>경제사학자 카를로타 페레스는 기술혁명이 두 국면을 거친다고 정리했다. 인프라에 자본이 몰리고 과잉과 거품이 생기는 '설치기', 그리고 거품이 정리된 뒤 그 인프라 위에서 실제 쓰임새가 사회 전체로 퍼지는 '전개기'. 철도가 그랬고 전기가 그랬고 인터넷이 그랬다. 지금 AI 칩과 데이터센터에 쏟아지는 투자를 이 틀로 보면, 우리는 설치기의 한복판에 있다. 설치기의 투자는 일부가 반드시 낭비가 되지만, 그 낭비 위에 다음 시대의 기반이 남는다.</p></div><h2>다르게 보는 시각</h2><div><p>수요가 계속 이 속도로 늘 것인가에 대한 의심은 항상 있다. 반도체는 역사적으로 호황과 불황을 격렬하게 오간 산업이다. 모두가 공장을 짓고 나면 공급 과잉이 오고, 가격이 무너지고, 투자가 얼어붙는 사이클이 반복됐다. AI 수요가 이 사이클을 없앴다고 믿는 것과, 사이클의 진폭을 키웠을 뿐이라고 보는 것 사이에서 — 역사는 후자의 편에 더 자주 섰다.</p></div><h2>남는 질문</h2><div><p>무어의 법칙은 물리 법칙이 아니라 산업이 스스로에게 건 약속이었다. 그 약속이 반세기 동안 지켜졌다는 사실 자체가 경이에 가깝다. 이제 약속의 형태가 바뀌고 있을 뿐, 계산이 계속 싸지고 빨라진다는 큰 방향은 아직 꺾이지 않았다. 문제는 그 개선이 예전처럼 모두에게 공짜로 돌아가지 않고, 설계할 줄 아는 소수에게 먼저 돌아간다는 점이다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>반도체 설계·제조·장비·소재, 그리고 이들에 의존하는 거의 모든 전자산업.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『칩 워』</span><span class="ba">크리스 밀러</span><span class="bd">반도체를 둘러싼 기술과 지정학의 역사. 이 장의 배경을 통째로 다룬 책</span></div></div>
+<div class="pnav"><a href="./ch02.html"><span class="lbl">← 이전</span><span class="tt">스스로 일을 끝내는 소프트웨어</span></a><a class="next" href="./ch04.html"><span class="lbl">다음 →</span><span class="tt">AI의 진짜 병목은 전기였다</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[3] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (3 > last) localStorage.setItem("book-last", "3");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

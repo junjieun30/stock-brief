@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>기술은 언제 경제를 바꾸는가 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>25 / 25</span></div>
+<div class="chhead">
+  <div class="pt">6부 · 돈과 사회</div>
+  <h1>기술은 언제 경제를 바꾸는가</h1>
+  <div class="sub">설치기와 전개기, 그리고 그 사이의 거품</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>공장에 전기가 처음 들어온 것은 1880년대다. 그런데 전기가 미국 제조업의 생산성 통계에 뚜렷이 나타난 것은 1920년대 — 40년 뒤다. 이유를 파고든 경제사학자들의 답은 뜻밖이었다. 초기 공장들은 증기기관 시절의 설계 그대로, 중앙의 큰 모터 하나로 벨트를 돌렸다. 전기의 진짜 이점 — 기계마다 작은 모터를 달아 공장 배치를 자유롭게 하는 것 — 은 공장을 새로 짓고, 공정을 다시 설계하고, 세대가 교체된 뒤에야 실현됐다. 기술은 빨랐고, 기술을 담는 그릇은 느렸다.</p><p>이 40년의 간격은 예외가 아니라 규칙이었다. 그리고 이 규칙을 가장 체계적으로 정리한 사람이 경제사학자 카를로타 페레스다.</p></div><h2>설치기, 거품, 전개기</h2><div><p>페레스는 산업혁명 이후 다섯 번의 기술혁명 — 운하, 철도, 전기·강철, 자동차·석유, 정보기술 — 에서 같은 각본을 발견했다. 1막, 설치기: 새 기술의 인프라에 금융자본이 몰린다. 기대가 가격을 끌어올리고, 과잉 투자와 거품이 생긴다. 2막, 붕괴: 거품이 꺼지고 투기꾼이 퇴장한다. 그러나 — 여기가 핵심인데 — 거품이 지은 인프라는 남는다. 3막, 전개기: 살아남은 인프라 위에서 실제 쓰임새가 사회 전체로 퍼지고, 이 시기에 기술의 진짜 열매가 열린다.</p><p>영국 철도 광풍(1840년대)이 무너진 뒤 그 선로 위에서 국민경제가 재편됐고, 닷컴 버블(2000년)이 터진 뒤 그때 깔린 광케이블 위에서 검색·전자상거래·스트리밍·클라우드가 자랐다. 거품은 낭비이면서 동시에, 사회가 새 인프라 비용을 미리 지불하는 기묘한 메커니즘이었다는 것이다.</p></div><h2>이 틀로 지금을 보면</h2><div><p>AI 데이터센터와 반도체에 쏟아지는 현재의 투자를 이 틀에 놓으면, 진단은 자연스럽다 — 우리는 설치기의 한복판에 있다. 이 틀이 주는 것은 시점 예측이 아니라 두 개의 명제다. 첫째, 기술이 진짜라는 것과 지금 가격이 맞다는 것은 별개의 문제다. 철도도 인터넷도 진짜였지만 그 사이 어딘가에서 가격은 무너졌다. 둘째, 붕괴가 오더라도 그것이 기술의 끝이 아니라 전개기의 입구였다는 것. 2001년에 인터넷을 떠난 판단은 방향이 아니라 시점에서 옳았고, 시점에서 옳은 것은 생각보다 위로가 안 된다.</p></div><h2>미래학자들의 시선</h2><div><p>페레스의 『기술혁명과 금융자본』이 이 장의 뼈대다. 에릭 브린욜프슨의 'J커브' — 범용기술 도입 초기의 생산성 정체와 후기의 급등 — 는 같은 현상을 기업 단위에서 본 것이다. 두 관점의 공통 결론은 인내에 대한 것이다. 범용기술의 열매는 기술이 아니라 재조직에서 열리고, 재조직은 언제나 한 세대의 시간을 요구한다.</p></div><h2>다르게 보는 시각</h2><div><p>모든 거품이 인프라를 남기는 것은 아니라는 반론이 있다 — 튤립은 아무것도 남기지 않았다. 그리고 경제학자 로버트 고든의 더 근본적인 도전이 있다. 그는 전기·수도·항생제·내연기관이라는 20세기 중반의 혁신 묶음이 인류 생활을 바꾼 폭에 비하면, 최근 수십 년의 디지털 혁신은 생산성 기여가 초라하다고 주장한다. '위대한 발명의 시대는 끝났는가'라는 이 논쟁은 아직 판정 나지 않았고, AI가 그 판정의 증거가 될 것이다 — 어느 쪽의 증거가 될지는 모르지만.</p></div><h2>남는 질문</h2><div><p>이 장을 책의 마지막에 둔 이유가 있다. 앞의 스물네 장이 다룬 모든 기술은 언젠가 각자의 설치기와 거품과 전개기를 지날 것이다. 열광의 한가운데서 '이것은 각본의 몇 막인가'를 물을 수 있다면 — 그 질문 하나가 이 책이 남기려는 습관의 전부다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>특정 산업이 아니라, 자본이 몰리는 곳 어디든 — 지금 어디에 과잉이 쌓이는지를 읽는 틀.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『기술혁명과 금융자본』</span><span class="ba">카를로타 페레스</span><span class="bd">이 장의 원전. 얇지 않지만 이 책 전체의 뼈대가 되는 한 권</span></div><div><span class="bt">『미국의 성장은 끝났는가』</span><span class="ba">로버트 고든</span><span class="bd">그 반대편의 기념비. 두 권이 하나의 논쟁이다</span></div></div>
+<div class="pnav"><a href="./ch24.html"><span class="lbl">← 이전</span><span class="tt">미래의 공격에 지금 대비하는 일</span></a><a class="next" href="./index.html"><span class="lbl">끝 →</span><span class="tt">목차로</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[25] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (25 > last) localStorage.setItem("book-last", "25");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>화면 이후의 인터페이스 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>20 / 25</span></div>
+<div class="chhead">
+  <div class="pt">5부 · 공간과 연결</div>
+  <h1>화면 이후의 인터페이스</h1>
+  <div class="sub">공간 컴퓨팅이 아직 넘지 못한 것</div>
+  <span class="hz">10년 이상</span>
+</div>
+<div class="lede"><p>컴퓨터와 사람이 만나는 접점은 몇 번 크게 바뀌었고, 바뀔 때마다 산업의 지도가 다시 그려졌다. 천공카드에서 키보드로, 키보드에서 마우스와 창(window)으로, 그리고 손가락과 유리판으로. 각 전환의 승자는 그 전의 승자가 아니었다. 그래서 모두가 다음 전환을 주시한다 — 정보가 화면 안이 아니라 우리 주변 공간에 놓이는 것, 이른바 공간 컴퓨팅이다.</p><p>안경 너머의 현실 위에 길 안내가 겹치고, 책상 위에 가상 모니터 세 장이 떠 있고, 멀리 있는 사람이 실물 크기로 맞은편에 앉는다 — 데모는 이미 이 수준에 와 있다.</p></div><h2>기술은 왔는데 이유가 안 왔다</h2><div><p>하드웨어의 진보는 실제로 놀랍다. 밀리미터 단위의 공간 추적, 시선 인식, 망막 수준 해상도의 마이크로 디스플레이. 그런데 판매량은 데모만큼 놀랍지 않다. 이유를 업계 스스로 안다 — 무겁고, 배터리가 짧고, 쓰고 있으면 어색하고, 무엇보다 '매일 써야 할 이유'가 아직 없다.</p><p>역사가 힌트를 준다. 새 인터페이스는 언제나 옛것의 흉내에서 출발했다 — 초기 웹은 종이 카탈로그를 닮았고, 초기 스마트폰 앱은 PC 프로그램의 축소판이었다. 각 전환의 진짜 개화는 그 매체에서만 가능한 것(검색, 소셜, 위치 기반 호출)이 발명된 순간이었다. 지금의 공간 컴퓨팅은 대체로 '공중에 뜬 모니터'를 보여준다. 즉, 아직 흉내 단계다. 킬러 앱은 정의상 흉내가 아닌 곳에서 나온다.</p></div><h2>안경이라는 우회로</h2><div><p>무거운 헤드셋 대신, 카메라와 AI 비서를 단 가벼운 스마트 안경이 뜻밖의 가교가 되고 있다. 화면을 띄우는 대신 보고 듣고 말해주는 것 — 디스플레이 문제를 통째로 우회한 이 접근이 먼저 일상에 안착하고, 디스플레이는 광학 기술이 익을 때까지 기다린다는 시나리오가 힘을 얻는 중이다. 1부의 언어모델이 이 시나리오의 엔진이다. AI가 좋아질수록 '화면 없는 컴퓨팅'의 실용성이 올라가기 때문이다.</p></div><h2>미래학자들의 시선</h2><div><p>'우리는 도구를 만들고, 그다음엔 도구가 우리를 만든다' — 매클루언을 해설한 존 컬킨의 이 문장은 인터페이스 전환기마다 소환된다. 스마트폰은 우리의 자세, 대화, 주의력, 어린 시절의 모양까지 바꿨다. 컴퓨터가 시야 자체에 들어온다면 무엇이 바뀔지 — 이 질문은 기술 예측이 아니라 인간 예측의 영역이고, 그래서 매클루언식 관점이 사양 비교표보다 유용하다.</p></div><h2>다르게 보는 시각</h2><div><p>이 분야는 실패의 목록이 유난히 길다. 지난 10여 년간 여러 세대의 AR/VR 기기가 '올해가 원년'이라는 선언과 함께 나왔고 조용히 물러났다. 회의론의 핵심은 사회적 비용이다 — 얼굴에 컴퓨터를 쓰는 행위는 배터리나 해상도가 아니라 '남들 앞에서 이상해 보이는가'라는 문제에 걸려 넘어졌다. 카메라 달린 안경은 프라이버시 반발이라는 추가 관문도 있다. 기술 로드맵은 명확한데 수용 로드맵이 불명확한, 드문 유형의 기술이다.</p></div><h2>남는 질문</h2><div><p>확실한 것 하나 — 화면 앞에 앉아 있는 지금의 컴퓨팅이 최종 형태일 가능성은 낮다. 불확실한 것 하나 — 다음 형태가 무엇인지, 언제 오는지는 업계의 누구도 모른다. 확신과 겸손이 동시에 필요한 지점에 이 기술이 서 있다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>소비자 전자, 디스플레이·광학, 반도체, 게임·콘텐츠, AI 비서.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『미디어의 이해』</span><span class="ba">마셜 매클루언</span><span class="bd">인터페이스가 인간을 바꾼다는 관점의 원전. 어렵지만 첫 장만이라도</span></div></div>
+<div class="pnav"><a href="./ch19.html"><span class="lbl">← 이전</span><span class="tt">발사 비용이 무너진 뒤</span></a><a class="next" href="./ch21.html"><span class="lbl">다음 →</span><span class="tt">언어의 벽이 낮아진다는 것</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[20] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (20 > last) localStorage.setItem("book-last", "20");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

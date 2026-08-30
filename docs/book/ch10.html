@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>코드를 고치는 의학 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>10 / 25</span></div>
+<div class="chhead">
+  <div class="pt">3부 · 몸과 생명</div>
+  <h1>코드를 고치는 의학</h1>
+  <div class="sub">유전자 편집이 실제 치료가 되기까지</div>
+  <span class="hz">5~10년</span>
+</div>
+<div class="lede"><p>생명은 네 글자로 쓰인 코드다 — 이 비유는 오래됐지만, 그 코드를 '편집'하는 도구가 손에 들어온 것은 최근이다. CRISPR는 원래 세균이 바이러스를 기억해뒀다 잘라내는 면역 장치였다. 과학자들은 이 장치를 프로그래밍 가능한 가위로 바꿨다. 원하는 유전자 서열을 찾아가 자르고, 세포의 복구 과정을 이용해 고치는 것이다. 2020년 노벨 화학상이 이 도구에 주어졌고, 2023년에는 겸상적혈구빈혈에 대한 편집 기반 치료가 사상 처음으로 규제 승인을 받았다.</p><p>실험실의 논문이 환자의 몸에 도달하기까지 10년 남짓 — 생명과학의 시간 감각으로는 이례적으로 빠른 여정이었다.</p></div><h2>지금 가능한 것과 아직 안 되는 것</h2><div><p>다만 승인된 치료의 형태를 뜯어보면 현재의 한계가 보인다. 환자의 조혈모세포를 몸 밖으로 꺼내, 실험실에서 편집한 뒤, 다시 넣어주는 방식이다. 혈액 질환이 첫 타자가 된 것은 우연이 아니다 — 세포를 꺼냈다 넣을 수 있는 거의 유일한 조직이기 때문이다.</p><p>진짜 어려운 문제는 '몸 안에서' 고치는 것이다. 간이면 간, 근육이면 근육 — 원하는 장기의 세포에만 편집 도구를 배달하고, 다른 곳은 건드리지 않아야 한다. 이 '전달(delivery)' 문제가 현재 유전자 편집 분야의 최전선이다. 편집 가위 자체보다, 가위를 담아 보낼 택배 상자(지질나노입자, 바이러스 벡터)의 성능이 이 분야의 실제 속도를 결정하고 있다.</p></div><h2>정확도의 진화</h2><div><p>도구 자체도 진화하고 있다. 초기 CRISPR가 두 가닥을 모두 자르는 가위였다면, 이후 나온 염기 편집(base editing)은 자르지 않고 글자 하나를 화학적으로 바꾸는 연필에 가깝고, 프라임 편집(prime editing)은 짧은 구절을 통째로 다시 쓰는 수정 테이프에 가깝다. 자르는 방식보다 부작용(의도치 않은 변이)이 적어, 차세대 치료의 다수가 이쪽으로 옮겨가고 있다.</p></div><h2>미래학자들의 시선</h2><div><p>CRISPR 개발로 노벨상을 받은 제니퍼 다우드나는 이 기술의 가장 진지한 낙관론자이자 가장 진지한 경고자다. 그는 기술의 치료적 잠재력을 확신하면서도, 정자·난자·배아를 편집해 변화가 후대로 유전되는 '생식세포 편집'에 대해서는 국제적 합의 전까지 멈춰야 한다고 일찍부터 공개적으로 주장해 왔다. 실제로 2018년 중국에서 편집 아기가 태어났다는 발표는 전 세계적 비난과 관련 연구자의 실형으로 이어졌다. 기술이 할 수 있는 것과 해도 되는 것 사이의 간격 — 이 분야만큼 그 간격이 선명한 곳이 없다.</p></div><h2>다르게 보는 시각</h2><div><p>현실적 제약도 만만치 않다. 승인된 편집 치료의 가격은 환자 한 명당 수십억 원 수준이다. 한 번의 치료로 평생 가는 효과를 낸다는 논리로 정당화되지만, 이 가격으로는 혜택이 극소수에 머문다. 그리고 희귀 유전질환에서 흔한 질환으로 적용을 넓히려면, '유전자 하나가 원인인 병'이라는 조건 자체가 무너진다 — 대부분의 만성질환은 수백 개 유전자와 환경이 얽힌 결과라, 자를 곳이 한 군데가 아니다.</p></div><h2>남는 질문</h2><div><p>코드를 고칠 수 있게 된 종은 이제 무엇을 고칠지 정해야 한다. 질병과 특성의 경계는 어디인가. 키는? 지능은? 이 질문들은 아직 먼 것처럼 보이지만, 기술의 역사에서 '아직 먼 질문'이 도착하는 속도는 대개 예상보다 빨랐다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>바이오텍, 유전자·세포치료, 위탁개발생산(CDMO), 유전자 진단.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『크리스퍼가 온다』</span><span class="ba">제니퍼 다우드나·새뮤얼 스턴버그</span><span class="bd">개발자 본인이 쓴 기술과 윤리의 기록</span></div><div><span class="bt">『코드 브레이커』</span><span class="ba">월터 아이작슨</span><span class="bd">다우드나와 CRISPR 경쟁의 전기적 서술. 읽기 쉬운 입문</span></div></div>
+<div class="pnav"><a href="./ch09.html"><span class="lbl">← 이전</span><span class="tt">비만이 처방의 영역으로 들어왔다</span></a><a class="next" href="./ch11.html"><span class="lbl">다음 →</span><span class="tt">질병이 아닌 것을 치료하려는 시도</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[10] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (10 > last) localStorage.setItem("book-last", "10");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

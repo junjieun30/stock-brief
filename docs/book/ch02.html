@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>스스로 일을 끝내는 소프트웨어 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>2 / 25</span></div>
+<div class="chhead">
+  <div class="pt">1부 · 계산하는 기계</div>
+  <h1>스스로 일을 끝내는 소프트웨어</h1>
+  <div class="sub">대답하는 기계에서 실행하는 기계로</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>챗봇에게 '이번 달 지출 정리해줘'라고 물으면 정리하는 방법을 알려준다. 에이전트에게 같은 말을 하면 — 카드 내역을 불러오고, 항목을 분류하고, 표를 만들어 저장한 다음 '끝났습니다'라고 답한다. 이 차이가 지금 소프트웨어 산업이 넘고 있는 문턱이다. 대답과 실행 사이의 문턱.</p><p>에이전트라는 말은 오래됐지만, 언어모델이 붙으면서 의미가 달라졌다. 목표를 주면 스스로 단계를 나누고, 필요한 도구(검색, 파일, 결제, 이메일)를 호출하고, 결과를 확인하고, 실패하면 다른 방법을 시도한다. 사람이 일하는 방식과 구조적으로 같다. 다만 지치지 않고, 여럿을 동시에 돌릴 수 있다는 점이 다르다.</p></div><h2>자동화의 문턱이 내려간다</h2><div><p>이 방식이 진짜로 바꾸는 것은 '자동화할 수 있는 일의 범위'다. 지금까지 무언가를 자동화하려면 절차를 빠짐없이 코드로 적어야 했다. 그래서 자동화는 반복이 많고 예외가 적은 일 — 급여 계산, 재고 집계 — 에 갇혀 있었다. 예외가 많은 일은 예외 처리 코드가 본체보다 커져서 수지가 안 맞았다.</p><p>에이전트는 절차를 다 적어주지 않아도 된다. '이 메일함에서 환불 요청을 찾아 규정에 맞으면 처리하고 애매하면 나에게 넘겨라' 정도의 지시로 움직인다. 매번 조금씩 다른 일, 판단이 섞인 일 — 지금까지 자동화가 포기했던 넓은 중간지대가 열리는 것이다. 사무직 업무의 상당 부분이 바로 이 중간지대에 있다.</p></div><h2>새로 생기는 문제</h2><div><p>대신 예전에 없던 문제가 생긴다. 스스로 행동하는 소프트웨어에게 무엇을 허용할 것인가. 이메일을 읽게 할 것인가, 보내게도 할 것인가. 결제 권한은? 실수하면 누가 책임지는가? 그래서 이 분야의 실무는 '더 똑똑한 에이전트'보다 '믿고 맡길 수 있는 에이전트' 쪽으로 무게가 옮겨가 있다. 권한을 잘게 쪼개고, 모든 행동을 기록으로 남기고, 중요한 일은 사람의 승인을 거치게 하고, 잘못되면 되돌릴 수 있게 만드는 것. 화려하지 않지만 여기가 승부처다.</p><p>흥미로운 파생 효과도 있다. 에이전트가 소프트웨어를 '사용'하게 되면서, 소프트웨어가 사람이 아니라 기계를 고객으로 삼기 시작했다. 사람용 화면 대신 기계용 통로(API)가 제품의 얼굴이 되는 것이다. 웹사이트가 사람과 검색엔진 양쪽을 상대로 지어졌듯, 이제 서비스는 사람과 에이전트 양쪽을 상대로 지어진다.</p></div><h2>미래학자들의 시선</h2><div><p>케빈 켈리는 『인에비터블』에서 기술이 완성품이 아니라 영원히 '되어가는(becoming)' 상태로 존재하게 된다고 썼다. 에이전트는 그 성격이 극단적으로 강하다. 매달 능력이 달라지고, 쓰는 법도 달라진다. 켈리의 표현을 빌리면 우리는 이제 평생 초보자다. 숙련이 쌓이기 전에 대상이 바뀌기 때문이다. 이것을 피로로 받아들일 수도, 진입장벽이 계속 리셋되는 기회로 받아들일 수도 있다.</p></div><h2>다르게 보는 시각</h2><div><p>로봇공학자 로드니 브룩스는 수십 년간 같은 경고를 반복해 왔다. 시연에서 되는 것과 현장에서 매일 되는 것 사이의 간격을 사람들은 체계적으로 과소평가한다는 것이다. 에이전트의 성공률이 95%라면 시연으로는 충분하지만, 하루 천 건을 처리하는 현장에서는 매일 50건의 사고라는 뜻이다. 자율성이 높아질수록 그 5%의 값이 비싸진다. 에이전트 도입이 기대보다 느린 곳에서는 대개 이 산수가 발목을 잡고 있다.</p></div><h2>남는 질문</h2><div><p>일을 시키는 능력이 새로운 리터러시가 되고 있다. 좋은 지시는 목표와 제약과 예외 처리를 담는다 — 사실 좋은 위임이 원래 그렇다. 부하 직원에게 일을 잘 맡기는 사람이 에이전트도 잘 쓴다는 관찰은 우연이 아니다. 기계에게 일을 맡기는 시대의 핵심 기술이, 결국 사람에게 일을 맡기던 기술과 같다는 것은 묘한 위안이기도 하다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>기업용 소프트웨어, 업무 자동화, 고객 서비스, 그리고 이를 뒷받침하는 컴퓨팅 인프라.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『인에비터블: 미래의 정체』</span><span class="ba">케빈 켈리</span><span class="bd">기술이 향하는 12가지 방향. '되어감'과 '흐름'의 개념이 이 장의 배경이다</span></div></div>
+<div class="pnav"><a href="./ch01.html"><span class="lbl">← 이전</span><span class="tt">언어를 다루게 된 기계</span></a><a class="next" href="./ch03.html"><span class="lbl">다음 →</span><span class="tt">무어의 법칙 이후의 셈법</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[2] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (2 > last) localStorage.setItem("book-last", "2");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>배터리 다음의 배터리 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>17 / 25</span></div>
+<div class="chhead">
+  <div class="pt">4부 · 에너지와 물질</div>
+  <h1>배터리 다음의 배터리</h1>
+  <div class="sub">소재가 바뀌면 무엇이 열리는가</div>
+  <span class="hz">5~10년</span>
+</div>
+<div class="lede"><p>리튬이온 배터리는 1991년 상용화 이후 한 세대 동안 세상을 다시 배선했다. 휴대폰과 노트북을 만들었고, 전기차를 만들었고, 이제 전력망의 저장장치를 만들고 있다. 그 공로로 2019년 노벨 화학상이 주어졌다. 그러나 30년을 개량한 지금도 근본 한계는 남아 있다 — 무게당 담는 에너지의 상한, 급속충전의 한계, 액체 전해질의 화재 위험, 그리고 리튬·코발트·니켈이라는 특정 광물에 대한 의존.</p><p>이 한계들이 전기차의 주행거리 불안, 충전 대기, 화재 뉴스, 그리고 공급망 지정학의 형태로 일상에 번역된다. 배터리의 다음 세대를 둘러싼 경쟁은 그래서 소재의 경쟁이다.</p></div><h2>전고체 — 본명은 '제조 문제'</h2><div><p>전고체 배터리는 액체 전해질을 고체로 바꾸는 시도다. 원리적 이점은 목록이 길다 — 불이 잘 안 나고, 에너지 밀도를 높일 여지가 크고, 급속충전에 유리하다. 원리는 수십 년 전부터 알려져 있었다. 안 된 것은 과학이 아니라 제조다. 고체와 고체가 맞닿는 계면은 충방전을 반복하면 틈이 벌어지고, 얇고 결함 없는 고체 전해질 층을 기가와트시 규모로 찍어내는 공정은 아직 아무도 완성하지 못했다.</p><p>주요 배터리·자동차 회사들이 2027~2030년 언저리를 양산 목표로 내걸고 있지만, 이 시간표는 이미 여러 번 밀린 시간표의 최신판이다. 실험실 셀과 차량 탑재 셀 사이의 거리 — 2부의 자율주행이 가르쳐 준 바로 그 거리가 여기에도 있다.</p></div><h2>반대 방향의 혁신 — 더 싸게, 더 흔하게</h2><div><p>흥미로운 것은 시장의 실제 움직임이 '더 좋게'만이 아니라 '더 싸게'로도 갔다는 점이다. 코발트·니켈을 뺀 인산철(LFP) 배터리는 에너지 밀도를 조금 양보하는 대신 싸고 안전해서, 보급형 전기차와 전력망 저장의 주류가 됐다. 그 다음 줄에는 리튬 대신 나트륨 — 소금의 그 나트륨 — 을 쓰는 배터리가 서 있다. 성능은 낮지만 원료가 사실상 무한하다.</p><p>교훈은 명확하다. 배터리 시장은 하나가 아니다. 무게가 생명인 곳(항공, 프리미엄 차)과 무게가 상관없는 곳(전력망, 지게차)의 최적해는 다르며, '최고의 배터리'가 아니라 '용도별 최적 배터리'의 포트폴리오로 산업이 재편되고 있다.</p></div><h2>미래학자들의 시선</h2><div><p>카를로타 페레스의 틀을 빌리면 배터리 소재는 지금 '설치기'의 특징을 전부 보여준다 — 경쟁하는 복수의 기술 방식, 과잉 투자, 과장된 발표, 그리고 주기적인 파산. 이 단계에서 승자를 미리 고르는 것은 도박이지만, 이 단계가 지나면 표준이 굳고 이득이 산업 전체로 퍼진다는 것은 역사의 패턴이다. 4부 첫 장의 학습곡선이 여기서도 예열되고 있는 셈이다.</p></div><h2>다르게 보는 시각</h2><div><p>전고체 회의론의 논거는 상대의 정지 상태를 가정하지 말라는 것이다. 기존 리튬이온은 지금도 매년 밀도가 오르고 단가가 내려간다. 신기술이 이겨야 하는 기준선 자체가 움직이는 표적이다. 게다가 배터리 산업의 승부는 성능 지표가 아니라 '기가팩토리를 수율 있게 돌리는 능력'에서 나는 경우가 많았다 — 그 능력은 논문이 아니라 십 년의 양산 경험에서 나온다. 화학의 우위가 곧 산업의 우위는 아니다.</p></div><h2>남는 질문</h2><div><p>배터리는 '에너지를 어디서 얻는가'만큼 '에너지를 언제 쓰는가'를 바꾸는 기술이다. 태양이 만든 정오의 전기를 밤에 쓰게 하는 것 — 4부 전체를 관통하는 시간 이동의 문제가 결국 이 소재 위에 놓여 있다.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>배터리 제조, 양극·음극·전해질 소재, 자동차, 에너지 저장, 광물·재활용.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『배터리 전쟁』</span><span class="ba">루카스 베드나르스키</span><span class="bd">배터리 공급망의 지정학과 산업 구조</span></div></div>
+<div class="pnav"><a href="./ch16.html"><span class="lbl">← 이전</span><span class="tt">원자력이 다시 이야기되는 이유</span></a><a class="next" href="./ch18.html"><span class="lbl">다음 →</span><span class="tt">막는 기술에서 견디는 기술로</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[17] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (17 > last) localStorage.setItem("book-last", "17");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" type="image/png" sizes="192x192" href="./../icon-192.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>언어의 벽이 낮아진다는 것 · 지금에 모인 미래</title>
+<style>
+  :root{
+    --bg:#eeece7; --panel:#f7f6f2; --line:#d9d5cc; --ink:#2b2925; --muted:#807b71;
+    --up:#a4442c; --accent:#55504a; --radius:2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da;
+           --muted:#95908a; --up:#cf7a5f; --accent:#b5afa4; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:660px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    font-size:12.5px;color:var(--muted);margin-bottom:34px}
+  .top a{text-decoration:none;color:var(--muted)}
+  .top a:hover{color:var(--ink)}
+  /* 표지 */
+  .cover{text-align:center;padding:76px 0 60px;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--line);margin-bottom:40px}
+  .cover .small{font-size:12px;letter-spacing:.34em;color:var(--muted);margin-bottom:26px}
+  .cover h1{margin:0 0 16px;font-size:34px;letter-spacing:.06em;font-weight:800;word-break:keep-all}
+  .cover .tag{font-size:14px;color:var(--muted)}
+  .continue{display:inline-block;margin-top:34px;padding:11px 26px;border:1px solid var(--ink);
+    border-radius:var(--radius);background:var(--ink);color:var(--bg);text-decoration:none;
+    font-size:13.5px;font-weight:700}
+  /* 목차 */
+  .part{margin:36px 0 10px;font-size:12.5px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+  .toc{list-style:none;margin:0;padding:0;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel)}
+  .toc li{border-bottom:1px solid var(--line)}
+  .toc li:last-child{border-bottom:none}
+  .toc a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:13px 16px;text-decoration:none}
+  .toc a:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .toc .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc .t{font-weight:600;font-size:15px;word-break:keep-all}
+  .toc .done{font-size:11px;color:var(--up);font-weight:700;visibility:hidden}
+  .toc a.read .done{visibility:visible}
+  .toc a.read .t{color:var(--muted);font-weight:500}
+  /* 본문 */
+  .chhead{text-align:center;padding:38px 0 30px;border-top:2px solid var(--ink);margin-bottom:34px}
+  .chhead .pt{font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:14px}
+  .chhead h1{margin:0 0 10px;font-size:26px;font-weight:800;letter-spacing:-.01em;word-break:keep-all}
+  .chhead .sub{font-size:14.5px;color:var(--muted);word-break:keep-all}
+  .chhead .hz{display:inline-block;margin-top:18px;padding:3px 12px;border:1px solid var(--line);
+    border-radius:var(--radius);font-size:11.5px;font-weight:700;color:var(--muted)}
+  .chhead .hz.now{border-color:var(--ink);color:var(--ink)}
+  h2{font-size:16.5px;margin:40px 0 14px;font-weight:750;letter-spacing:-.01em}
+  p{margin:0 0 20px;word-break:keep-all}
+  .lede > p:first-of-type::first-letter{font-size:1.4em;font-weight:800}
+  .where{margin:44px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .where b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .books{margin:14px 0 0;padding:16px 18px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel);font-size:14px}
+  .books b{display:block;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .books div{margin-bottom:7px}
+  .books div:last-child{margin-bottom:0}
+  .books .bt{font-weight:700}
+  .books .ba{color:var(--muted);margin-left:6px;font-size:13px}
+  .books .bd{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  /* 이전/다음 */
+  .pnav{display:flex;gap:10px;margin-top:44px}
+  .pnav a{flex:1;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);text-decoration:none}
+  .pnav a:hover{border-color:var(--ink)}
+  .pnav .lbl{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:3px}
+  .pnav .tt{font-weight:700;font-size:13.5px;word-break:keep-all}
+  .pnav .next{text-align:right}
+  .pnav .ghost{visibility:hidden}
+  /* 진행 바 */
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--up);width:0;z-index:99}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="wrap">
+<div class="top"><a href="./index.html">← 목차</a><span>21 / 25</span></div>
+<div class="chhead">
+  <div class="pt">5부 · 공간과 연결</div>
+  <h1>언어의 벽이 낮아진다는 것</h1>
+  <div class="sub">실시간 번역이 바꾸는 범위</div>
+  <span class="hz now">이미 진행 중</span>
+</div>
+<div class="lede"><p>바벨탑 이야기가 수천 년을 산 것은, 언어의 분열이 그만큼 근본적인 조건이었기 때문이다. 언어는 시장을 나누고, 문화를 나누고, 기회를 나눴다. 그 조건이 지금 눈에 띄게 무르고 있다. 기계 번역은 오랫동안 '대충 뜻은 통하는' 수준이었지만, 언어모델 이후 실용의 문턱을 넘었다 — 문서와 자막을 넘어 음성 대화의 실시간 통역, 말하는 이의 목소리 톤까지 흉내 내는 더빙이 상용 서비스가 됐다.</p><p>이 장이 다루는 것은 번역기의 성능이 아니라, 벽이 낮아진 뒤의 지형이다.</p></div><h2>경계가 사라질 때 생기는 비대칭</h2><div><p>언어 장벽이 낮아지면 두 방향의 흐름이 동시에 열린다. 작은 언어권의 것이 밖으로 나가고, 큰 언어권의 것이 안으로 들어온다. 한국의 웹툰과 드라마와 음악이 자막·더빙 비용의 붕괴에 올라타 세계로 나간 것이 앞의 흐름이라면, 영어권의 콘텐츠·소프트웨어·교육이 한국어의 옷을 입고 들어오는 것이 뒤의 흐름이다.</p><p>두 흐름의 크기는 같지 않다. 유통되는 콘텐츠와 지식의 총량은 큰 언어권이 압도적이므로, 벽이 낮아질수록 유입이 유출보다 커지는 것이 기본값이다. 언어 장벽은 사실 작은 언어권 산업의 보호관세이기도 했다 — 그 관세가 철폐되는 중이라는 것이 이 변화의 냉정한 면이다.</p></div><h2>일과 배움의 재편</h2><div><p>통·번역이라는 직업은 이미 재편의 한복판에 있다. 기계가 초벌을 하고 사람이 감수하는 흐름이 표준이 됐고, 사람의 가치는 '옮기기'에서 '책임지기'로 이동하고 있다 — 법정, 수술 동의, 외교처럼 오역의 대가가 큰 자리일수록 사람이 남는다. 한편 외국어 학습의 의미도 갈린다. 정보 접근을 위한 학습의 효용은 줄고, 관계와 신뢰를 위한 학습 — 상대의 언어로 말을 거는 행위의 의미 — 은 오히려 희소해져 값이 오른다.</p></div><h2>미래학자들의 시선</h2><div><p>케빈 켈리는 기술의 장기 방향을 '더 많은 연결'로 요약한다. 도로, 전신, 인터넷 — 연결 비용이 무너질 때마다 그 위의 경제와 문화가 예상보다 넓게 재편됐다. 언어는 그 연결이 마지막까지 남겨둔 마찰이었다. 더글러스 애덤스가 소설에 그린 바벨피시 — 귀에 넣으면 모든 언어가 들리는 물고기 — 는 농담이었지만, 이어폰 실시간 통역은 그 농담의 상용화다.</p></div><h2>다르게 보는 시각</h2><div><p>번역이 매끄러워질수록 잃는 것이 안 보이게 된다는 역설이 있다. 뉘앙스, 유머, 관계의 온도 같은 것들은 번역이 매끈할수록 오히려 조용히 증발한다. 그리고 언어는 정보 전달 도구만이 아니라 사고의 틀이기도 하다 — 모두가 번역기를 통해 말하는 세계에서 소수 언어가 계속 살아남을지, 아니면 '박물관 언어'가 될지는 열린 문제다. 기술이 언어를 보존하는 도구가 될지 균질화의 도구가 될지는 기술이 아니라 사용이 정한다.</p></div><h2>남는 질문</h2><div><p>경계가 낮아진 세계의 승부는 '전달'이 아니라 '내용'으로 옮겨간다. 무슨 말이든 전해질 수 있게 됐을 때, 남는 질문은 하나다 — 전할 만한 것을 가졌는가.</p></div>
+<div class="where"><b>어디에서 관찰되는가</b>콘텐츠·미디어, 교육, 소프트웨어 현지화, 고객 서비스, 여행, 통신 기기.</div>
+<div class="books"><b>더 읽어보기</b><div><span class="bt">『인에비터블: 미래의 정체』</span><span class="ba">케빈 켈리</span><span class="bd">'연결'이라는 장기 방향의 지도. 1부에 이어 다시 등장하는 이유가 있다</span></div></div>
+<div class="pnav"><a href="./ch20.html"><span class="lbl">← 이전</span><span class="tt">화면 이후의 인터페이스</span></a><a class="next" href="./ch22.html"><span class="lbl">다음 →</span><span class="tt">자산을 쪼개서 기록한다는 발상</span></a></div>
+<div class="foot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</div>
+<script>
+(function () {
+  try {
+    var read = JSON.parse(localStorage.getItem("book-read") || "{}");
+    read[21] = true;
+    localStorage.setItem("book-read", JSON.stringify(read));
+    var last = parseInt(localStorage.getItem("book-last") || "0", 10);
+    if (21 > last) localStorage.setItem("book-last", "21");
+  } catch (e) {}
+  var bar = document.getElementById("prog");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(100, pct) + "%";
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
