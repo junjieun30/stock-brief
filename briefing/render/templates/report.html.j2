@@ -85,6 +85,46 @@
     white-space:normal;word-break:break-word}
   .tag{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-radius:var(--radius);
     color:var(--muted);font-size:11px;font-weight:600;margin-right:6px;letter-spacing:.03em}
+  /* --- 상단 고정 섹션 내비 + 설치/맨위로 버튼 --- */
+  .snav{position:sticky;top:0;z-index:50;display:flex;gap:6px;overflow-x:auto;
+    margin:0 -20px 6px;padding:10px 20px;background:var(--bg);
+    border-bottom:1px solid var(--line);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .snav::-webkit-scrollbar{display:none}
+  .snav a{flex:0 0 auto;padding:6px 13px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:600;
+    letter-spacing:.02em;white-space:nowrap}
+  .snav a.cur{border-color:var(--ink);color:var(--ink)}
+  .install{margin-left:auto;padding:7px 14px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font-size:12.5px;font-weight:700;cursor:pointer;
+    font-family:inherit}
+  .totop{position:fixed;right:18px;bottom:18px;z-index:60;width:42px;height:42px;
+    border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--panel);
+    color:var(--ink);font-size:17px;cursor:pointer;opacity:0;pointer-events:none;
+    transition:opacity .2s;box-shadow:0 2px 10px rgba(43,41,37,.12)}
+  .totop.show{opacity:1;pointer-events:auto}
+  @media (max-width:620px){
+    .wrap{padding:16px 14px 70px}
+    .snav{margin:0 -14px 6px;padding:9px 14px}
+    h2{margin:30px 0 12px}
+    .reflect{margin-top:44px}
+  }
+  /* --- 장 여는 시간 --- */
+  .krnote{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.02em}
+  .hours{list-style:none;margin:0;padding:0}
+  .hours li{display:grid;grid-template-columns:14px 168px 1fr auto;gap:10px;align-items:center;
+    padding:9px 16px;border-bottom:1px solid var(--line);font-size:13.5px}
+  .hours li:last-child{border-bottom:none}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+  .dot.on{background:var(--up)}
+  .mname{font-weight:600}
+  .mhours{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .mstate{font-size:11.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .mstate.on{color:var(--up)}
+  @media (max-width:560px){
+    .hours li{grid-template-columns:14px 1fr auto;font-size:13px}
+    .mhours{grid-column:2 / -1;grid-row:2;font-size:12px}
+  }
   /* --- 급등락 알림 --- */
   .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
   .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:var(--radius-lg);
@@ -171,7 +211,10 @@
   <h1>해외 시장 데일리 브리핑</h1>
   <div class="meta">시장 기준일 <b>{{ brief.market_date or '미상' }}</b>
     · 생성 {{ brief.generated_at.strftime('%Y-%m-%d %H:%M') }} KST</div>
+  <button id="install-btn" class="install" hidden>📲 앱으로 설치</button>
 </header>
+
+<nav class="snav" id="snav" aria-label="섹션 바로가기"></nav>
 
 {% if brief.alerts %}
 <div class="alerts">
@@ -190,6 +233,76 @@
   <div class="disclaimer">AI가 공개 데이터를 바탕으로 생성한 요약입니다. 사실관계는 원문 기사로 확인하세요.</div>
 </div>
 {% endif %}
+
+<h2>장 여는 시간 <span class="krnote">한국시간 기준</span></h2>
+<div class="card">
+<ul class="hours" id="market-hours"></ul>
+</div>
+<script>
+(function () {
+  // 미국 서머타임: 3월 둘째 일요일 ~ 11월 첫째 일요일 (현지 기준)
+  function nthSunday(year, month, nth) {          // month: 0-based
+    var d = new Date(Date.UTC(year, month, 1));
+    var first = (7 - d.getUTCDay()) % 7 + 1;      // 첫 일요일 날짜
+    return first + (nth - 1) * 7;
+  }
+  function usDST(nowUTC) {
+    var y = nowUTC.getUTCFullYear();
+    var start = Date.UTC(y, 2, nthSunday(y, 2, 2), 7);    // 3월 둘째 일 02:00 EST = 07:00 UTC
+    var end   = Date.UTC(y, 10, nthSunday(y, 10, 1), 6);  // 11월 첫째 일 02:00 EDT = 06:00 UTC
+    return nowUTC >= start && nowUTC < end;
+  }
+  function euDST(nowUTC) {                                 // 3월 마지막 일 ~ 10월 마지막 일 01:00 UTC
+    var y = nowUTC.getUTCFullYear();
+    var lastSun = function (m) { var d = new Date(Date.UTC(y, m + 1, 0)); return d.getUTCDate() - d.getUTCDay(); };
+    return nowUTC >= Date.UTC(y, 2, lastSun(2), 1) && nowUTC < Date.UTC(y, 9, lastSun(9), 1);
+  }
+
+  var now = new Date();
+  var dst = usDST(now), edst = euDST(now);
+
+  // 각 시장의 세션을 한국시간 분(minute) 구간으로 정의. 자정을 넘으면 두 구간으로 쪼갠다.
+  function span(h1, m1, h2, m2) { return [h1 * 60 + m1, h2 * 60 + m2]; }
+  var markets = [
+    { name: "한국 (KRX)", hours: "09:00 ~ 15:30", sessions: [span(9,0,15,30)] },
+    { name: "일본 (도쿄)", hours: "09:00 ~ 11:30 · 12:30 ~ 15:30", sessions: [span(9,0,11,30), span(12,30,15,30)] },
+    { name: "중국 (상해)", hours: "10:30 ~ 12:30 · 14:00 ~ 16:00", sessions: [span(10,30,12,30), span(14,0,16,0)] },
+    { name: "홍콩", hours: "10:30 ~ 13:00 · 14:00 ~ 17:00", sessions: [span(10,30,13,0), span(14,0,17,0)] },
+    edst
+      ? { name: "유럽 (런던·프랑크푸르트)", hours: "16:00 ~ 다음날 00:30", sessions: [span(16,0,24,0), span(0,0,0,30)] }
+      : { name: "유럽 (런던·프랑크푸르트)", hours: "17:00 ~ 다음날 01:30", sessions: [span(17,0,24,0), span(0,0,1,30)] },
+    dst
+      ? { name: "미국 (뉴욕·나스닥)", hours: "22:30 ~ 다음날 05:00 (서머타임)", sessions: [span(22,30,24,0), span(0,0,5,0)] }
+      : { name: "미국 (뉴욕·나스닥)", hours: "23:30 ~ 다음날 06:00", sessions: [span(23,30,24,0), span(0,0,6,0)] },
+  ];
+
+  // 지금 한국시간 (기기 시간대와 무관하게 UTC+9 로 계산)
+  var kst = new Date(now.getTime() + 9 * 3600 * 1000);
+  var mins = kst.getUTCHours() * 60 + kst.getUTCMinutes();
+  var dow = kst.getUTCDay();                                // 한국시간 요일
+  // 미국·유럽 야간 세션은 자정 이전 구간이 전날 개장분이므로 요일 판정을 단순화:
+  // 주말(토 새벽 미국장 마감 후 ~ 월 아침)만 전부 휴장 처리한다.
+  function isWeekendClosed(name) {
+    if (dow === 0) return true;                             // 일요일 전부 휴장
+    if (dow === 6) return !(name.indexOf("미국") === 0 || name.indexOf("유럽") === 0) ? true
+                        : mins >= (dst ? 300 : 360);        // 토요일: 미국·유럽 새벽 마감분만 인정
+    if (dow === 1 && (name.indexOf("미국") === 0 || name.indexOf("유럽") === 0))
+      return mins < 960;                                    // 월요일 저녁 개장 전까지는 닫힘
+    return false;
+  }
+
+  var ul = document.getElementById("market-hours");
+  markets.forEach(function (m) {
+    var open = !isWeekendClosed(m.name) && m.sessions.some(function (s) { return mins >= s[0] && mins < s[1]; });
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="dot ' + (open ? "on" : "") + '"></span>'
+      + '<span class="mname">' + m.name + '</span>'
+      + '<span class="mhours">' + m.hours + '</span>'
+      + '<span class="mstate ' + (open ? "on" : "") + '">' + (open ? "개장 중" : "장 마감") + "</span>";
+    ul.appendChild(li);
+  });
+})();
+</script>
 
 <h2>주요 지수</h2>
 <div class="grid">
@@ -398,11 +511,68 @@
 </footer>
 
 </div>
+<button id="totop" class="totop" aria-label="맨 위로">↑</button>
 <script>
   // 홈 화면 설치용 서비스워커. file:// 로 열었을 때는 조용히 건너뛴다.
   if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
     navigator.serviceWorker.register("./sw.js").catch(function () {});
   }
+
+  // --- 섹션 바로가기: h2 를 훑어 상단 고정 칩 내비를 만든다 ---
+  (function () {
+    var nav = document.getElementById("snav");
+    var heads = document.querySelectorAll("h2");
+    heads.forEach(function (h, i) {
+      var label = h.childNodes[0].textContent.trim();
+      if (!label) return;
+      h.id = "s" + i;
+      var a = document.createElement("a");
+      a.href = "#s" + i;
+      a.textContent = label;
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      nav.appendChild(a);
+    });
+    // 스크롤 위치에 따라 현재 섹션 강조
+    var links = nav.querySelectorAll("a");
+    function mark() {
+      var y = window.scrollY + 90, cur = 0;
+      heads.forEach(function (h, i) { if (h.offsetTop <= y) cur = i; });
+      links.forEach(function (a, i) { a.classList.toggle("cur", i === cur); });
+    }
+    window.addEventListener("scroll", mark, { passive: true });
+    mark();
+  })();
+
+  // --- 맨 위로 버튼 ---
+  (function () {
+    var btn = document.getElementById("totop");
+    window.addEventListener("scroll", function () {
+      btn.classList.toggle("show", window.scrollY > 600);
+    }, { passive: true });
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+
+  // --- 앱 설치 버튼: 브라우저가 설치 가능하다고 알려줄 때만 나타난다 ---
+  (function () {
+    var deferred = null;
+    var btn = document.getElementById("install-btn");
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferred = e;
+      btn.hidden = false;
+    });
+    btn.addEventListener("click", function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () { btn.hidden = true; deferred = null; });
+    });
+    window.addEventListener("appinstalled", function () { btn.hidden = true; });
+  })();
 </script>
 </body>
 </html>
