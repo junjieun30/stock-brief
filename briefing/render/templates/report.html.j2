@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <title>해외 시장 브리핑 · {{ brief.market_date }}</title>
 <style>
   /* 안도 다다오에서 빌려온 것들 — 노출 콘크리트의 따뜻한 회백색, 목탄색 잉크,
@@ -27,7 +28,7 @@
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:"Pretendard","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
     font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
   header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:22px}
@@ -120,22 +121,19 @@
   /* --- 내일의 기술 : 데이터 카드들과 다른 호흡. 책 한 페이지처럼 --- */
   .reflect{margin:64px 0 8px;padding:52px 44px;border-radius:0;
     background:var(--panel);
-    border:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);
-    font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif}
+    border:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}
   .rlabel{font-size:11px;letter-spacing:.3em;color:var(--muted);font-weight:700;
-    font-family:"Pretendard","Malgun Gothic",sans-serif;
     margin-bottom:30px;text-align:center}
   .bpart{font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:10px}
-  .btitle{margin:0 0 8px;font-size:25px;letter-spacing:-.02em;text-align:center;
-    font-weight:700;word-break:keep-all}
+  .btitle{margin:0 0 8px;font-size:24px;letter-spacing:-.01em;text-align:center;
+    font-weight:800;word-break:keep-all}
   .bsub{font-size:14.5px;color:var(--muted);text-align:center;margin-bottom:14px;word-break:keep-all}
   .bhorizon{display:block;width:fit-content;margin:0 auto 30px;padding:3px 12px;border-radius:var(--radius);
     font-size:11.5px;font-weight:700;letter-spacing:.02em;
-    background:transparent;border:1px solid var(--line);color:var(--muted);
-    font-family:"Pretendard","Malgun Gothic",sans-serif}
+    background:transparent;border:1px solid var(--line);color:var(--muted)}
   .bhorizon.now{background:transparent;border:1px solid var(--ink);color:var(--ink)}
   .bbody{max-width:620px;margin:0 auto}
-  .bbody p{margin:0 0 20px;font-size:16px;line-height:2.05;word-break:keep-all;
+  .bbody p{margin:0 0 20px;font-size:15.5px;line-height:2.0;font-weight:430;word-break:keep-all;
     text-indent:1em}
   .bbody p:first-child{text-indent:0}
   .bbody p:first-child::first-letter{font-size:1.35em;font-weight:700;color:var(--ink)}
@@ -143,7 +141,6 @@
     border-top:1px solid var(--line);
     display:grid;gap:18px}
   .bnote b{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.12em;
-    font-family:"Pretendard","Malgun Gothic",sans-serif;
     margin-bottom:5px}
   .bnote p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.88;
     word-break:keep-all}
