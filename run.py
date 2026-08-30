@@ -164,16 +164,16 @@ def write_outputs(brief: Brief, cfg: Config) -> dict[str, Path]:
 ARCHIVE_TPL = """<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>지난 브리핑</title><style>
-:root{{--bg:#f6f7f9;--panel:#fff;--line:#e3e6ea;--ink:#141821;--muted:#6b7480;--accent:#3d5afe}}
-@media(prefers-color-scheme:dark){{:root{{--bg:#0e1116;--panel:#161b22;--line:#252c36;
---ink:#e6eaf0;--muted:#8d97a5;--accent:#7c8cff}}}}
+:root{{--bg:#eeece7;--panel:#f7f6f2;--line:#d9d5cc;--ink:#2b2925;--muted:#807b71;--accent:#55504a}}
+@media(prefers-color-scheme:dark){{:root{{--bg:#1c1b19;--panel:#242220;--line:#3a3733;
+--ink:#e4e1da;--muted:#95908a;--accent:#b5afa4}}}}
 body{{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6;
 font-family:"Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif}}
 .wrap{{max-width:640px;margin:0 auto;padding:32px 20px 60px}}
 h1{{font-size:20px;margin:0 0 6px}}
 .sub{{color:var(--muted);font-size:13px;margin-bottom:22px}}
 ul{{list-style:none;margin:0;padding:0;background:var(--panel);border:1px solid var(--line);
-border-radius:12px;overflow:hidden}}
+border-radius:3px;overflow:hidden}}
 li{{border-bottom:1px solid var(--line)}} li:last-child{{border-bottom:none}}
 a{{display:block;padding:12px 18px;color:var(--ink);text-decoration:none}}
 a:hover{{background:color-mix(in srgb,var(--accent) 6%,transparent);color:var(--accent)}}

@@ -5,14 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>해외 시장 브리핑 · 2026-08-27</title>
 <style>
+  /* 안도 다다오에서 빌려온 것들 — 노출 콘크리트의 따뜻한 회백색, 목탄색 잉크,
+     직각에 가까운 기하, 그림자 대신 가는 선과 여백. 색은 재료의 색만 쓴다. */
   :root{
-    --bg:#f6f7f9; --panel:#ffffff; --line:#e3e6ea; --ink:#141821; --muted:#6b7480;
-    --up:#d92c2c; --down:#1b64d1; --flat:#8a929c; --accent:#3d5afe;
-    --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.05);
+    --bg:#eeece7;            /* 콘크리트 — 따뜻한 회백 */
+    --panel:#f7f6f2;         /* 한 톤 밝은 면 */
+    --line:#d9d5cc;          /* 거푸집 이음새 같은 가는 선 */
+    --ink:#2b2925;           /* 목탄 */
+    --muted:#807b71;         /* 마른 콘크리트 */
+    --up:#a4442c;            /* 산화한 벽돌 — 상승 */
+    --down:#44586e;          /* 쇳빛 남색 — 하락 */
+    --flat:#8f8a80;
+    --accent:#55504a;        /* 액센트도 무채색에 가깝게. 색이 아니라 농도로 말한다 */
+    --shadow:0 1px 0 rgba(43,41,37,.05);
+    --radius:2px;            /* 직각에 가까운 모서리 */
+    --radius-lg:3px;
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#0e1116; --panel:#161b22; --line:#252c36; --ink:#e6eaf0; --muted:#8d97a5;
-           --up:#ff6b6b; --down:#5b9dff; --flat:#7a838f; --accent:#7c8cff; --shadow:none; }
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da; --muted:#95908a;
+           --up:#cf7a5f; --down:#8ba3bd; --flat:#87827a; --accent:#b5afa4; --shadow:none; }
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
@@ -20,13 +31,13 @@
     font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
   header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:22px}
-  h1{font-size:24px;margin:0;letter-spacing:-.02em}
+  h1{font-size:22px;margin:0;letter-spacing:.02em;font-weight:700}
   .meta{color:var(--muted);font-size:13px}
   .meta b{color:var(--ink);font-weight:600}
-  h2{font-size:15px;margin:34px 0 12px;letter-spacing:-.01em;
+  h2{font-size:13px;margin:40px 0 14px;letter-spacing:.14em;font-weight:600;
      display:flex;align-items:center;gap:9px}
-  h2::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+  h2::before{content:"";width:10px;height:2px;background:var(--ink)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
   .summary{padding:20px 22px;white-space:pre-wrap}
   .summary strong{display:block;margin-top:14px;margin-bottom:2px;font-size:12.5px;color:var(--muted);
     letter-spacing:.04em}
@@ -34,13 +45,13 @@
     font-size:12px;color:var(--muted);white-space:normal}
   .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
   .tile{padding:13px 15px;background:var(--panel);border:1px solid var(--line);
-    border-radius:11px;box-shadow:var(--shadow)}
+    border-radius:var(--radius-lg);box-shadow:var(--shadow)}
   .tile .n{font-size:12.5px;color:var(--muted);margin-bottom:5px}
   .tile .p{font-size:20px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
   .tile .c{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
   .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
   table{width:100%;border-collapse:collapse;font-size:14px}
-  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-lg);
     background:var(--panel);box-shadow:var(--shadow)}
   th,td{padding:10px 14px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
   th{font-size:12px;font-weight:600;color:var(--muted)}
@@ -51,9 +62,9 @@
   .bars{display:grid;gap:7px}
   .bar{display:grid;grid-template-columns:104px 1fr 82px;align-items:center;gap:10px;font-size:13.5px}
   .track{position:relative;height:20px;background:color-mix(in srgb,var(--line) 60%,transparent);
-    border-radius:5px}
+    border-radius:var(--radius)}
   .track i{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
-  .fill{position:absolute;top:2px;bottom:2px;border-radius:4px}
+  .fill{position:absolute;top:2px;bottom:2px;border-radius:var(--radius)}
   .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
   .pos{position:relative;width:84px;height:6px;
     background:color-mix(in srgb,var(--line) 70%,transparent);
@@ -66,12 +77,11 @@
   .news a:hover{color:var(--accent)}
   .news .sub{margin-top:4px;font-size:12px;color:var(--muted);line-height:1.5;
     white-space:normal;word-break:break-word}
-  .tag{display:inline-block;padding:1px 7px;border-radius:4px;
-    background:color-mix(in srgb,var(--accent) 12%,transparent);
-    color:var(--accent);font-size:11px;font-weight:600;margin-right:6px}
+  .tag{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-radius:var(--radius);
+    color:var(--muted);font-size:11px;font-weight:600;margin-right:6px;letter-spacing:.03em}
   /* --- 급등락 알림 --- */
   .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
-  .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:11px;
+  .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:var(--radius-lg);
     background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);font-size:14px}
   .alert.up{border-left:3px solid var(--up)} .alert.down{border-left:3px solid var(--down)}
   .alert .nm{font-weight:600} .alert .pc{font-weight:700;font-variant-numeric:tabular-nums}
@@ -84,11 +94,11 @@
   .dday.soon{color:var(--up)}
   .cal .t{font-weight:600;font-size:14.5px}
   .cal .d{font-size:12.5px;color:var(--muted);margin-top:2px}
-  .kind{display:inline-block;padding:0 6px;border-radius:4px;font-size:11px;font-weight:600;
+  .kind{display:inline-block;padding:0 6px;border-radius:var(--radius);font-size:11px;font-weight:600;
     margin-left:7px;background:color-mix(in srgb,var(--muted) 15%,transparent);color:var(--muted)}
   /* --- 종목별 뉴스 --- */
   .tnews{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
-  .tn{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  .tn{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
     box-shadow:var(--shadow);padding:13px 16px}
   .tn h3{margin:0 0 8px;font-size:13px;display:flex;align-items:baseline;gap:7px}
   .tn h3 .pc{font-size:12px;font-variant-numeric:tabular-nums}
@@ -99,37 +109,41 @@
   .tn .src{color:var(--muted);font-size:11.5px}
   /* --- 오늘의 공부 --- */
   .learn{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-  .lc{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  .lc{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
     box-shadow:var(--shadow);padding:16px 18px}
-  .lc .badge{display:inline-block;padding:2px 9px;border-radius:5px;font-size:11px;font-weight:700;
+  .lc .badge{display:inline-block;padding:2px 9px;border-radius:var(--radius);font-size:11px;font-weight:700;
     background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);margin-bottom:9px}
   .lc h3{margin:0 0 7px;font-size:17px;letter-spacing:-.01em}
   .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
   .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
     font-size:13.5px;color:var(--muted);line-height:1.65}
   /* --- 내일의 기술 : 데이터 카드들과 다른 호흡. 책 한 페이지처럼 --- */
-  .reflect{margin:56px 0 8px;padding:48px 44px;border-radius:16px;
-    background:color-mix(in srgb,var(--accent) 4%,var(--panel));
-    border:1px solid color-mix(in srgb,var(--accent) 16%,var(--line))}
-  .rlabel{font-size:11.5px;letter-spacing:.22em;color:var(--accent);font-weight:700;
+  .reflect{margin:64px 0 8px;padding:52px 44px;border-radius:0;
+    background:var(--panel);
+    border:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);
+    font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif}
+  .rlabel{font-size:11px;letter-spacing:.3em;color:var(--muted);font-weight:700;
+    font-family:"Pretendard","Malgun Gothic",sans-serif;
     margin-bottom:30px;text-align:center}
   .bpart{font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:10px}
   .btitle{margin:0 0 8px;font-size:25px;letter-spacing:-.02em;text-align:center;
     font-weight:700;word-break:keep-all}
   .bsub{font-size:14.5px;color:var(--muted);text-align:center;margin-bottom:14px;word-break:keep-all}
-  .bhorizon{display:block;width:fit-content;margin:0 auto 30px;padding:3px 12px;border-radius:20px;
+  .bhorizon{display:block;width:fit-content;margin:0 auto 30px;padding:3px 12px;border-radius:var(--radius);
     font-size:11.5px;font-weight:700;letter-spacing:.02em;
-    background:color-mix(in srgb,var(--muted) 14%,transparent);color:var(--muted)}
-  .bhorizon.now{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    font-family:"Pretendard","Malgun Gothic",sans-serif}
+  .bhorizon.now{background:transparent;border:1px solid var(--ink);color:var(--ink)}
   .bbody{max-width:620px;margin:0 auto}
-  .bbody p{margin:0 0 18px;font-size:15.5px;line-height:1.95;word-break:keep-all;
+  .bbody p{margin:0 0 20px;font-size:16px;line-height:2.05;word-break:keep-all;
     text-indent:1em}
   .bbody p:first-child{text-indent:0}
-  .bbody p:first-child::first-letter{font-size:1.35em;font-weight:700;color:var(--accent)}
+  .bbody p:first-child::first-letter{font-size:1.35em;font-weight:700;color:var(--ink)}
   .bnotes{max-width:620px;margin:30px auto 0;padding-top:26px;
-    border-top:1px solid color-mix(in srgb,var(--accent) 18%,transparent);
-    display:grid;gap:16px}
-  .bnote b{display:block;font-size:12px;color:var(--accent);letter-spacing:.05em;
+    border-top:1px solid var(--line);
+    display:grid;gap:18px}
+  .bnote b{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.12em;
+    font-family:"Pretendard","Malgun Gothic",sans-serif;
     margin-bottom:5px}
   .bnote p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.88;
     word-break:keep-all}
@@ -154,7 +168,7 @@
 <header>
   <h1>해외 시장 데일리 브리핑</h1>
   <div class="meta">시장 기준일 <b>2026-08-27</b>
-    · 생성 2026-08-30 23:48 KST</div>
+    · 생성 2026-08-30 23:53 KST</div>
 </header>
 
 <div class="alerts">
@@ -352,8 +366,8 @@
   </div>
   <div class="tile">
     <div class="n">비트코인</div>
-    <div class="p">$78,762</div>
-    <div class="c up">▲ +1.20%</div>
+    <div class="p">$78,780</div>
+    <div class="c up">▲ +1.22%</div>
   </div>
 </div>
 
@@ -627,12 +641,24 @@
     <div class="sub"><span class="tag">Yahoo</span>08-30 14:20 UTC · Man posed as a 49ers player and convinced 26 women to hand over $1.3 million in romance scam scheme</div>
   </li>
   <li>
-    <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQTmViQ29RaXFwVnZraEk4N0tQbDM2eU5SLUxiRXZVcEI0SUdacE4xUHJTbFM5THl6WDFWdi05eXhHRENzdksydk92ZWRnT3NZVGprTzZkajBCQnRwWF96Y0lwdlczSmVlcVJmU0R5ejNQZExtMWlyUkYxNUlOWUdVUXBZY0ktVlk3WUhr?oc=5" target="_blank" rel="noopener">(MULV) Equity Market Report (MULV:CA) - Stock Traders Daily</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 14:42 UTC · (MULV) Equity Market Report (MULV:CA) - Stock Traders Daily</div>
+    <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQWWxWekJCUWFfaE5aZzlwcjBiNlZvNjNYcUdaemxZQzVibHgweU02YkZDOUlnSkxoYzhveEprVU1qakc5Z1FJX2FpajAwTFhfTDN0cF93bWc1aUEtMUR4ZEZ5bTg1SXhMVlBGSlFqNXBmZTFJVkljTzB2d1dESmJIQmFlRjNPOF96VGdTVnhlN0Q0ZTlkZTc4?oc=5" target="_blank" rel="noopener">(NUBF) Investment Performance Report (NUBF:CA) - Stock Traders Daily</a>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:48 UTC · (NUBF) Investment Performance Report (NUBF:CA) - Stock Traders Daily</div>
   </li>
   <li>
     <a href="https://www.cnbc.com/2026/08/30/iceland-eu-accession-referendum-result.html" target="_blank" rel="noopener">Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 12:32 UTC · Icelanders reject reopening talks to join the EU despite Trump&#39;s Greenland threats</div>
+  </li>
+  <li>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/visa-stock-underperforming-dow-145730618.html" target="_blank" rel="noopener">Is Visa Stock Underperforming the Dow?</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:57 UTC · Is Visa Stock Underperforming the Dow?</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQTmViQ29RaXFwVnZraEk4N0tQbDM2eU5SLUxiRXZVcEI0SUdacE4xUHJTbFM5THl6WDFWdi05eXhHRENzdksydk92ZWRnT3NZVGprTzZkajBCQnRwWF96Y0lwdlczSmVlcVJmU0R5ejNQZExtMWlyUkYxNUlOWUdVUXBZY0ktVlk3WUhr?oc=5" target="_blank" rel="noopener">(MULV) Equity Market Report (MULV:CA) - Stock Traders Daily</a>
+    <div class="sub"><span class="tag">Reuters</span>08-30 14:42 UTC · (MULV) Equity Market Report (MULV:CA) - Stock Traders Daily</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/08/30/trump-tariff-refunds-walmart-home-depot-target.html" target="_blank" rel="noopener">The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</a>
+    <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</div>
   </li>
   <li>
     <a href="https://finance.yahoo.com/economy/articles/kevin-oleary-worth-400-million-143000770.html" target="_blank" rel="noopener">Kevin O&#39;Leary, worth $400 million, compares paper towel prices at Walmart as grocery costs climb 5.9%</a>
@@ -643,8 +669,8 @@
     <div class="sub"><span class="tag">Reuters</span>08-30 14:36 UTC · Bull Markets Rise, Bear Markets Fall: Here&#39;s How I Use Each to Build Wealth - The Motley Fool</div>
   </li>
   <li>
-    <a href="https://www.cnbc.com/2026/08/30/trump-tariff-refunds-walmart-home-depot-target.html" target="_blank" rel="noopener">The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</a>
-    <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · The &#39;choose your own adventure&#39; earnings: Why retailers are handling tariff refunds so differently</div>
+    <a href="https://www.cnbc.com/2026/08/30/mike-moore-ag-social-media-settlement-big-tobacco.html" target="_blank" rel="noopener">He beat Big Tobacco. Will the same playbook work against Meta and social media?</a>
+    <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · He beat Big Tobacco. Will the same playbook work against Meta and social media?</div>
   </li>
   <li>
     <a href="https://finance.yahoo.com/economy/article/fed-chairman-warsh-shows-courage-with-jackson-hole-speech-defying-political-pressure-says-harvards-rogoff-140951926.html" target="_blank" rel="noopener">Fed Chairman Warsh shows courage with Jackson Hole speech, defying political pressure, says Harvard&#39;s Rogoff</a>
@@ -655,24 +681,12 @@
     <div class="sub"><span class="tag">Reuters</span>08-30 14:24 UTC · Meta Stock Looks Undervalued. Is the Market Missing Something? - The Motley Fool</div>
   </li>
   <li>
-    <a href="https://www.cnbc.com/2026/08/30/mike-moore-ag-social-media-settlement-big-tobacco.html" target="_blank" rel="noopener">He beat Big Tobacco. Will the same playbook work against Meta and social media?</a>
-    <div class="sub"><span class="tag">CNBC</span>08-30 12:00 UTC · He beat Big Tobacco. Will the same playbook work against Meta and social media?</div>
-  </li>
-  <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/t-mobile-stock-could-win-140002998.html" target="_blank" rel="noopener">How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 14:00 UTC · How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</div>
-  </li>
-  <li>
-    <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPeG5GY3ItMllKZkh2NHZqa0ZzQ2Nid0cxbkZ1SWs3S0ZBUnNSMWM3a1JqcFB4R3BRXzh0OEY1MmFoOFlHemtpdmQ3QzdJRmhpX1duN2VMSHJZU2ZldVBKU0tFNVFHN01CNkdtYXZlc29SU0ZuSENfbFFJZDRTQU82d2dsd3lkRS1OZXNTNUt0Q2FwTHlsZ0Uya0tqenV5ZDF2c1Y0dkpyNjNWbmw5STVBcEMxaVZGMDJKNktIanVIMEg1ejdMRXVSRWI4YTNBMWJSNzVwQ1JPUmtRbUdncGFz?oc=5" target="_blank" rel="noopener">Where Will Nvidia Stock Be 6 Months After the Latest Explosive Earnings Report? Here’s What History Says. - The Motley Fool</a>
-    <div class="sub"><span class="tag">Reuters</span>08-30 14:17 UTC · Where Will Nvidia Stock Be 6 Months After the Latest Explosive Earnings Report? Here’s What History Says. - The Motley Fool</div>
-  </li>
-  <li>
     <a href="https://www.cnbc.com/2026/08/30/top-analysts-suggest-these-dividend-stocks-for-consistent-income.html" target="_blank" rel="noopener">Top Wall Street analysts suggest these 3 dividend stocks for consistent income</a>
     <div class="sub"><span class="tag">CNBC</span>08-30 10:42 UTC · Top Wall Street analysts suggest these 3 dividend stocks for consistent income</div>
   </li>
   <li>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/sandisk-reported-layoffs-israel-locations-134502982.html" target="_blank" rel="noopener">Sandisk Reported Layoffs at Its Israel Locations. This Is an Efficiency Push, Not a Warning Sign for SNDK Stock.</a>
-    <div class="sub"><span class="tag">Yahoo</span>08-29 13:45 UTC · Sandisk Reported Layoffs at Its Israel Locations. This Is an Efficiency Push, Not a Warning Sign for SNDK Stock.</div>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/t-mobile-stock-could-win-140002998.html" target="_blank" rel="noopener">How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</a>
+    <div class="sub"><span class="tag">Yahoo</span>08-29 14:00 UTC · How T-Mobile Stock Could Win as SpaceX Expands Its Wireless Business</div>
   </li>
 </ul>
 </div>
