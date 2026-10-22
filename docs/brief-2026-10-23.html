@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="theme-color" content="#eeece7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<title>해외 시장 브리핑 · 2026-10-22</title>
+<style>
+  /* 안도 다다오에서 빌려온 것들 — 노출 콘크리트의 따뜻한 회백색, 목탄색 잉크,
+     직각에 가까운 기하, 그림자 대신 가는 선과 여백. 색은 재료의 색만 쓴다. */
+  :root{
+    --bg:#eeece7;            /* 콘크리트 — 따뜻한 회백 */
+    --panel:#f7f6f2;         /* 한 톤 밝은 면 */
+    --line:#d9d5cc;          /* 거푸집 이음새 같은 가는 선 */
+    --ink:#2b2925;           /* 목탄 */
+    --muted:#807b71;         /* 마른 콘크리트 */
+    --up:#a4442c;            /* 산화한 벽돌 — 상승 */
+    --down:#44586e;          /* 쇳빛 남색 — 하락 */
+    --flat:#8f8a80;
+    --accent:#55504a;        /* 액센트도 무채색에 가깝게. 색이 아니라 농도로 말한다 */
+    --shadow:0 1px 0 rgba(43,41,37,.05);
+    --radius:2px;            /* 직각에 가까운 모서리 */
+    --radius-lg:3px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1c1b19; --panel:#242220; --line:#3a3733; --ink:#e4e1da; --muted:#95908a;
+           --up:#cf7a5f; --down:#8ba3bd; --flat:#87827a; --accent:#b5afa4; --shadow:none; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard","Malgun Gothic",-apple-system,"Segoe UI",sans-serif;
+    font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:22px}
+  h1{font-size:22px;margin:0;letter-spacing:.02em;font-weight:700}
+  .meta{color:var(--muted);font-size:13px}
+  .meta b{color:var(--ink);font-weight:600}
+  h2{font-size:13px;margin:40px 0 14px;letter-spacing:.14em;font-weight:600;
+     display:flex;align-items:center;gap:9px}
+  h2::before{content:"";width:10px;height:2px;background:var(--ink)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+  .summary{padding:20px 22px;white-space:pre-wrap}
+  .summary strong{display:block;margin-top:14px;margin-bottom:2px;font-size:12.5px;color:var(--muted);
+    letter-spacing:.04em}
+  .disclaimer{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
+    font-size:12px;color:var(--muted);white-space:normal}
+  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+  .tile{padding:13px 15px;background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+  .tile .n{font-size:12.5px;color:var(--muted);margin-bottom:5px}
+  .tile .p{font-size:20px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tile .c{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-lg);
+    background:var(--panel);box-shadow:var(--shadow)}
+  th,td{padding:10px 14px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+  th{font-size:12px;font-weight:600;color:var(--muted)}
+  th:first-child,td:first-child{text-align:left}
+  tbody tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums}
+  .sym{color:var(--muted);font-size:12px;margin-left:6px}
+  .bars{display:grid;gap:7px}
+  .bar{display:grid;grid-template-columns:104px 1fr 82px;align-items:center;gap:10px;font-size:13.5px}
+  .track{position:relative;height:20px;background:color-mix(in srgb,var(--line) 60%,transparent);
+    border-radius:var(--radius)}
+  .track i{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
+  .fill{position:absolute;top:2px;bottom:2px;border-radius:var(--radius)}
+  .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  .pos{position:relative;width:84px;height:6px;
+    background:color-mix(in srgb,var(--line) 70%,transparent);
+    border-radius:3px;display:inline-block;vertical-align:middle}
+  .pos b{position:absolute;top:-2px;width:2px;height:10px;background:var(--accent);border-radius:1px}
+  .news{list-style:none;margin:0;padding:0}
+  .news li{padding:13px 18px;border-bottom:1px solid var(--line)}
+  .news li:last-child{border-bottom:none}
+  .news a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14.5px;line-height:1.5}
+  .news a:hover{color:var(--accent)}
+  .news .sub{margin-top:4px;font-size:12px;color:var(--muted);line-height:1.5;
+    white-space:normal;word-break:break-word}
+  .tag{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-radius:var(--radius);
+    color:var(--muted);font-size:11px;font-weight:600;margin-right:6px;letter-spacing:.03em}
+  /* --- 상단 고정 섹션 내비 + 설치/맨위로 버튼 --- */
+  .snav{position:sticky;top:0;z-index:50;display:flex;gap:6px;overflow-x:auto;
+    margin:0 -20px 6px;padding:10px 20px;background:var(--bg);
+    border-bottom:1px solid var(--line);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .snav::-webkit-scrollbar{display:none}
+  .snav a{flex:0 0 auto;padding:6px 13px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel);color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:600;
+    letter-spacing:.02em;white-space:nowrap}
+  .snav a.cur{border-color:var(--ink);color:var(--ink)}
+  .install{margin-left:auto;padding:7px 14px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:var(--ink);color:var(--bg);font-size:12.5px;font-weight:700;cursor:pointer;
+    font-family:inherit}
+  .totop{position:fixed;right:18px;bottom:18px;z-index:60;width:42px;height:42px;
+    border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--panel);
+    color:var(--ink);font-size:17px;cursor:pointer;opacity:0;pointer-events:none;
+    transition:opacity .2s;box-shadow:0 2px 10px rgba(43,41,37,.12)}
+  .totop.show{opacity:1;pointer-events:auto}
+  @media (max-width:620px){
+    .wrap{padding:16px 14px 70px}
+    .snav{margin:0 -14px 6px;padding:9px 14px}
+    h2{margin:30px 0 12px}
+    .reflect{margin-top:44px}
+  }
+  /* --- 장 여는 시간 (접이식) --- */
+  .fold summary{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .fold summary::-webkit-details-marker{display:none}
+  .fold h2.infold{margin-bottom:0}
+  .fold[open] h2.infold{margin-bottom:14px}
+  .chev{margin-left:2px;color:var(--muted);font-size:11px;transition:transform .15s}
+  .fold[open] .chev{transform:rotate(180deg)}
+  .krnote{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.02em}
+  .hours{list-style:none;margin:0;padding:0}
+  .hours li{display:grid;grid-template-columns:14px 168px 1fr auto;gap:10px;align-items:center;
+    padding:9px 16px;border-bottom:1px solid var(--line);font-size:13.5px}
+  .hours li:last-child{border-bottom:none}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+  .dot.on{background:var(--up)}
+  .mname{font-weight:600}
+  .mhours{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .mstate{font-size:11.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .mstate.on{color:var(--up)}
+  @media (max-width:560px){
+    .hours li{grid-template-columns:14px 1fr auto;font-size:13px}
+    .mhours{grid-column:2 / -1;grid-row:2;font-size:12px}
+  }
+  .secnote{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.9;word-break:keep-all}
+  .secnote b{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.12em;
+    margin-bottom:5px;font-weight:700}
+  /* --- 급등락 알림 --- */
+  .alerts{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
+  .alert{display:flex;align-items:center;gap:9px;padding:10px 15px;border-radius:var(--radius-lg);
+    background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);font-size:14px}
+  .alert.up{border-left:3px solid var(--up)} .alert.down{border-left:3px solid var(--down)}
+  .alert .nm{font-weight:600} .alert .pc{font-weight:700;font-variant-numeric:tabular-nums}
+  /* --- 일정 --- */
+  .cal{list-style:none;margin:0;padding:0}
+  .cal li{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:baseline;
+    padding:12px 18px;border-bottom:1px solid var(--line)}
+  .cal li:last-child{border-bottom:none}
+  .dday{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .dday.soon{color:var(--up)}
+  .cal .t{font-weight:600;font-size:14.5px}
+  .cal .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .kind{display:inline-block;padding:0 6px;border-radius:var(--radius);font-size:11px;font-weight:600;
+    margin-left:7px;background:color-mix(in srgb,var(--muted) 15%,transparent);color:var(--muted)}
+  /* --- 종목별 뉴스 --- */
+  .tnews{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+  .tn{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);padding:13px 16px}
+  .tn h3{margin:0 0 8px;font-size:13px;display:flex;align-items:baseline;gap:7px}
+  .tn h3 .pc{font-size:12px;font-variant-numeric:tabular-nums}
+  .tn a{display:block;color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.5;
+    margin-bottom:6px}
+  .tn a:last-child{margin-bottom:0}
+  .tn a:hover{color:var(--accent)}
+  .tn .src{color:var(--muted);font-size:11.5px}
+  /* --- 오늘의 공부 --- */
+  .learn{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .lc{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);padding:16px 18px}
+  .lc .badge{display:inline-block;padding:2px 9px;border-radius:var(--radius);font-size:11px;font-weight:700;
+    background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);margin-bottom:9px}
+  .lc h3{margin:0 0 7px;font-size:17px;letter-spacing:-.01em}
+  .lc p{margin:0 0 9px;font-size:14px;line-height:1.65}
+  .lc .why{margin:0;padding-top:9px;border-top:1px dashed var(--line);
+    font-size:13.5px;color:var(--muted);line-height:1.65}
+  /* --- 내일의 기술 : 데이터 카드들과 다른 호흡. 책 한 페이지처럼 --- */
+  .reflect{margin:64px 0 8px;padding:52px 44px;border-radius:0;
+    background:var(--panel);
+    border:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}
+  .rlabel{font-size:11px;letter-spacing:.3em;color:var(--muted);font-weight:700;
+    margin-bottom:30px;text-align:center}
+  .bpart{font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:10px}
+  .btitle{margin:0 0 8px;font-size:24px;letter-spacing:-.01em;text-align:center;
+    font-weight:800;word-break:keep-all}
+  .bsub{font-size:14.5px;color:var(--muted);text-align:center;margin-bottom:14px;word-break:keep-all}
+  .bhorizon{display:block;width:fit-content;margin:0 auto 30px;padding:3px 12px;border-radius:var(--radius);
+    font-size:11.5px;font-weight:700;letter-spacing:.02em;
+    background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .bhorizon.now{background:transparent;border:1px solid var(--ink);color:var(--ink)}
+  .bbody{max-width:620px;margin:0 auto}
+  .bbody p{margin:0 0 20px;font-size:15.5px;line-height:2.0;font-weight:430;word-break:keep-all;
+    text-indent:1em}
+  .bbody p:first-child{text-indent:0}
+  .bbody p:first-child::first-letter{font-size:1.35em;font-weight:700;color:var(--ink)}
+  .bnotes{max-width:620px;margin:30px auto 0;padding-top:26px;
+    border-top:1px solid var(--line);
+    display:grid;gap:18px}
+  .bnote b{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.12em;
+    margin-bottom:5px}
+  .bnote p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink);opacity:.88;
+    word-break:keep-all}
+  .bmore{max-width:620px;margin:28px auto 0;display:flex;flex-wrap:wrap;gap:10px;
+    justify-content:center}
+  .bmore a{padding:10px 18px;border:1px solid var(--ink);border-radius:var(--radius);
+    text-decoration:none;font-size:13px;font-weight:700;color:var(--bg);background:var(--ink)}
+  .bmore a.tocol{background:transparent;color:var(--ink)}
+  .bfoot{max-width:620px;margin:26px auto 0;font-size:11.5px;color:var(--muted);
+    text-align:center;opacity:.85}
+  @media (max-width:620px){
+    .reflect{padding:34px 22px}
+    .btitle{font-size:21px}
+    .bbody p{font-size:15px}
+  }
+  .warn{padding:8px 16px;font-size:13px;color:var(--muted)}
+  .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);line-height:1.7}
+  footer .archive{color:var(--accent);text-decoration:none;font-size:13px;font-weight:600}
+  footer .archive:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>해외 시장 데일리 브리핑</h1>
+  <div class="meta">시장 기준일 <b>2026-10-22</b>
+    · 생성 2026-10-23 08:57 KST</div>
+  <button id="install-btn" class="install" hidden>📲 앱으로 설치</button>
+</header>
+
+<nav class="snav" id="snav" aria-label="섹션 바로가기"></nav>
+
+<div class="alerts">
+  <div class="alert down">
+    <span class="nm">메타</span>
+    <span class="pc down">▼ -6.98%</span>
+    <span class="sym">META</span>
+  </div>
+</div>
+
+
+<details class="fold">
+<summary><h2 class="infold">장 여는 시간 <span class="krnote">한국시간 · 탭해서 펼치기</span><span class="chev">▾</span></h2></summary>
+<div class="card">
+<ul class="hours" id="market-hours"></ul>
+</div>
+</details>
+<script>
+(function () {
+  // 미국 서머타임: 3월 둘째 일요일 ~ 11월 첫째 일요일 (현지 기준)
+  function nthSunday(year, month, nth) {          // month: 0-based
+    var d = new Date(Date.UTC(year, month, 1));
+    var first = (7 - d.getUTCDay()) % 7 + 1;      // 첫 일요일 날짜
+    return first + (nth - 1) * 7;
+  }
+  function usDST(nowUTC) {
+    var y = nowUTC.getUTCFullYear();
+    var start = Date.UTC(y, 2, nthSunday(y, 2, 2), 7);    // 3월 둘째 일 02:00 EST = 07:00 UTC
+    var end   = Date.UTC(y, 10, nthSunday(y, 10, 1), 6);  // 11월 첫째 일 02:00 EDT = 06:00 UTC
+    return nowUTC >= start && nowUTC < end;
+  }
+  function euDST(nowUTC) {                                 // 3월 마지막 일 ~ 10월 마지막 일 01:00 UTC
+    var y = nowUTC.getUTCFullYear();
+    var lastSun = function (m) { var d = new Date(Date.UTC(y, m + 1, 0)); return d.getUTCDate() - d.getUTCDay(); };
+    return nowUTC >= Date.UTC(y, 2, lastSun(2), 1) && nowUTC < Date.UTC(y, 9, lastSun(9), 1);
+  }
+
+  var now = new Date();
+  var dst = usDST(now), edst = euDST(now);
+
+  // 각 시장의 세션을 한국시간 분(minute) 구간으로 정의. 자정을 넘으면 두 구간으로 쪼갠다.
+  function span(h1, m1, h2, m2) { return [h1 * 60 + m1, h2 * 60 + m2]; }
+  var markets = [
+    { name: "한국 (KRX)", hours: "09:00 ~ 15:30", sessions: [span(9,0,15,30)] },
+    { name: "일본 (도쿄)", hours: "09:00 ~ 11:30 · 12:30 ~ 15:30", sessions: [span(9,0,11,30), span(12,30,15,30)] },
+    { name: "중국 (상해)", hours: "10:30 ~ 12:30 · 14:00 ~ 16:00", sessions: [span(10,30,12,30), span(14,0,16,0)] },
+    { name: "홍콩", hours: "10:30 ~ 13:00 · 14:00 ~ 17:00", sessions: [span(10,30,13,0), span(14,0,17,0)] },
+    edst
+      ? { name: "유럽 (런던·프랑크푸르트)", hours: "16:00 ~ 다음날 00:30", sessions: [span(16,0,24,0), span(0,0,0,30)] }
+      : { name: "유럽 (런던·프랑크푸르트)", hours: "17:00 ~ 다음날 01:30", sessions: [span(17,0,24,0), span(0,0,1,30)] },
+    dst
+      ? { name: "미국 (뉴욕·나스닥)", hours: "22:30 ~ 다음날 05:00 (서머타임)", sessions: [span(22,30,24,0), span(0,0,5,0)] }
+      : { name: "미국 (뉴욕·나스닥)", hours: "23:30 ~ 다음날 06:00", sessions: [span(23,30,24,0), span(0,0,6,0)] },
+  ];
+
+  // 지금 한국시간 (기기 시간대와 무관하게 UTC+9 로 계산)
+  var kst = new Date(now.getTime() + 9 * 3600 * 1000);
+  var mins = kst.getUTCHours() * 60 + kst.getUTCMinutes();
+  var dow = kst.getUTCDay();                                // 한국시간 요일
+  // 미국·유럽 야간 세션은 자정 이전 구간이 전날 개장분이므로 요일 판정을 단순화:
+  // 주말(토 새벽 미국장 마감 후 ~ 월 아침)만 전부 휴장 처리한다.
+  function isWeekendClosed(name) {
+    if (dow === 0) return true;                             // 일요일 전부 휴장
+    if (dow === 6) return !(name.indexOf("미국") === 0 || name.indexOf("유럽") === 0) ? true
+                        : mins >= (dst ? 300 : 360);        // 토요일: 미국·유럽 새벽 마감분만 인정
+    if (dow === 1 && (name.indexOf("미국") === 0 || name.indexOf("유럽") === 0))
+      return mins < 960;                                    // 월요일 저녁 개장 전까지는 닫힘
+    return false;
+  }
+
+  var ul = document.getElementById("market-hours");
+  markets.forEach(function (m) {
+    var open = !isWeekendClosed(m.name) && m.sessions.some(function (s) { return mins >= s[0] && mins < s[1]; });
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="dot ' + (open ? "on" : "") + '"></span>'
+      + '<span class="mname">' + m.name + '</span>'
+      + '<span class="mhours">' + m.hours + '</span>'
+      + '<span class="mstate ' + (open ? "on" : "") + '">' + (open ? "개장 중" : "장 마감") + "</span>";
+    ul.appendChild(li);
+  });
+})();
+</script>
+
+<h2>주요 지수</h2>
+<div class="grid">
+  <div class="tile">
+    <div class="n">S&amp;P 500</div>
+    <div class="p">7,663.43</div>
+    <div class="c down">▼ -1.21%</div>
+  </div>
+  <div class="tile">
+    <div class="n">나스닥 종합</div>
+    <div class="p">26,009</div>
+    <div class="c down">▼ -2.60%</div>
+  </div>
+  <div class="tile">
+    <div class="n">다우존스</div>
+    <div class="p">—</div>
+    <div class="c flat">—</div>
+  </div>
+  <div class="tile">
+    <div class="n">러셀 2000</div>
+    <div class="p">2,784.03</div>
+    <div class="c up">▲ +0.11%</div>
+  </div>
+  <div class="tile">
+    <div class="n">VIX 변동성</div>
+    <div class="p">19.03</div>
+    <div class="c up">▲ +14.09%</div>
+  </div>
+</div>
+
+<h2>글로벌 증시</h2>
+<div class="grid">
+  <div class="tile">
+    <div class="n">유로스톡스50</div>
+    <div class="p">6,207.52</div>
+    <div class="c up">▲ +1.40%</div>
+  </div>
+  <div class="tile">
+    <div class="n">독일 DAX</div>
+    <div class="p">25,645</div>
+    <div class="c up">▲ +1.35%</div>
+  </div>
+  <div class="tile">
+    <div class="n">영국 FTSE100</div>
+    <div class="p">10,753</div>
+    <div class="c up">▲ +0.19%</div>
+  </div>
+  <div class="tile">
+    <div class="n">프랑스 CAC40</div>
+    <div class="p">7,921.68</div>
+    <div class="c up">▲ +1.06%</div>
+  </div>
+  <div class="tile">
+    <div class="n">스위스 SMI</div>
+    <div class="p">14,552</div>
+    <div class="c up">▲ +0.51%</div>
+  </div>
+  <div class="tile">
+    <div class="n">네덜란드 AEX</div>
+    <div class="p">1,142.30</div>
+    <div class="c up">▲ +0.77%</div>
+  </div>
+  <div class="tile">
+    <div class="n">스웨덴 OMX30</div>
+    <div class="p">3,244.07</div>
+    <div class="c up">▲ +0.17%</div>
+  </div>
+  <div class="tile">
+    <div class="n">캐나다 TSX</div>
+    <div class="p">35,973</div>
+    <div class="c down">▼ -0.97%</div>
+  </div>
+  <div class="tile">
+    <div class="n">일본 니케이225</div>
+    <div class="p">64,621</div>
+    <div class="c up">▲ +0.85%</div>
+  </div>
+  <div class="tile">
+    <div class="n">호주 ASX200</div>
+    <div class="p">8,759.10</div>
+    <div class="c down">▼ -0.82%</div>
+  </div>
+  <div class="tile">
+    <div class="n">한국 코스피</div>
+    <div class="p">5,735.66</div>
+    <div class="c up">▲ +3.29%</div>
+  </div>
+  <div class="tile">
+    <div class="n">홍콩 항셍</div>
+    <div class="p">23,652</div>
+    <div class="c down">▼ -0.90%</div>
+  </div>
+  <div class="tile">
+    <div class="n">중국 상해종합</div>
+    <div class="p">3,713.03</div>
+    <div class="c down">▼ -0.60%</div>
+  </div>
+</div>
+
+<h2>G10 통화</h2>
+<div class="grid">
+  <div class="tile">
+    <div class="n">유로 / 달러</div>
+    <div class="p">1.1225</div>
+    <div class="c down">▼ -0.09%</div>
+  </div>
+  <div class="tile">
+    <div class="n">파운드 / 달러</div>
+    <div class="p">1.3404</div>
+    <div class="c up">▲ +0.06%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 엔</div>
+    <div class="p">156.47</div>
+    <div class="c down">▼ -1.05%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 스위스프랑</div>
+    <div class="p">0.8198</div>
+    <div class="c down">▼ -0.51%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 캐나다달러</div>
+    <div class="p">1.4002</div>
+    <div class="c down">▼ -0.28%</div>
+  </div>
+  <div class="tile">
+    <div class="n">호주달러 / 달러</div>
+    <div class="p">0.7022</div>
+    <div class="c down">▼ -0.10%</div>
+  </div>
+  <div class="tile">
+    <div class="n">뉴질랜드달러 / 달러</div>
+    <div class="p">0.5686</div>
+    <div class="c down">▼ -0.34%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 스웨덴크로나</div>
+    <div class="p">9.905</div>
+    <div class="c up">▲ +0.17%</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러 / 노르웨이크로네</div>
+    <div class="p">9.325</div>
+    <div class="c down">▼ -0.39%</div>
+  </div>
+  <div class="tile">
+    <div class="n">유로 / 원</div>
+    <div class="p">1,487.1원</div>
+    <div class="c down">▼ -0.14%</div>
+  </div>
+  <div class="tile">
+    <div class="n">엔 / 원</div>
+    <div class="p">8.45원</div>
+    <div class="c up">▲ +0.87%</div>
+  </div>
+</div>
+
+<h2>매크로 · 환율 · 원자재</h2>
+<div class="grid">
+  <div class="tile">
+    <div class="n">미국 10년물 금리</div>
+    <div class="p">4.95%</div>
+    <div class="c down">▼ -19.3bp</div>
+  </div>
+  <div class="tile">
+    <div class="n">달러인덱스(DXY)</div>
+    <div class="p">101.56</div>
+    <div class="c down">▼ -0.21%</div>
+  </div>
+  <div class="tile">
+    <div class="n">원/달러 환율</div>
+    <div class="p">1,326.02원</div>
+    <div class="c up">▲ +0.03%</div>
+  </div>
+  <div class="tile">
+    <div class="n">WTI 유가</div>
+    <div class="p">$99.39</div>
+    <div class="c up">▲ +2.31%</div>
+  </div>
+  <div class="tile">
+    <div class="n">금 선물</div>
+    <div class="p">$4,038.60</div>
+    <div class="c down">▼ -2.68%</div>
+  </div>
+  <div class="tile">
+    <div class="n">비트코인</div>
+    <div class="p">$81,298</div>
+    <div class="c down">▼ -3.23%</div>
+  </div>
+</div>
+
+<h2>섹터별 등락</h2>
+<div class="card" style="padding:16px 18px">
+  <div class="bars">
+    <div class="bar">
+      <div>필수소비재</div>
+      <div class="track"><i></i><span class='fill' style='left:50%;width:50.0%;background:var(--up)'></span></div>
+      <div class="v up">▲ +3.31%</div>
+    </div>
+    <div class="bar">
+      <div>유틸리티</div>
+      <div class="track"><i></i><span class='fill' style='left:50%;width:31.3%;background:var(--up)'></span></div>
+      <div class="v up">▲ +2.07%</div>
+    </div>
+    <div class="bar">
+      <div>헬스케어</div>
+      <div class="track"><i></i><span class='fill' style='left:50%;width:19.9%;background:var(--up)'></span></div>
+      <div class="v up">▲ +1.32%</div>
+    </div>
+    <div class="bar">
+      <div>부동산</div>
+      <div class="track"><i></i><span class='fill' style='left:50%;width:16.5%;background:var(--up)'></span></div>
+      <div class="v up">▲ +1.09%</div>
+    </div>
+    <div class="bar">
+      <div>금융</div>
+      <div class="track"><i></i><span class='fill' style='left:50%;width:16.5%;background:var(--up)'></span></div>
+      <div class="v up">▲ +1.09%</div>
+    </div>
+    <div class="bar">
+      <div>소재</div>
+      <div class="track"><i></i><span class='fill' style='left:50%;width:10.9%;background:var(--up)'></span></div>
+      <div class="v up">▲ +0.72%</div>
+    </div>
+    <div class="bar">
+      <div>경기소비재</div>
+      <div class="track"><i></i><span class='fill' style='right:50%;width:6.8%;background:var(--down)'></span></div>
+      <div class="v down">▼ -0.45%</div>
+    </div>
+    <div class="bar">
+      <div>에너지</div>
+      <div class="track"><i></i><span class='fill' style='right:50%;width:13.1%;background:var(--down)'></span></div>
+      <div class="v down">▼ -0.87%</div>
+    </div>
+    <div class="bar">
+      <div>산업재</div>
+      <div class="track"><i></i><span class='fill' style='right:50%;width:14.2%;background:var(--down)'></span></div>
+      <div class="v down">▼ -0.94%</div>
+    </div>
+    <div class="bar">
+      <div>커뮤니케이션</div>
+      <div class="track"><i></i><span class='fill' style='right:50%;width:21.5%;background:var(--down)'></span></div>
+      <div class="v down">▼ -1.42%</div>
+    </div>
+    <div class="bar">
+      <div>기술</div>
+      <div class="track"><i></i><span class='fill' style='right:50%;width:49.7%;background:var(--down)'></span></div>
+      <div class="v down">▼ -3.29%</div>
+    </div>
+  </div>
+</div>
+
+<h2>관심 종목</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr>
+    <th>종목</th><th>종가</th><th>등락</th><th>52주 위치</th><th>고점 대비</th><th>거래량</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>애플<span class="sym">AAPL</span></td>
+      <td class="num">348.22</td>
+      <td class="num up"><b>▲ +1.23%</b></td>
+      <td><span class='pos' title='52주 저점 대비 100%'><b style='left:100.0%'></b></span></td>
+      <td class="num flat">0.0%</td>
+      <td class="num">46.8M</td>
+    </tr>
+    <tr>
+      <td>마이크로소프트<span class="sym">MSFT</span></td>
+      <td class="num">521.08</td>
+      <td class="num down"><b>▼ -2.23%</b></td>
+      <td><span class='pos' title='52주 저점 대비 84%'><b style='left:84.0%'></b></span></td>
+      <td class="num down">-5.9%</td>
+      <td class="num">21.2M</td>
+    </tr>
+    <tr>
+      <td>엔비디아<span class="sym">NVDA</span></td>
+      <td class="num">212.21</td>
+      <td class="num down"><b>▼ -4.40%</b></td>
+      <td><span class='pos' title='52주 저점 대비 61%'><b style='left:60.6%'></b></span></td>
+      <td class="num down">-12.8%</td>
+      <td class="num">125.0M</td>
+    </tr>
+    <tr>
+      <td>알파벳<span class="sym">GOOGL</span></td>
+      <td class="num">324.22</td>
+      <td class="num down"><b>▼ -3.15%</b></td>
+      <td><span class='pos' title='52주 저점 대비 46%'><b style='left:46.2%'></b></span></td>
+      <td class="num down">-20.7%</td>
+      <td class="num">27.7M</td>
+    </tr>
+    <tr>
+      <td>아마존<span class="sym">AMZN</span></td>
+      <td class="num">250.38</td>
+      <td class="num down"><b>▼ -4.57%</b></td>
+      <td><span class='pos' title='52주 저점 대비 60%'><b style='left:59.6%'></b></span></td>
+      <td class="num down">-12.8%</td>
+      <td class="num">48.7M</td>
+    </tr>
+    <tr>
+      <td>메타<span class="sym">META</span></td>
+      <td class="num">648.85</td>
+      <td class="num down"><b>▼ -6.98%</b></td>
+      <td><span class='pos' title='52주 저점 대비 50%'><b style='left:49.5%'></b></span></td>
+      <td class="num down">-16.8%</td>
+      <td class="num">40.5M</td>
+    </tr>
+    <tr>
+      <td>테슬라<span class="sym">TSLA</span></td>
+      <td class="num">374.58</td>
+      <td class="num down"><b>▼ -3.08%</b></td>
+      <td><span class='pos' title='52주 저점 대비 38%'><b style='left:38.3%'></b></span></td>
+      <td class="num down">-24.9%</td>
+      <td class="num">51.5M</td>
+    </tr>
+    <tr>
+      <td>브로드컴<span class="sym">AVGO</span></td>
+      <td class="num">323.24</td>
+      <td class="num down"><b>▼ -4.31%</b></td>
+      <td><span class='pos' title='52주 저점 대비 16%'><b style='left:16.2%'></b></span></td>
+      <td class="num down">-34.7%</td>
+      <td class="num">28.1M</td>
+    </tr>
+    <tr>
+      <td>TSMC<span class="sym">TSM</span></td>
+      <td class="num">412.35</td>
+      <td class="num down"><b>▼ -4.52%</b></td>
+      <td><span class='pos' title='52주 저점 대비 66%'><b style='left:66.0%'></b></span></td>
+      <td class="num down">-15.4%</td>
+      <td class="num">16.4M</td>
+    </tr>
+    <tr>
+      <td>팔란티어<span class="sym">PLTR</span></td>
+      <td class="num">196.19</td>
+      <td class="num down"><b>▼ -2.74%</b></td>
+      <td><span class='pos' title='52주 저점 대비 84%'><b style='left:84.3%'></b></span></td>
+      <td class="num down">-7.9%</td>
+      <td class="num">22.9M</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>상승 · 하락 상위</h2>
+<div class="cols">
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>상승 상위</th><th>종가</th><th>등락</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>LMT</td>
+          <td class="num">589.91</td>
+          <td class="num up"><b>▲ +6.96%</b></td>
+        </tr>
+        <tr>
+          <td>ADBE</td>
+          <td class="num">270.55</td>
+          <td class="num up"><b>▲ +6.07%</b></td>
+        </tr>
+        <tr>
+          <td>INTU</td>
+          <td class="num">354.90</td>
+          <td class="num up"><b>▲ +5.75%</b></td>
+        </tr>
+        <tr>
+          <td>PG</td>
+          <td class="num">165.59</td>
+          <td class="num up"><b>▲ +5.58%</b></td>
+        </tr>
+        <tr>
+          <td>NEE</td>
+          <td class="num">81.90</td>
+          <td class="num up"><b>▲ +4.62%</b></td>
+        </tr>
+        <tr>
+          <td>HD</td>
+          <td class="num">327.73</td>
+          <td class="num up"><b>▲ +4.33%</b></td>
+        </tr>
+        <tr>
+          <td>CL</td>
+          <td class="num">97.39</td>
+          <td class="num up"><b>▲ +4.27%</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>하락 상위</th><th>종가</th><th>등락</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>LRCX</td>
+          <td class="num">230.15</td>
+          <td class="num down"><b>▼ -11.76%</b></td>
+        </tr>
+        <tr>
+          <td>KLAC</td>
+          <td class="num">147.83</td>
+          <td class="num down"><b>▼ -9.55%</b></td>
+        </tr>
+        <tr>
+          <td>MRVL</td>
+          <td class="num">223.47</td>
+          <td class="num down"><b>▼ -8.70%</b></td>
+        </tr>
+        <tr>
+          <td>AMAT</td>
+          <td class="num">375.58</td>
+          <td class="num down"><b>▼ -8.16%</b></td>
+        </tr>
+        <tr>
+          <td>AMD</td>
+          <td class="num">507.93</td>
+          <td class="num down"><b>▼ -8.10%</b></td>
+        </tr>
+        <tr>
+          <td>INTC</td>
+          <td class="num">85.49</td>
+          <td class="num down"><b>▼ -8.04%</b></td>
+        </tr>
+        <tr>
+          <td>ARM</td>
+          <td class="num">210.10</td>
+          <td class="num down"><b>▼ -7.28%</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2>앞으로 예정된 일정</h2>
+<div class="card">
+<ul class="cal">
+  <li>
+    <span class="dday ">D-5</span>
+    <span>
+      <span class="t">FOMC 정례회의</span><span class="kind">지표</span>
+<div class="d">10/27~10/28 · 결과 발표는 마지막 날 (한국시간 다음날 새벽)</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-5</span>
+    <span>
+      <span class="t">마이크로소프트 실적 발표</span><span class="kind">실적</span>
+<div class="d">주당순이익(EPS) 시장 예상 4.72달러</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-5</span>
+    <span>
+      <span class="t">알파벳 실적 발표</span><span class="kind">실적</span>
+<div class="d">주당순이익(EPS) 시장 예상 2.96달러</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-6</span>
+    <span>
+      <span class="t">아마존 실적 발표</span><span class="kind">실적</span>
+<div class="d">주당순이익(EPS) 시장 예상 1.98달러</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-10</span>
+    <span>
+      <span class="t">애플 실적 발표</span><span class="kind">실적</span>
+<div class="d">주당순이익(EPS) 시장 예상 1.98달러</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-10</span>
+    <span>
+      <span class="t">팔란티어 실적 발표</span><span class="kind">실적</span>
+<div class="d">주당순이익(EPS) 시장 예상 0.41달러</div>    </span>
+  </li>
+  <li>
+    <span class="dday ">D-14</span>
+    <span>
+      <span class="t">미국 고용보고서 (비농업 고용)</span><span class="kind">지표</span>
+<div class="d">통상 매월 첫째 금요일 · 한국시간 밤 9시 30분</div>    </span>
+  </li>
+</ul>
+</div>
+
+<h2>주요 뉴스</h2>
+<div class="card">
+<ul class="news">
+  <li>
+    <a href="https://www.cnbc.com/2026/10/23/japan-inflation-september-highest-in-2026.html" target="_blank" rel="noopener">Japan core inflation in September surges to its highest this year at 2.1%</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 23:43 UTC · Japan core inflation in September surges to its highest this year at 2.1%</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPWXBacVlwa2d5QnpyOHRwT2lwbWJKZHptMi1aRW1DcW5TVEV5Y1YyT0FaQng4YmpJMFIyUXAweFhIY2Yxa3lUNHZfWVRlMGVXSmR5cjUtNXNUUEdkSTBWT3Q5VXFBdzJReXBYRlpfZmhWQjZiZU02SV8yZm9vNEY0QWh3elA1bWRFWXB0ZklxOA?oc=5" target="_blank" rel="noopener">SLB earnings: what to look for from SLB - Yahoo Finance</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 23:17 UTC · SLB earnings: what to look for from SLB - Yahoo Finance</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/10/22/meta-mark-zuckerberg-california-billionaire-tax.html" target="_blank" rel="noopener">Meta’s deal to keep Zuckerberg in California adds fuel to wealth tax debate ahead of election</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 22:21 UTC · Meta’s deal to keep Zuckerberg in California adds fuel to wealth tax debate ahead of election</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxNbldYejM1ck41NWtEUTN5Q1c0d0llVm0zeXI4bXBySU5tTmlucEtpMVJ3RU9ON1Q1QlFpeTdpUlZKZEN1LVNOc0xkM0dPUENNR2hZOVVKRkpGaTlBdEduUzBtZWlDS1hhbVVCbmVsbDYxRWZsRjBNbVRLckljWF94RE5SdkphTmhMdzBRUGhRQlJGMEJaUUt2Wm84MEI0MEU?oc=5" target="_blank" rel="noopener">Why SpaceX Stock Dropped on Thursday - Yahoo Finance</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 23:00 UTC · Why SpaceX Stock Dropped on Thursday - Yahoo Finance</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/10/22/trump-world-liberty-crypto-lawsuit-uae.html" target="_blank" rel="noopener">Lawsuit accuses Trump of illegally profiting off foreign crypto deals</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 22:02 UTC · Lawsuit accuses Trump of illegally profiting off foreign crypto deals</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxQZ2JIR3FuTVVCRl8zeW91T1lMTG1CaWlETUJraXYwUDFXMDZsOWhtbGllYlVva1p3UlpISi1mZXFCTXFsTkxvVGY2SlJPbWNQTHVfaWh2MVF6VWVtQ3lzcW9MeWdJNXdpTk1pVTRMU2I3S00zSE9oVGZodDlIUGZZa3VTXzRFaVQ4VnhPRVk4TEQyNURyanc?oc=5" target="_blank" rel="noopener">Why Intel Stock Fell Today - Yahoo Finance</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 22:56 UTC · Why Intel Stock Fell Today - Yahoo Finance</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/10/22/elon-musk-midterm-election-spacex-tesla.html" target="_blank" rel="noopener">SpaceX and Tesla have high election stakes as Elon Musk pours $366 million into campaigns</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 21:58 UTC · SpaceX and Tesla have high election stakes as Elon Musk pours $366 million into campaigns</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxPVTgzYkNqVE5UWEVBcXVvZ0FzZ3c3WFZTd29vZXRBOW12X0tQZVpsWDNoQTJhRjQwY01sXy02cHFzeUo0bTFMY0diNTB2d0lBUzV0TFJ4WlV0YVdTbnNQNjJ6LUF1NEVHRnNkNkpWWGlwcGVuNFNENXBsT3k4U3NJZGJGSGs2eTFZR0JsMXhPYmZKMWQ5MVpmUEZVcUJMRmU4bTZMNFc5aUFieWpvdV9pbTc5U2ROQTQ4Zi1VOHpTZm5qd3FqZE9FT09YcERjZl9NTDFiWWF3N2FIUHRKUDR3bXVtUl8?oc=5" target="_blank" rel="noopener">Stock Market Today, Oct. 22: Netflix Rises as Investors Capitalize on Post-Earnings Sell-Off - The Motley Fool</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 22:33 UTC · Stock Market Today, Oct. 22: Netflix Rises as Investors Capitalize on Post-Earnings Sell-Off - The Motley Fool</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/10/22/moderna-stock-cancer-vaccine-data-leak.html" target="_blank" rel="noopener">Moderna shares plunge after cancer vaccine data leaks — despite positive results</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 21:52 UTC · Moderna shares plunge after cancer vaccine data leaks — despite positive results</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQdXFJRDdoVDBzYlZNSE15N3JFZ2RkY0J5amxiYzNXZGppTmthSm1XakFNWFRTU1Z5RXRFcmZhdUhPaVNmUWF5RENacFQySm5RT1c5ZU1RWG04TXFPRnlEME9OdzkxN3ZtUkxJWkJfWDhXU2wybmgycWlLbUlDRXo5ZUxNSG5YMklLTWx1cWpLVS1NSVB4RFB2aENrQ0hSRjFiUTFyZVdnSENhY1ZabTZ6bQ?oc=5" target="_blank" rel="noopener">SEC Attempts to Undo Stock Market Rules with Unlawful, Poorly Reasoned Order - Better Markets</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 22:30 UTC · SEC Attempts to Undo Stock Market Rules with Unlawful, Poorly Reasoned Order - Better Markets</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/10/22/trump-musk-starlink-ukraine.html" target="_blank" rel="noopener">Trump asked Musk to lift Starlink slowdown, WSJ reports</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 21:02 UTC · Trump asked Musk to lift Starlink slowdown, WSJ reports</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOaEt3SVB1WGhnbHVhVmVTbVl0QmR5QmN1U05DbVlUUmViLVlBb2xwSGk2RlZBZXNpalE3enZuV1Z1bXN0ZENLeHBQVFFXZUVNMFpLT25VZE9tWVRNcm1rdFpFSUFIY29aRVlKTmRNRFV4c1FXeUNxRks1VkdOOGlqeVpscjZJMVFCTTk5Ul9GYw?oc=5" target="_blank" rel="noopener">Western Digital Reports Quarterly Earnings Beat - Investor&#39;s Business Daily</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 22:24 UTC · Western Digital Reports Quarterly Earnings Beat - Investor&#39;s Business Daily</div>
+  </li>
+  <li>
+    <a href="https://www.cnbc.com/2026/10/22/disneys-multiplatform-super-bowl-plan-frustrates-abc-affiliates.html" target="_blank" rel="noopener">Disney’s multiplatform Super Bowl plan frustrates ABC affiliates</a>
+    <div class="sub"><span class="tag">CNBC</span>10-22 20:44 UTC · Disney’s multiplatform Super Bowl plan frustrates ABC affiliates</div>
+  </li>
+  <li>
+    <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQRDMwVi16eGd1Vkd4ZTlxOVpLTzFTN0xJZzJWdTl2bnhFVVlHYTNzU3pQdXozcGdjVmNHRnNQa2xzN3FtRTNPVTJ6b0JBR0x0cUtLV24zSEhxemhKa2RwdFJBSldZZUVDTUMyUTBKRlc0ZWdvQ050TjRMdVR1QUhzZDZyTmwwdzUwY2FxbS1QckpnMTQ?oc=5" target="_blank" rel="noopener">3 Growth Stocks With At Least 29% Earnings Growth - Yahoo Finance</a>
+    <div class="sub"><span class="tag">Reuters</span>10-22 22:17 UTC · 3 Growth Stocks With At Least 29% Earnings Growth - Yahoo Finance</div>
+  </li>
+</ul>
+</div>
+
+
+<h2>오늘의 공부</h2>
+<div class="learn">
+  <div class="lc">
+    <span class="badge">주식 용어</span>
+    <h3>연준 (Fed)과 FOMC</h3>
+    <p>연준은 미국의 중앙은행이고, FOMC는 그 안에서 기준금리를 정하는 회의입니다. 1년에 8번 열립니다.</p>
+    <p class="why">금리는 모든 자산 가격의 바탕입니다. FOMC 결과 발표일은 시장이 가장 크게 움직이는 날 중 하나예요.</p>
+  </div>
+  <div class="lc">
+    <span class="badge">투자 심리</span>
+    <h3>프레이밍 효과</h3>
+    <p>같은 사실도 어떻게 표현하느냐에 따라 다르게 받아들이는 현상입니다.</p>
+    <p class="why">‘고점 대비 30% 하락’과 ‘저점 대비 40% 상승’이 같은 주가를 가리킬 수 있습니다. 기준을 항상 확인하세요.</p>
+  </div>
+</div>
+
+<section class="reflect book">
+  <div class="rlabel">내일의 기술 · 13 / 25</div>
+  <div class="bpart">3부 · 몸과 생명</div>
+  <h3 class="btitle">신약을 찾는 방식이 바뀌는 중</h3>
+  <div class="bsub">단백질 구조 예측이 연 것</div>
+  <span class="bhorizon now">이미 진행 중</span>
+  <div class="bbody">
+    <p>약을 만드는 일의 상당 부분은 탐색이다. 어떤 분자가 어떤 단백질에 붙는지 찾아야 하는데, 가능한 조합이 천문학적이다. 그래서 신약 개발은 오래 걸리고 대부분 실패한다.</p>
+    <p>단백질의 3차원 구조를 계산으로 예측하는 기술이 이 탐색의 성격을 바꿨다. 실험으로 몇 년 걸리던 구조 규명이 훨씬 빨라졌고, 후보 물질을 컴퓨터에서 미리 걸러내는 일이 일상적인 절차가 됐다.</p>
+    <p>다만 후보를 찾는 일과 약이 되는 일은 다르다. 임상시험에서 실패하는 이유는 대개 &#39;표적에 붙지 않아서&#39;가 아니라 독성이나 효과 부족 때문이다. 병목이 앞단에서 뒷단으로 옮겨간 셈이다.</p>
+  </div>
+  <div class="bnotes">
+    <div class="bnote"><b>미래학자들의 시선</b><p>아짐 아자르는 『기하급수 시대』에서 계산 비용의 하락이 생물학처럼 원래 느리던 분야의 속도를 바꾸는 현상을 다룬다.</p></div>
+    <div class="bnote"><b>다르게 보는 시각</b><p>임상 성공률이 실제로 올라갔다는 근거는 아직 충분하지 않다. 개발 초기의 속도 향상이 최종 승인율로 이어지는지는 앞으로 몇 년의 데이터가 말해줄 것이다.</p></div>
+    <div class="bnote"><b>어디에서 관찰되는가</b><p>제약·바이오, 연구용 소프트웨어, 클라우드 컴퓨팅, 실험 자동화 장비.</p></div>
+  </div>
+  <div class="bmore">
+    <a href="./book/ch13.html">이 이야기의 전체 버전 읽기 →</a>
+    <a class="tocol" href="./book/index.html">책 전체 목차 『지금에 모인 미래』</a>
+  </div>
+  <div class="bfoot">특정 종목·매매에 대한 이야기가 아닙니다. 흐름을 읽는 배경 지식으로 읽어주세요.</div>
+</section>
+
+<h2>수집 경고</h2>
+<div class="card warn"><ul><li>뉴스 피드 비어 있음 [Yahoo]</li><li>시세 조회 실패: 다우존스</li><li>AI 요약 건너뜀 (ai.enabled=false 이거나 ANTHROPIC_API_KEY 없음)</li><li>텔레그램 전송 건너뜀 (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 없음)</li></ul></div>
+
+<footer>
+  <a class="archive" href="./archive.html">지난 브리핑 보기 →</a><br><br>
+  이 리포트는 공개된 시세·뉴스 데이터를 자동으로 수집해 정리한 <b>참고 자료</b>입니다.
+  투자 자문이나 매매 권유가 아니며, 데이터에 지연·누락·오류가 있을 수 있습니다.
+  투자 판단과 그 결과에 대한 책임은 이용자 본인에게 있습니다.<br>
+  데이터: Yahoo Finance / Finnhub / Alpha Vantage · 뉴스: RSS 피드
+</footer>
+
+</div>
+<button id="totop" class="totop" aria-label="맨 위로">↑</button>
+<script>
+  // 홈 화면 설치용 서비스워커. file:// 로 열었을 때는 조용히 건너뛴다.
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    navigator.serviceWorker.register("./sw.js").catch(function () {});
+  }
+
+  // --- 섹션 바로가기: h2 를 훑어 상단 고정 칩 내비를 만든다 ---
+  (function () {
+    var nav = document.getElementById("snav");
+    var heads = document.querySelectorAll("h2");
+    heads.forEach(function (h, i) {
+      var label = h.childNodes[0].textContent.trim();
+      if (!label) return;
+      h.id = "s" + i;
+      var a = document.createElement("a");
+      a.href = "#s" + i;
+      a.textContent = label;
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      nav.appendChild(a);
+    });
+    // 스크롤 위치에 따라 현재 섹션 강조
+    var links = nav.querySelectorAll("a");
+    function mark() {
+      var y = window.scrollY + 90, cur = 0;
+      heads.forEach(function (h, i) { if (h.offsetTop <= y) cur = i; });
+      links.forEach(function (a, i) { a.classList.toggle("cur", i === cur); });
+    }
+    window.addEventListener("scroll", mark, { passive: true });
+    mark();
+  })();
+
+  // --- 맨 위로 버튼 ---
+  (function () {
+    var btn = document.getElementById("totop");
+    window.addEventListener("scroll", function () {
+      btn.classList.toggle("show", window.scrollY > 600);
+    }, { passive: true });
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+
+  // --- 앱 설치 버튼: 브라우저가 설치 가능하다고 알려줄 때만 나타난다 ---
+  (function () {
+    var deferred = null;
+    var btn = document.getElementById("install-btn");
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferred = e;
+      btn.hidden = false;
+    });
+    btn.addEventListener("click", function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () { btn.hidden = true; deferred = null; });
+    });
+    window.addEventListener("appinstalled", function () { btn.hidden = true; });
+  })();
+</script>
+</body>
+</html>
